@@ -28,7 +28,7 @@ const SocialProof = () => {
   
 
   return (
-    <section className="py-16 bg-[#0F1115] border-y border-[#1F2937]/20">
+    <section className="py-16  border-y border-[#1F2937]">
       <div className="container-custom">
         <div className="text-center mb-12">
           <p className="text-white/40 text-sm font-medium uppercase tracking-wider">
@@ -41,7 +41,7 @@ const SocialProof = () => {
             {[...companies, ...companies].map(({logo: Logo, ...company}, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 flex items-center justify-center w-32 h-16 bg-[#14171c] border border-[#1F2937]/30 rounded-lg group  transition-all duration-300"
+                className="flex-shrink-0 flex items-center justify-center w-32 h-16 bg-[#141414] border border-[#1F2937]/30 rounded-lg group  transition-all duration-300"
               >
                 <div className={`text-2xl font-bold text-white/30 transition-colors duration-300
                     group-hover:${company.color}`}>

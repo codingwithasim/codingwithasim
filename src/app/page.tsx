@@ -8,12 +8,13 @@ import WritingPreview from '@/components/sections/WritingPreview';
 import Testimonials from '@/components/sections/Testimonials';
 import CTABand from '@/components/sections/CTABand';
 import FAB from '@/components/ui/fab';
+import Hero from '@/components/sections/Hero';
 
 export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <HeroSection />
+      <Hero />
 
       {/* Social Proof Strip */}
       <SocialProof />
@@ -34,7 +35,7 @@ export default function Home() {
       <WritingPreview />
 
       {/* Testimonials */}
-      <Testimonials />
+      {/* <Testimonials /> */}
 
       {/* CTA Band */}
       <CTABand />

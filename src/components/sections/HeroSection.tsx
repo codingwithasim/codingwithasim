@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { Button } from '../ui/button';
 
 const HeroSection = () => {
   const [displayedCode, setDisplayedCode] = useState('');
@@ -42,7 +43,7 @@ console.log(buildSomethingAmazing());`;
   }, []);
 
   return (
-    <section className="py-32 bg-gradient-to-b from-[#0B0F14] to-[#0F1115]">
+    <section className="py-32 bg-black">
       <div className="container-custom">
         <div className="grid-12 items-center">
           {/* Left Column - Intro (6 columns) */}
@@ -63,12 +64,19 @@ console.log(buildSomethingAmazing());`;
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/projects" className="btn-primary-lg">
-                View Projects
-              </Link>
-              <Link href="/contact" className="btn-secondary-lg">
+              
+              <Button variant="outline" className='text-black rounded-full py-4'>
+              <Link href="/contact">
                 Get in Touch
               </Link>
+              </Button>
+
+              <Button variant="default" className='text-white border border-gray-700 rounded-full py-4'>
+                <Link href="/projects">
+                  View Projects
+                </Link>
+              </Button>
+              
             </div>
 
             {/* Quick Stats */}

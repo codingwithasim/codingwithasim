@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { LucideMoveUpRight } from 'lucide-react';
+import { Button } from '../ui/button';
 
 const FeaturedProjects = () => {
   const projects = [
@@ -49,48 +50,7 @@ const FeaturedProjects = () => {
       stack: ['Language: Go', 'Protocol: gRPC', 'Orchestration: Kubernetes', 'Search: Elasticsearch'],
       link: '/projects/mobile-backend'
     },
-    {
-      id: 4,
-      title: 'AI Content Generator',
-      description: "AI-powered content generation tool that increased content production by 300%.",
-      image: '/api/placeholder/400/250',
-      tags: ['Python', 'TensorFlow', 'React', 'AWS'],
-      metrics: {
-        users: '1k+',
-        performance: '300%',
-        accuracy: '95%'
-      },
-      stack: ['AI: Python + TensorFlow', 'Frontend: React + Material-UI', 'Cloud: AWS Lambda', 'API: FastAPI'],
-      link: '/projects/ai-content-generator'
-    },
-    {
-      id: 5,
-      title: 'Real-time Chat System',
-      description: "Scalable real-time chat system supporting 100k+ concurrent connections.",
-      image: '/api/placeholder/400/250',
-      tags: ['WebSocket', 'Node.js', 'Redis', 'Socket.io'],
-      metrics: {
-        users: '100k+',
-        performance: 'Real-time',
-        reliability: '99.9%'
-      },
-      stack: ['Protocol: WebSocket', 'Runtime: Node.js', 'Cache: Redis', 'Library: Socket.io'],
-      link: '/projects/chat-system'
-    },
-    {
-      id: 6,
-      title: 'Data Visualization Tool',
-      description: "Interactive data visualization platform processing millions of data points.",
-      image: '/api/placeholder/400/250',
-      tags: ['D3.js', 'React', 'Python', 'PostgreSQL'],
-      metrics: {
-        users: '2k+',
-        performance: 'Fast',
-        data: 'Millions'
-      },
-      stack: ['Visualization: D3.js', 'Frontend: React + Hooks', 'Backend: Python + Flask', 'Database: PostgreSQL'],
-      link: '/projects/data-viz-tool'
-    }
+    
   ];
 
   const overlayDiv = useRef<HTMLDivElement | null>(null);
@@ -125,7 +85,7 @@ const FeaturedProjects = () => {
   };
 
   return (
-    <section className="py-24 bg-[#0B0F14]">
+    <section className="py-24">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="font-bold mb-6">
@@ -146,7 +106,7 @@ const FeaturedProjects = () => {
               key={project.id} 
               className="group relative overflow-clip rounded-3xl border border-gray-800"
             >
-              <div className="card h-full flex flex-col hover:scale-[1.02] transition-all duration-300">
+              <div className="card bg-black h-full flex flex-col hover:scale-[1.02] transition-all duration-300">
                 {/* Project Image */}
                 <div className="relative mb-6 overflow-hidden rounded-xl z-10">
                   <div className="w-full h-48 bg-gradient-to-br from-[#1F2937] to-[#111318] flex items-center justify-center">
@@ -163,7 +123,7 @@ const FeaturedProjects = () => {
 
                 {/* Project Content */}
                 <div className="flex-1 space-y-4 z-10">
-                  <h3 className="text-xl font-semibold text-white group-hover:text-[#22C55E] transition-colors duration-200">
+                  <h3 className="text-xl font-medium text-white group-hover:text-[#22C55E] transition-colors duration-200">
                     {project.title}
                   </h3>
                   
@@ -190,20 +150,6 @@ const FeaturedProjects = () => {
                     ))}
                   </div>
 
-                  {/* Hover Reveal - Stack & Metrics */}
-                  <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    <div className="pt-4 border-t border-[#1F2937]/50">
-                      <h4 className="text-sm font-medium text-white/80 mb-2">Tech Stack:</h4>
-                      <ul className="space-y-1 text-xs text-white/60">
-                        {project.stack.slice(0, 3).map((tech, index) => (
-                          <li key={index} className="flex items-center space-x-2">
-                            <div className="w-1 h-1 bg-[#22C55E] rounded-full"></div>
-                            <span>{tech}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Read Case Study Link */}
@@ -219,7 +165,7 @@ const FeaturedProjects = () => {
                   </Link>
                 </div>
 
-                <div className='w-[500px] h-[500px] rainbow-glow bg-gradient-to-br from-pink-600 via-20% via-indigo-600 to-yellow-400 opacity-0 absolute z-1 rounded-full blur-3xl transition-[opacity] duration-500'></div>
+                <div className='w-[500px] h-[500px] rainbow-glow bg-gradient-to-br from-orange-600 via-20% via-gray-600 to-cyan-400 opacity-0 absolute z-1 rounded-full blur-3xl transition-[opacity] duration-500'></div>
               </div>
 
               <Link 
@@ -233,9 +179,11 @@ const FeaturedProjects = () => {
         </div>
 
         <div className="text-center mt-16">
-          <Link href="/projects" className="btn-secondary-lg">
-            View All Projects
-          </Link>
+          <Button className='py-5 border border-gray-700 bg-black'>
+            <Link href="/projects">
+              View All Projects
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
