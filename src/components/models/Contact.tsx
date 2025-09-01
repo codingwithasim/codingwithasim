@@ -59,10 +59,16 @@ export default function ContactDialog({open, setOpen}: {open: boolean, setOpen: 
 
       // keep dialog open for a short moment so user sees confirmation, then close
       setTimeout(() => setOpen(false), 1000);
-    } catch (err: any) {
-      console.error(err);
-      setStatus("error");
-      setStatusMessage(err?.message || "Something went wrong. Please try again.");
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err);
+        setStatus("error");
+        setStatusMessage(err.message);
+      } else {
+        console.error("Unknown error", err);
+        setStatus("error");
+        setStatusMessage("Something went wrong. Please try again.");
+      }
     }
   }
 
@@ -74,7 +80,7 @@ export default function ContactDialog({open, setOpen}: {open: boolean, setOpen: 
       <DialogContent className="dark sm:max-w-lg bg-black border-[#444444]">
         <DialogHeader>
           <DialogTitle>
-            <h4>Send me a message</h4>
+            <span className="text-xl">Send me a message</span>
           </DialogTitle>
           <DialogDescription>
             Quick messages, project inquiries, or freelance requests — I usually reply within 48
