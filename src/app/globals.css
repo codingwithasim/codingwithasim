@@ -211,10 +211,7 @@ pre {
     transition: all var(--transition-normal);
   }
 
-  .card:hover {
-    @apply border-[#22C55E]/20 shadow-xl shadow-[#22C55E]/5;
-    transform: translateY(-2px);
-  }
+
 
   /* Button Components - n8n/Supabase/GitHub Style */
   .btn-primary {
@@ -356,6 +353,42 @@ pre {
     @apply bg-[#8B5CF6]/20 text-[#8B5CF6] border border-[#8B5CF6]/30;
   }
 }
+
+.fancy-border {
+  position: relative;
+  background: black;        /* Inner background stays visible */
+  z-index: 0;
+  overflow: hidden;         /* Make sure the pseudo-element clips */
+}
+
+.fancy-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;                 /* Cover the whole element */
+  border-radius: inherit;
+  padding: 1px;             /* Border thickness */
+  background: conic-gradient(
+    from 150deg at 50% 50%,
+    #333 0deg 186deg,
+    #d1d1d1 199deg 200deg,
+    #333 237deg 360deg
+  );
+  
+  /* Mask trick to only show the border */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+.polka {
+  opacity: 0.8;
+  background-image: radial-gradient(#8b8b8b 0.5px, transparent 0.5px);
+  background-size: 10px 10px;
+}
+
+
 
 /* Optimized Animations */
 @keyframes marquee {

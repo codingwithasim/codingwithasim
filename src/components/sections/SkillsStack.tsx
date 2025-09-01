@@ -1,14 +1,24 @@
+import { LucideGithub } from "lucide-react";
+import { Badge } from "../ui/badge";
+import { FaNodeJs, FaReact } from "react-icons/fa";
+import { IconType } from "react-icons";
+import { SiTypescript } from "react-icons/si";
+import { RiSupabaseLine } from "react-icons/ri";
+import { HiOutlineColorSwatch } from "react-icons/hi";
+import { LuSettings } from "react-icons/lu";
+
 interface Skill {
   name: string;
   category: string;
   level: string;
-  icon: string;
+  icon: IconType;
   description: string;
+  iconColor: string
 }
 
 interface TechCategory {
   name: string;
-  icon: string;
+  icon: IconType;
   color: string;
   technologies: string[];
 }
@@ -19,88 +29,90 @@ const SkillsStack = () => {
       name: 'React',
       category: 'Frontend',
       level: 'Expert',
-      icon: '⚛️',
-      description: "Building modern user interfaces with hooks, context and performance optimization"
+      icon: FaReact,
+      description: "Building modern user interfaces with hooks, context and performance optimization",
+      iconColor: "text-sky-400"
     },
     {
       name: 'TypeScript',
       category: 'Language',
       level: 'Advanced',
-      icon: '🔷',
-      description: 'Type-safe development with interfaces, generics and utility types'
+      icon: SiTypescript,
+      description: 'Type-safe development with interfaces, generics and utility types',
+      iconColor: "text-blue-600"
     },
     {
       name: 'Node.js',
       category: 'Backend',
       level: 'Advanced',
-      icon: '🟢',
-      description: 'Server-side development with Express, APIs and microservices'
+      icon: FaNodeJs,
+      description: 'Server-side development with Express, APIs and microservices',
+      iconColor: "text-yellow-400"
     },
     {
-      name: 'PostgreSQL',
+      name: 'Supabase',
       category: 'Database',
       level: 'Intermediate',
-      icon: '🐘',
-      description: 'Relational databases, complex queries and data modeling'
+      icon: RiSupabaseLine,
+      description: 'Relational databases, complex queries and data modeling',
+      iconColor: "text-green-500"
     }
   ];
 
   const techCategories: TechCategory[] = [
     {
       name: 'Frontend',
-      icon: '🎨',
+      icon: HiOutlineColorSwatch  ,
       color: 'from-[#22C55E] to-[#16A34A]',
       technologies: ['React', 'Vue.js', 'Tailwind CSS', 'Next.js']
     },
     {
       name: 'Backend',
-      icon: '⚙️',
+      icon: LuSettings,
       color: 'from-[#14B8A6] to-[#0D9488]',
       technologies: ['Node.js', 'Python', 'Go', 'FastAPI']
     },
     {
       name: 'DevOps',
-      icon: '🚀',
+      icon: LuSettings,
       color: 'from-[#8B5CF6] to-[#7C3AED]',
       technologies: ['Docker', 'AWS', 'Git', 'CI/CD']
     }
   ];
 
   return (
-    <section className="py-24 bg-[#0F1115]">
+    <section className="py-24">
       <div className="container-custom">
         <div className="text-center mb-20">
-          <h2 className="font-bold mb-6">
-            Skills & <span className="text-[#22C55E]">Stack</span>
-          </h2>
-          <p className="text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-            Core technologies I use daily, with a focus on modern web development
-            and developer experience.
-          </p>
+        <h4 className="font-bold mb-6 max-w-2xl mx-auto">
+          Technologies & Tools<span className='text-gray-400 font-medium'> I most commonly use.</span>
+          </h4>
         </div>
 
         {/* Core Skills Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {coreSkills.map((skill) => (
+          {coreSkills.map(({icon: Icon, ...skill}) => (
             <div key={skill.name} className="group">
-              <div className="card h-full text-center hover:border-[#22C55E]/30 transition-all duration-300">
+              <div className="card bg-black border-[#323232] rounded-lg  h-full transition-all duration-300 hover:border-[#585858]">
                 {/* Skill Icon */}
-                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {skill.icon}
+                <div className={`text-5xl h-30  polka mb-4 grid place-items-center ${skill.iconColor}`}>
+                  <Icon size={28}/>
                 </div>
                 
-                {/* Skill Name */}
-                <h3 className="text-xl font-semibold text-white mb-2">
+                <div className="flex items-center justify-between">
+                  {/* Skill Name */}
+                <h5 className="text-xl font-semibold text-white">
                   {skill.name}
-                </h3>
+                </h5>
                 
                 {/* Level Badge */}
-                <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mb-4 bg-[#22C55E]/20 text-[#22C55E] border border-[#22C55E]/30">
+                <Badge>
                   {skill.level}
+                </Badge>
                 </div>
                 
                 {/* Description */}
-                <p className="text-white/60 text-sm leading-relaxed">
+                <p className="text-white/60 pt-2 text-sm leading-relaxed">
                   {skill.description}
                 </p>
               </div>
@@ -110,22 +122,22 @@ const SkillsStack = () => {
 
         {/* Technology Categories */}
         <div className="space-y-12">
-          {techCategories.map((category) => (
+          {techCategories.map(({icon: Icon, ...category}) => (
             <div key={category.name} className="group">
               <div className="flex items-center mb-8">
                 <div className="text-3xl mr-4 group-hover:scale-110 transition-transform duration-300">
-                  {category.icon}
+                  <Icon size={24}/>
                 </div>
-                <h3 className="text-2xl font-semibold text-white">
+                <h5 className="text-2xl font-semibold text-white">
                   {category.name}
-                </h3>
-                <div className={`ml-4 h-px flex-1 bg-gradient-to-r ${category.color} opacity-60`}></div>
+                </h5>
+                <div className={`ml-4 h-px flex-1 bg-gradient-to-r bg-[#383838] opacity-60`}></div>
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {category.technologies.map((tech) => (
                   <div key={tech} className="group/tech">
-                    <div className="bg-[#111318] border border-[#1F2937] rounded-xl p-4 text-center hover:border-[#22C55E]/30 hover:bg-[#1F2937] transition-all duration-300 group-hover/tech:scale-105">
+                    <div className="border border-[#2b2b2b] rounded-md p-4 text-center transition-all duration-300 hover:border-[#444444]">
                       <div className="text-white/80 font-medium text-sm group-hover/tech:text-white transition-colors duration-200">
                         {tech}
                       </div>

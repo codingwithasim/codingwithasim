@@ -50,7 +50,7 @@ console.log(buildSomethingAmazing());`;
         <div className="flex items-center justify-center h-[550px]">
           <div className="flex flex-col h-fit mb-12 items-center justify-center space-y-7 z-9 text-center">
               <h2 className="text-lg font-normal">
-                I'm Asim a web developer
+                I'm Asim, a web developer
               </h2>
             
             <p className="text-lg text-white/70 leading-relaxed max-w-2xl">

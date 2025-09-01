@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { LucideMoveUpRight } from 'lucide-react';
 import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
 
 const FeaturedProjects = () => {
   const projects = [
@@ -59,7 +60,7 @@ const FeaturedProjects = () => {
     overlayDiv.current = e.currentTarget.querySelector("div.rainbow-glow") as HTMLDivElement;
     if (overlayDiv.current) {
       overlayDiv.current.style.display = "block";
-      overlayDiv.current.style.opacity = ".4";
+      overlayDiv.current.style.opacity = ".2";
     }
   };
 
@@ -86,15 +87,11 @@ const FeaturedProjects = () => {
 
   return (
     <section className="py-24">
-      <div className="container-custom">
-        <div className="text-center mb-16">
-          <h2 className="font-bold mb-6">
-            Featured <span className="text-[#22C55E]">Projects</span>
-          </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-            A selection of projects that demonstrate my expertise in building scalable web applications, 
-            performant systems, and developer tools.
-          </p>
+      <div className="container-custom max-w-6xl">
+        <div className="text-center mb-16 ">
+          <h4 className="font-bold mb-6 max-w-2xl mx-auto">
+          Featured projects <span className='text-gray-400 font-medium'>showcasing expertise in scalable apps, systems, and developer tools.</span>
+          </h4>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -104,12 +101,12 @@ const FeaturedProjects = () => {
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               key={project.id} 
-              className="group relative overflow-clip rounded-3xl border border-gray-800"
+              className="group relative overflow-clip rounded-3xl"
             >
-              <div className="card bg-black h-full flex flex-col hover:scale-[1.02] transition-all duration-300">
+              <div className="card fancy-border h-full flex flex-col transition-all duration-300">
                 {/* Project Image */}
-                <div className="relative mb-6 overflow-hidden rounded-xl z-10">
-                  <div className="w-full h-48 bg-gradient-to-br from-[#1F2937] to-[#111318] flex items-center justify-center">
+                <div className="relative mb-6 overflow-hidden rounded-t-xl z-10">
+                  <div className="w-full h-48 flex items-center justify-center">
                     <Image
                         className="grayscale group-hover:grayscale-0 duration-700 transition-all"
                         src={project.image}
@@ -123,20 +120,22 @@ const FeaturedProjects = () => {
 
                 {/* Project Content */}
                 <div className="flex-1 space-y-4 z-10">
-                  <h3 className="text-xl font-medium text-white group-hover:text-[#22C55E] transition-colors duration-200">
+                  <h5>
                     {project.title}
-                  </h3>
+                  </h5>
                   
                   <p className="text-white/70 text-sm leading-relaxed">
                     {project.description}
                   </p>
 
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 pb-8">
                     {project.tags.map((tag, index) => (
-                      <span key={index} className="badge badge-primary text-xs">
-                        {tag}
-                      </span>
+                      <Badge 
+                        variant="default" 
+                        title={tag} 
+                        key={index}
+                        className='border border-gray-700'>{tag}</Badge>
                     ))}
                   </div>
 
@@ -144,7 +143,7 @@ const FeaturedProjects = () => {
                   <div className="grid grid-cols-3 gap-2 text-xs">
                     {Object.entries(project.metrics).map(([key, value]) => (
                       <div key={key} className="text-center">
-                        <div className="text-[#22C55E] font-semibold">{value}</div>
+                        <div className="font-semibold">{value}</div>
                         <div className="text-white/50 capitalize">{key}</div>
                       </div>
                     ))}
@@ -156,7 +155,7 @@ const FeaturedProjects = () => {
                 <div className="pt-4 mt-auto z-10">
                   <Link
                     href={project.link}
-                    className="inline-flex items-center text-[#22C55E] hover:text-[#16A34A] transition-colors duration-200 text-sm font-medium group/link"
+                    className="inline-flex items-center transition-colors duration-200 text-sm font-medium group/link"
                   >
                     Read Case Study
                     <svg className="w-4 h-4 ml-1 transform group-hover/link:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,8 +164,8 @@ const FeaturedProjects = () => {
                   </Link>
                 </div>
 
-                <div className='w-[500px] h-[500px] rainbow-glow bg-gradient-to-br from-orange-600 via-20% via-gray-600 to-cyan-400 opacity-0 absolute z-1 rounded-full blur-3xl transition-[opacity] duration-500'></div>
-              </div>
+                <div className='w-[500px] h-[500px] rainbow-glow bg-gradient-to-br from-gray-600 via-20% via-gray-100 to-gray-600 opacity-0 absolute z-1 rounded-full blur-3xl transition-[opacity] duration-500'></div>
+                </div>
 
               <Link 
                 href={project.link}
