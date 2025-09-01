@@ -67,7 +67,7 @@ const Navigation = () => {
 
           {/* CTA Button */}
           <div className="flex items-center space-x-4">
-            <Button asChild variant="outline"  className='text-black ' >
+            <Button asChild >
               <Link
                 href="/contact"
               >

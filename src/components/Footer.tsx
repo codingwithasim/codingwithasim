@@ -12,9 +12,9 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { name: 'GitHub', url: 'https://github.com', icon: 'github' },
-    { name: 'LinkedIn', url: 'https://linkedin.com', icon: 'linkedin' },
-    { name: 'Twitter', url: 'https://twitter.com', icon: 'twitter' },
+    { name: 'GitHub', url: 'https://github.com/asim-muhammad', icon: 'github' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/muhammad-asim-63057535a/', icon: 'linkedin' },
+    { name: 'Twitter', url: 'https://x.com/Muhamma48589007', icon: 'twitter' },
   ];
 
   const getSocialIcon = (icon: string) => {
@@ -43,12 +43,12 @@ const Footer = () => {
   };
 
   return (
-    <footer className="border-t border-[#1F2937]/20 bg-[#0F1115]/50 mt-32">
+    <footer className="border-t border-[#1F2937]/20">
       <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center sm:text-left">
           {/* Navigation */}
           <div>
-            <h3 className="text-white/60 font-medium mb-4">Navigation</h3>
+            <h6 className="font-medium mb-4">Navigation</h6>
             <ul className="space-y-2">
               {footerLinks.map((link) => (
                 <li key={link.path}>
@@ -64,9 +64,9 @@ const Footer = () => {
           </div>
 
           {/* Social Links */}
-          <div>
-            <h3 className="text-white/60 font-medium mb-4">Se connecter</h3>
-            <div className="flex space-x-4">
+          <div className="flex flex-col items-center">
+            <h6 className="font-medium mb-4">Se connecter</h6>
+            <div className="flex space-x-4 justify-center">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
@@ -82,31 +82,16 @@ const Footer = () => {
             </div>
           </div>
 
+
           {/* Copyright */}
           <div>
-            <h3 className="text-white/60 font-medium mb-4">Portfolio</h3>
+            <h6 className="font-medium mb-4">Portfolio</h6>
             <p className="text-white/40 text-sm leading-relaxed">
               Conçu avec Next.js, Tailwind CSS, et une passion pour le code propre.
             </p>
             <p className="text-white/30 text-xs mt-4">
               © {currentYear} Muhammad Asim. Tous droits réservés.
             </p>
-          </div>
-        </div>
-
-        <div className="border-t border-[#1F2937]/20 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-white/30 text-sm">
-              Fait avec ❤️ pour la communauté des développeurs
-            </p>
-            <div className="flex space-x-6 text-xs text-white/30">
-              <Link href="/confidentialite" className="hover:text-white/50 transition-colors duration-200">
-                Confidentialité
-              </Link>
-              <Link href="/conditions" className="hover:text-white/50 transition-colors duration-200">
-                Conditions
-              </Link>
-            </div>
           </div>
         </div>
       </div>

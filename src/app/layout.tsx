@@ -19,7 +19,11 @@ export const metadata: Metadata = {
   description: "Full-Stack Web Developer specializing in React, Next.js and modern web technologies",
   keywords: "web developer, full-stack, react, nextjs, javascript, typescript, portfolio",
   authors: [{ name: "Muhammad Asim" }],
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -29,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased dark`}>
         <Navigation />
         <main className="pt-16">
           {children}

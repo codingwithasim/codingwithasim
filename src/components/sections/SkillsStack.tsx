@@ -81,7 +81,7 @@ const SkillsStack = () => {
   ];
 
   return (
-    <section className="py-24">
+    <section>
       <div className="container-custom">
         <div className="text-center mb-20">
         <h4 className="font-bold mb-6 max-w-2xl mx-auto">
@@ -106,7 +106,7 @@ const SkillsStack = () => {
                 </h5>
                 
                 {/* Level Badge */}
-                <Badge>
+                <Badge variant="outline" className="border-[#4a4a4a]">
                   {skill.level}
                 </Badge>
                 </div>
@@ -147,31 +147,6 @@ const SkillsStack = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Learning Section */}
-        <div className="mt-20 text-center">
-          <div className="inline-flex items-center space-x-3 bg-[#111318] border border-[#1F2937] rounded-2xl px-6 py-4">
-            <div className="w-3 h-3 bg-[#22C55E] rounded-full animate-pulse"></div>
-            <span className="text-white/80 font-medium">Currently exploring:</span>
-            <span className="text-[#22C55E] font-semibold">Rust, WebAssembly</span>
-          </div>
-        </div>
-
-        {/* Additional Tools */}
-        <div className="mt-16 text-center">
-          <h3 className="text-lg font-medium text-white/80 mb-6">
-            Tools & Platforms
-          </h3>
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              'VS Code', 'Figma', 'Postman', 'Docker', 'GitHub', 'Vercel'
-            ].map((tool) => (
-              <span key={tool} className="badge badge-primary text-xs">
-                {tool}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
     </section>

@@ -59,14 +59,14 @@ console.log(buildSomethingAmazing());`;
 
             <div className="flex flex-col sm:flex-row gap-4">
               
-              <Button variant="outline" className='text-black rounded-full py-6'>
-              <Link href="/contact">
+              <Button className='rounded-full' asChild>
+              <Link href="/contact" className='py-6'>
                 Get in Touch
               </Link>
               </Button>
 
-              <Button variant="outline"  className='text-white border-black bg-black rounded-full py-6 hover:bg-[#1d1d1d] hover:text-white'>
-                <Link href="/projects">
+              <Button variant="secondary" asChild className='bg-black rounded-full'>
+                <Link href="/projects" className='py-6'>
                   View Projects
                 </Link>
               </Button>
