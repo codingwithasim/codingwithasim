@@ -14,21 +14,21 @@ const CTABand = () => {
       name: 'Email',
       value: 'hello@muhammadasim.dev',
       icon: '✉️',
-      link: 'mailto:hello@muhammadasim.dev',
+      link: '#',
       description: 'Direct communication for project discussions'
     },
     {
       name: 'LinkedIn',
       value: 'muhammadasim',
       icon: '💼',
-      link: 'https://linkedin.com/in/muhammadasim',
+      link: 'https://www.linkedin.com/in/muhammad-asim-63057535a/',
       description: 'Professional networking and updates'
     },
     {
       name: 'GitHub',
       value: 'muhammadasim',
       icon: '🐙',
-      link: 'https://github.com/muhammadasim',
+      link: 'https://github.com/asim-muhammad',
       description: 'View my code and open source contributions'
     }
   ];

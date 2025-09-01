@@ -26,13 +26,13 @@ export default function Home() {
       <SkillsStack />
 
       {/* About Preview */}
-      <AboutPreview />
+      {/* <AboutPreview /> */}
 
       {/* Open Source */}
-      <OpenSource />
+      {/* <OpenSource /> */}
 
       {/* Writing Preview */}
-      <WritingPreview />
+      {/* <WritingPreview /> */}
 
       {/* Testimonials */}
       {/* <Testimonials /> */}
