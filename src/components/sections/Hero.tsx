@@ -49,7 +49,7 @@ console.log(buildSomethingAmazing());`;
         
         <div className="flex items-center justify-center h-[550px]">
           <div className="flex flex-col h-fit mb-12 items-center justify-center space-y-7 z-9 text-center">
-              <h2 className="text-lg font-normal">
+              <h2 className="font-normal">
                 I'm Asim, a web developer
               </h2>
             
