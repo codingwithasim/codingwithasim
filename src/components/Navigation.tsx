@@ -6,7 +6,11 @@ import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
 import Image from 'next/image';
 
-const Navigation = ({onMenuClick}) => {
+type NavigationProps = {
+  onMenuClick: () => void
+}
+
+const Navigation = ({onMenuClick}: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 

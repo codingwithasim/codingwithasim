@@ -1,7 +1,12 @@
 import Link from "next/link"
 import { useEffect } from "react"
 
-export default function NavDrawer({open, onClose}) {
+type NavDrawerProps = {
+    open: boolean,
+    onClose: ()=> void
+}
+
+export default function NavDrawer({open, onClose}: NavDrawerProps) {
 
     const navItems = [
         {

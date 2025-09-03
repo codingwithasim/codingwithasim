@@ -48,8 +48,8 @@ console.log(buildSomethingAmazing());`;
       <div className="container-custom relative max-w-[1100px]">
         
         <div className="flex items-center justify-center h-[550px]">
-          <div className="flex flex-col h-fit mb-12 items-center justify-center space-y-7 z-9 text-center">
-              <h2 className="font-normal">
+          <div className="flex flex-col h-fit mb-32 items-center justify-center space-y-7 z-9 text-center">
+              <h2 className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-white via-[#bfbfbf] to-white">
                 I'm Asim, a web developer
               </h2>
             
@@ -73,20 +73,12 @@ console.log(buildSomethingAmazing());`;
               
             </div>
 
-            <Image
-              width={200}
-              height={200}
-              alt='A logo'
-              src="/assets/a_logo.png"
-              className='invert'/>
-
-            
           </div>
 
           <Image 
             fill
             className='absolute hue-rotate-30 brightness-85'
-            src="/assets/hero_banner.webp"
+            src="/assets/test.png"
             alt="Hero banner"/>
 
           <div className='absolute top-0 left-0 right-0 h-2/3 bg-gradient-to-b from-black to-transparent'></div>
