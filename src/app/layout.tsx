@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import NavDrawerWrapper from "@/components/ui/NavDrawerWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -34,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased dark`}>
-        <Navigation />
+        <NavDrawerWrapper/>
         <main className="pt-16">
           {children}
         </main>

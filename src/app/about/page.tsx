@@ -1,3 +1,4 @@
+import { LuCodeXml } from "react-icons/lu";
 
 export default function About() {
   const experience = [
@@ -42,18 +43,18 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0B0F14]">
+    <div className="min-h-screen">
       {/* Header */}
       <section className="pt-32 pb-16">
         <div className="container-custom">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              About <span className="text-[#22C55E]">Me</span>
-            </h1>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-              A passionate developer focused on creating exceptional user experiences 
-              and building tools that make development easier and more enjoyable.
-            </p>
+          <div className="grid place-items-center gap-4">
+            <div className="size-16 grid place-items-center bg-[#252525] rounded-full">
+              <LuCodeXml size={22} />
+            </div>
+            <span>Hi, I'm Muhammad Asim</span>
+            <span className="text-[#7e7e7e] max-w-2xl text-center">
+            I craft beautiful, functional web experiences that bring ideas to life. Specializing in modern web technologies and user-centered design.
+            </span>
           </div>
         </div>
       </section>

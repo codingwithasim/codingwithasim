@@ -103,7 +103,7 @@ export default function Projects() {
         <div className="container-custom">
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             {/* Technology Filter */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap justify-center gap-3">
               {technologies.map((tech) => (
                 <Badge
                   key={tech}
