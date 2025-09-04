@@ -77,7 +77,8 @@ console.log(buildSomethingAmazing());`;
 
           <Image 
             fill
-            className='absolute hue-rotate-30 brightness-85'
+            loading='lazy'
+            className='absolute object-cover hue-rotate-30 brightness-85'
             src="/assets/test.png"
             alt="Hero banner"/>
 

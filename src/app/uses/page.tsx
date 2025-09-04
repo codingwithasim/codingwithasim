@@ -101,13 +101,10 @@ export default function Uses() {
       <section className="pt-32 pb-16">
         <div className="container-custom">
           <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              What I <span className="text-[#22C55E]">Use</span>
-            </h1>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-              A comprehensive list of tools, technologies, and setup that I use 
-              for development, productivity, and daily work.
-            </p>
+            <h4 className="text-xl text-dark-400 max-w-3xl mx-auto leading-relaxed">
+              A list of <span className='text-white font-medium'>tools & technologies</span> I use 
+              for <span className='text-white font-medium'>development, productivity, and daily work</span>.
+            </h4>
           </div>
         </div>
       </section>

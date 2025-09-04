@@ -49,7 +49,7 @@ const CTABand = () => {
     <section className="py-24 ">
       <div className="container-custom">
         <div className="card bg-black max-w-5xl mx-auto text-center border-[#22C55E]/20">
-          <div className="space-y-8 p-12">
+          <div className="space-y-8 ">
             {/* Main CTA */}
             <div className="space-y-4">
               <h4 className="font-bold mb-6 max-w-2xl mx-auto">

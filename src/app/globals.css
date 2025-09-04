@@ -494,3 +494,17 @@ pre {
   }
 }
 
+@theme {
+  --color-dark-50:  #f9f9f9;
+  --color-dark-100: #f0f0f0;
+  --color-dark-200: #d9d9d9;
+  --color-dark-300: #bfbfbf;
+  --color-dark-400: #a6a6a6;
+  --color-dark-500: #8c8c8c;
+  --color-dark-600: #737373;
+  --color-dark-700: #595959;
+  --color-dark-800: #3c3c3c;
+  --color-dark-900: #262626;
+  --color-dark-950: #0d0d0d;
+  
+}
