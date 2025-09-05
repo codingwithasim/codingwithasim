@@ -6,42 +6,7 @@ import { Button } from '../ui/button';
 import Image from 'next/image';
 
 const Hero = () => {
-  const [displayedCode, setDisplayedCode] = useState('');
-
-  const codeSnippet = `const developer = {
-  name: "Muhammad Asim",
-  role: "Web Developer",
-  specialty: "React, Performance & DX",
-  location: "Remote",
-  available: true
-};
-
-function buildSomethingAmazing() {
-  return "Let's create incredible web experiences!";
-}
-
-// Currently working on:
-// Building modern web applications
-// Performance optimization and UX
-// Open source contributions
-
-console.log(buildSomethingAmazing());`;
-
-  useEffect(() => {
-    const lines = codeSnippet.split('\n');
-    let currentIndex = 0;
-    
-    const interval = setInterval(() => {
-      if (currentIndex < lines.length-1) {
-        setDisplayedCode(prev => prev + lines[currentIndex] + '\n');
-        currentIndex++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, []);
+ 
 
   return (
     <section className="py-32 bg-black">

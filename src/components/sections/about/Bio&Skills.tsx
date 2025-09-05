@@ -19,7 +19,7 @@ export default function BioSkills() {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2">
-            <Card className="border-[#464646] border-b-0 rounded-b-none md:border-b md:border-l md:rounded-l-lg  md:border-r-0 md:rounded-r-none bg-black">
+            <Card className="border-dark-800 border-b-0 rounded-b-none md:border-b md:border-l md:rounded-l-lg  md:border-r-0 md:rounded-r-none bg-black">
               <CardTitle className="px-6 py-12">
                 Who I Am
               </CardTitle>
@@ -34,7 +34,7 @@ export default function BioSkills() {
               </CardContent>
             </Card>
 
-            <Card className="border-[#464646] rounded-t-none md:rounded-r-lg md:rounded-l-none bg-black">
+            <Card className="border-dark-800 rounded-t-none md:rounded-r-lg md:rounded-l-none bg-black">
               <CardTitle className="px-6 py-12">
                 Technical Expertise
               </CardTitle>

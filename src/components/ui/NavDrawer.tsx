@@ -18,10 +18,6 @@ export default function NavDrawer({open, onClose}: NavDrawerProps) {
             href: "/projects"
         },
         {
-            name: "Blog",
-            href: "/blog"
-        },
-        {
             name: "About",
             href: "/about"
         },

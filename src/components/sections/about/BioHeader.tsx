@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { IconType } from "react-icons";
+import { FaFacebookF } from "react-icons/fa";
 import { LuCodeXml, LuGithub, LuInstagram, LuLinkedin } from "react-icons/lu";
 import { RiTwitterXFill } from "react-icons/ri";
 
@@ -32,6 +33,11 @@ export default function AboutHeader(){
           name: 'X',
           icon: RiTwitterXFill,
           href: "https://x.com/CodingWithAsim"
+        },
+        {
+          name: 'Facebook',
+          icon: FaFacebookF,
+          href: "https://www.facebook.com/profile.php?id=61580246404401"
         }
       ];
 
@@ -46,9 +52,9 @@ export default function AboutHeader(){
 
               </div>
             </div>
-            <span>Hi, I'm Muhammad Asim</span>
+            <h5>Hey, I'm Muhammad Asim</h5>
             <span className="text-[#7e7e7e] max-w-2xl text-center">
-            A passionate full-stack developer with 2+ years of experience crafting digital experiences that blend beautiful design with powerful functionality. I turn complex problems into elegant, user-friendly solutions.
+            A passionate full-stack developer with 2+ years of experience crafting digital experiences that blend beautiful design with powerful functionality.
             </span>
           </div>
 
@@ -70,7 +76,7 @@ export default function AboutHeader(){
           <Badge variant="secondary" className="place-self-center py-1.5 flex gap-2">
           <div className="size-1.5 bg-white animate-pulse rounded-full"></div>
 
-            Open to work
+          Currently Taking on Projects
           </Badge>
         </div>
       </section>

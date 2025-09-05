@@ -2,10 +2,11 @@
 
 import { Project } from "@/app/types/project";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Badge } from "./badge";
 import Link from "next/link";
 import { LucideMoveUpRight } from "lucide-react";
+import { attachSpotlightTo } from "@/utils/spotlight";
 
 type ProjectCardProps = {
     project: Project
@@ -45,11 +46,13 @@ export default function ProjectCard({project} : ProjectCardProps) {
       }
     };
 
+    useEffect(()=> {
+        attachSpotlightTo(overlayDiv)
+    }, [])
+
     return (
         <div
-            onMouseEnter={handleMouseEnter}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
+            ref={overlayDiv}
             key={project.id}
             className="group relative overflow-clip rounded-3xl"
         >
@@ -114,7 +117,7 @@ export default function ProjectCard({project} : ProjectCardProps) {
                     </Link>
                 </div>
 
-                <div className='w-[500px] h-[500px] rainbow-glow bg-gradient-to-br from-gray-600 via-20% via-gray-100 to-gray-600 opacity-0 absolute z-1 rounded-full blur-3xl transition-[opacity] duration-500'></div>
+                <div className='spotlight w-[500px] h-[500px] rainbow-glow bg-gradient-to-br from-gray-600 via-20% via-gray-100 to-gray-600 opacity-0 absolute z-1 rounded-full blur-3xl transition-[opacity] duration-500'></div>
             </div>
 
             <Link

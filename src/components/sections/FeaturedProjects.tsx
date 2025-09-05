@@ -73,23 +73,26 @@ import ProjectCard from '../ui/project.card';
     
 
     return (
-      <section className="py-24">
+      <section className="py-32">
         <div className="container-custom max-w-6xl">
-          <div className="text-center mb-16 ">
-            <h4 className="font-bold mb-6 max-w-2xl mx-auto">
-            Featured projects <span className='text-gray-400 font-medium'>showcasing expertise in scalable apps, systems, and developer tools.</span>
-            </h4>
+          <div className="text-center mb-20 space-y-4">
+            <h2 className="text-3xl md:text-4xl font-light text-white">
+              Featured Work
+            </h2>
+            <p className="text-lg text-white/60 max-w-2xl mx-auto">
+              Showcasing expertise in scalable applications, systems, and developer tools.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
 
-          <div className="text-center mt-16">
+          <div className="text-center mt-20">
             <Button asChild>
-              <Link href="/projects" className='py-5'>
+              <Link href="/projects" className='py-6 px-8 text-base'>
                 View All Projects
               </Link>
             </Button>

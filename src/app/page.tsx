@@ -10,22 +10,31 @@ import { LucideMessageCircleMore } from 'lucide-react';
 export default function Home() {
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-black">
       
       {/* Hero Section */}
       <Hero />
 
       {/* Social Proof Strip */}
-      <SocialProof />
+      <div className="py-16">
+        <SocialProof />
+      </div>
 
       {/* Featured Projects */}
-      <FeaturedProjects />
+      <div className="py-16">
+        <FeaturedProjects />
+      </div>
 
       {/* Skills & Stack */}
-      <SkillsStack />
+      <div className="py-16">
+        <SkillsStack />
+      </div>
 
       {/* CTA Band */}
-      <CTABand />
+      <div className="py-16">
+        <CTABand />
+      </div>
+      
 
       {/* Floating Action Button*/}
       <FAB icon={LucideMessageCircleMore}/>

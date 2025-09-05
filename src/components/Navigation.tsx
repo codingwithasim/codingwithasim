@@ -31,10 +31,10 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-gray-700 ${
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-dark-800 ${
       isScrolled 
-        ? 'bg-[#0B0F14]/80 backdrop-blur-xl border-b border-[#1F2937]/50' 
-        : 'bg-transparent'
+        ? 'bg-black/75 backdrop-blur-xl border-b border-[#1F2937]/50' 
+        : 'bg-black'
     }`}>
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
