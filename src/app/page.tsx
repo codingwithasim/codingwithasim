@@ -2,6 +2,7 @@
 import SocialProof from '@/components/sections/SocialProof';
 import FeaturedProjects from '@/components/sections/FeaturedProjects';
 import SkillsStack from '@/components/sections/SkillsStack';
+import Services from '@/components/sections/Services';
 import CTABand from '@/components/sections/CTABand';
 import FAB from '@/components/ui/fab';
 import Hero from '@/components/sections/Hero';
@@ -18,6 +19,11 @@ export default function Home() {
       {/* Social Proof Strip */}
       <div className="py-16">
         <SocialProof />
+      </div>
+
+      {/* Services */}
+      <div className="py-16">
+        <Services />
       </div>
 
       {/* Featured Projects */}
