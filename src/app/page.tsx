@@ -1,4 +1,5 @@
 
+import { Metadata } from 'next';
 import SocialProof from '@/components/sections/SocialProof';
 import FeaturedProjects from '@/components/sections/FeaturedProjects';
 import SkillsStack from '@/components/sections/SkillsStack';
@@ -8,8 +9,19 @@ import FAB from '@/components/ui/fab';
 import Hero from '@/components/sections/Hero';
 import { LucideMessageCircleMore } from 'lucide-react';
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Muhammad Asim - Full Stack Developer | React & Next.js Expert",
+  description: "Welcome to Muhammad Asim's portfolio. Full-Stack Developer with 2+ years of experience building scalable web applications with React, Next.js, TypeScript, and Node.js. View my projects and services.",
+  keywords: ["Muhammad Asim", "full-stack developer", "React developer", "Next.js", "TypeScript", "web developer portfolio", "frontend developer", "backend developer"],
+  openGraph: {
+    title: "Muhammad Asim - Full Stack Developer Portfolio",
+    description: "Full-Stack Developer specializing in React, Next.js, and modern web technologies. Explore my projects and services.",
+    type: "website",
+    images: ["/og-home.jpg"],
+  },
+};
 
+export default function Home() {
   return (
     <div className="min-h-screen bg-black">
       
@@ -17,31 +29,30 @@ export default function Home() {
       <Hero />
 
       {/* Social Proof Strip */}
-      <div className="py-16">
+      <section className="py-16" aria-labelledby="social-proof-heading">
         <SocialProof />
-      </div>
+      </section>
 
       {/* Services */}
-      <div className="py-16">
+      <section className="py-16" aria-labelledby="services-heading">
         <Services />
-      </div>
+      </section>
 
       {/* Featured Projects */}
-      <div className="py-16">
+      <section className="py-16" aria-labelledby="projects-heading">
         <FeaturedProjects />
-      </div>
+      </section>
 
       {/* Skills & Stack */}
-      <div className="py-16">
+      <section className="py-16" aria-labelledby="skills-heading">
         <SkillsStack />
-      </div>
+      </section>
 
       {/* CTA Band */}
-      <div className="py-16">
+      <section className="py-16" aria-labelledby="cta-heading">
         <CTABand />
-      </div>
+      </section>
       
-
       {/* Floating Action Button*/}
       <FAB icon={LucideMessageCircleMore}/>
 

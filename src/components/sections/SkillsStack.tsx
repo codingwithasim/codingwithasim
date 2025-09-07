@@ -6,6 +6,8 @@ import { SiTypescript } from "react-icons/si";
 import { RiSupabaseLine } from "react-icons/ri";
 import { HiOutlineColorSwatch } from "react-icons/hi";
 import { LuSettings } from "react-icons/lu";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 interface Skill {
   name: string;
@@ -64,25 +66,25 @@ const SkillsStack = () => {
       name: 'Frontend',
       icon: HiOutlineColorSwatch  ,
       color: 'from-[#22C55E] to-[#16A34A]',
-      technologies: ['React', 'Vue.js', 'Tailwind CSS', 'Next.js']
+      technologies: ['React', 'Tailwind CSS', 'Next.js']
     },
     {
       name: 'Backend',
       icon: LuSettings,
       color: 'from-[#14B8A6] to-[#0D9488]',
-      technologies: ['Node.js', 'Python', 'Go', 'FastAPI']
+      technologies: ['Node.js', 'Supabase']
     },
     {
       name: 'DevOps',
       icon: LuSettings,
       color: 'from-[#8B5CF6] to-[#7C3AED]',
-      technologies: ['Docker', 'AWS', 'Git', 'CI/CD']
+      technologies: ['Vercel', 'Github', 'Git']
     }
   ];
 
   return (
     <section>
-      <div className="container-custom">
+      <div className="container-custom flex flex-col">
         <div className="text-center mb-20">
         <h4 className="font-bold mb-6 max-w-2xl mx-auto">
           Technologies & Tools<span className='text-gray-400 font-medium'> I most commonly use.</span>
@@ -121,33 +123,54 @@ const SkillsStack = () => {
         </div>
 
         {/* Technology Categories */}
-        <div className="space-y-12">
-          {techCategories.map(({icon: Icon, ...category}) => (
-            <div key={category.name} className="group">
-              <div className="flex items-center mb-8">
-                <div className="text-3xl mr-4 group-hover:scale-110 transition-transform duration-300">
-                  <Icon size={24}/>
+        <div className="space-y-16">
+          {techCategories.map(({icon: Icon, ...category}, index) => (
+            <div key={category.name} className="group relative">
+              {/* Category Header with Icon */}
+              <div className="flex items-center mb-8 group-hover:translate-x-2 transition-transform duration-300">
+                <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <Icon size={20} className="text-white"/>
                 </div>
-                <h5 className="text-2xl font-semibold text-white">
+                <h5 className="text-2xl font-bold text-white group-hover:text-white/90 transition-colors duration-300">
                   {category.name}
                 </h5>
-                <div className={`ml-4 h-px flex-1 bg-gradient-to-r bg-[#383838] opacity-60`}></div>
+                <div className="ml-6 h-px flex-1 bg-gradient-to-r from-white/20 via-white/10 to-transparent"></div>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {category.technologies.map((tech) => (
-                  <div key={tech} className="group/tech">
-                    <div className="border border-[#2b2b2b] rounded-md p-4 text-center transition-all duration-300 hover:border-[#444444]">
-                      <div className="text-white/80 font-medium text-sm group-hover/tech:text-white transition-colors duration-200">
+              {/* Technologies in a flowing layout */}
+              <div className="pl-16">
+                <div className="flex flex-wrap gap-3">
+                  {category.technologies.map((tech, techIndex) => (
+                    <div 
+                      key={tech} 
+                      className="group/tech relative overflow-hidden"
+                      style={{
+                        animationDelay: `${techIndex * 100}ms`
+                      }}
+                    >
+                      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105 cursor-pointer">
                         {tech}
                       </div>
+                      
+                      {/* Subtle glow effect on hover */}
+                      <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${category.color} opacity-0 group-hover/tech:opacity-20 blur-sm transition-opacity duration-300 -z-10`}></div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
+              
+              {/* Connecting line to next category */}
+              {index < techCategories.length - 1 && (
+                <div className="absolute left-6 -bottom-8 w-px h-8 bg-gradient-to-b from-white/20 to-transparent"></div>
+              )}
             </div>
           ))}
         </div>
+        <Button className="mt-8 w-fit self-center px-8" asChild>
+          <Link href="/uses">
+            View All
+          </Link>
+        </Button>
       </div>
     </section>
   );

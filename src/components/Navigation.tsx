@@ -39,48 +39,56 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
+          <Link href="/" className="flex items-center space-x-3 group" aria-label="Go to homepage">
             <div className="w-8 h-8 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-              {/* <span className="text-white font-bold text-lg">A</span> */}
               <Image
               src="/assets/a_logo.png"
               className='invert'
-              alt="Logo"
+              alt="Muhammad Asim Logo"
               width={50}
               height={50}
               />
             </div>
-            
           </Link>
 
           {/* Navigation Links */}
-          <div className="hidden md:flex items-center ">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                href={item.path}
-                className={`nav-link text-sm font-[400] ${
-                  pathname === item.path ? 'active' : ''
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
+          <nav className="hidden md:flex items-center" role="navigation" aria-label="Main navigation">
+            <ul className="flex items-center">
+              {navItems.map((item) => (
+                <li key={item.path}>
+                  <Link
+                    href={item.path}
+                    className={`nav-link text-sm font-[400] rounded ${
+                      pathname === item.path ? 'active' : ''
+                    }`}
+                    aria-current={pathname === item.path ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           {/* CTA Button */}
           <div className="flex items-center space-x-4">
-            <Button asChild >
+            <Button asChild>
               <Link
                 href="/contact"
+                aria-label="Contact Muhammad Asim"
               >
                 Contact
               </Link>
             </Button>
             
             {/* Mobile Menu Button */}
-            <button onClick={onMenuClick} className="md:hidden p-2 rounded-lg hover:bg-[#1F2937] transition-colors duration-200">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button 
+              onClick={onMenuClick} 
+              className="md:hidden p-2 rounded-lg hover:bg-[#1F2937] focus:bg-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:ring-opacity-50 transition-colors duration-200"
+              aria-label="Open navigation menu"
+              aria-expanded="false"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>

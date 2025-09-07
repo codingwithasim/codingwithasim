@@ -17,35 +17,6 @@ export default function ProjectCard({project} : ProjectCardProps) {
 
     const overlayDiv = useRef<HTMLDivElement | null>(null);
 
-    const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-      overlayDiv.current = e.currentTarget.querySelector("div.rainbow-glow") as HTMLDivElement;
-      if (overlayDiv.current) {
-        overlayDiv.current.style.display = "block";
-        overlayDiv.current.style.opacity = ".2";
-      }
-    };
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-      const card = e.currentTarget;
-      const rainbow = card.querySelector(".rainbow-glow") as HTMLDivElement;
-
-      if (!rainbow) return;
-
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      rainbow.style.left = `${x}px`;
-      rainbow.style.top = `${y}px`;
-      rainbow.style.transform = "translate(-50%, -50%)";
-    };
-
-    const handleMouseLeave = () => {
-      if (overlayDiv.current) {
-        overlayDiv.current.style.opacity = "0";
-      }
-    };
-
     useEffect(()=> {
         attachSpotlightTo(overlayDiv)
     }, [])
@@ -91,16 +62,6 @@ export default function ProjectCard({project} : ProjectCardProps) {
                                 className='border border-gray-700'>{tag}</Badge>
                         ))}
                     </div>
-
-                    {/* Quick Metrics */}
-                    {/* <div className="grid grid-cols-3 gap-2 text-xs">
-                        {Object.entries(project.metrics).map(([key, value]) => (
-                            <div key={key} className="text-center">
-                                <div className="font-semibold">{value}</div>
-                                <div className="text-white/50 capitalize">{key}</div>
-                            </div>
-                        ))}
-                    </div> */}
 
                 </div>
 

@@ -24,26 +24,27 @@ const CTABand = () => {
       value: 'hello@muhammadasim.dev',
       icon: LuMail,
       link: '/contact',
-      description: 'Direct communication for project discussions',
-      actionLabel: "Write me"
+      description: 'Reach out directly to discuss projects or collaborations',
+      actionLabel: "Send a Message"
     },
     {
       name: 'LinkedIn',
       value: 'muhammadasim',
       icon: LuLinkedin,
       link: 'https://www.linkedin.com/in/codingwithasim',
-      description: 'Professional networking and updates',
-      actionLabel: "Let's talk"
+      description: 'Connect professionally and follow my development journey',
+      actionLabel: "Connect"
     },
     {
       name: 'GitHub',
       value: 'muhammadasim',
       icon: LuGithub,
       link: 'https://github.com/codingwithasim',
-      description: 'View my code and open source contributions',
-      actionLabel: "Let's talk"
+      description: 'Explore my code, projects, and open source contributions',
+      actionLabel: "Check it out"
     }
   ];
+  
 
   return (
     <section className="py-24 ">
