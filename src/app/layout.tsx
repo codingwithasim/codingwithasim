@@ -80,7 +80,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased dark`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -93,8 +93,6 @@ export default function RootLayout({
             __html: JSON.stringify(websiteSchema),
           }}
         />
-      </head>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased dark`}>
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-black text-white p-2 rounded z-50">
           Skip to main content
         </a>
