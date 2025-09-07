@@ -1,4 +1,3 @@
-import { LucideGithub } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { FaNodeJs, FaReact } from "react-icons/fa";
 import { IconType } from "react-icons";
@@ -127,7 +126,7 @@ const SkillsStack = () => {
           {techCategories.map(({icon: Icon, ...category}, index) => (
             <div key={category.name} className="group relative">
               {/* Category Header with Icon */}
-              <div className="flex items-center mb-8 group-hover:translate-x-2 transition-transform duration-300">
+              <div className="flex items-center mb-8">
                 <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300`}>
                   <Icon size={20} className="text-white"/>
                 </div>
@@ -142,13 +141,11 @@ const SkillsStack = () => {
                 <div className="flex flex-wrap gap-3">
                   {category.technologies.map((tech, techIndex) => (
                     <div 
-                      key={tech} 
+                      key={techIndex} 
                       className="group/tech relative overflow-hidden"
-                      style={{
-                        animationDelay: `${techIndex * 100}ms`
-                      }}
+                      
                     >
-                      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105 cursor-pointer">
+                      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer">
                         {tech}
                       </div>
                       

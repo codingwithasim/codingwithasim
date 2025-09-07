@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconType } from "react-icons";
 import { FaFacebookF } from "react-icons/fa";
-import { LuCodeXml, LuGithub, LuInstagram, LuLinkedin } from "react-icons/lu";
+import { LuGithub, LuInstagram, LuLinkedin } from "react-icons/lu";
 import { RiTwitterXFill } from "react-icons/ri";
 
 type ContactMethod = {
@@ -23,17 +23,17 @@ export default function AboutHeader(){
         {
           name: 'LinkedIn',
           icon: LuLinkedin,
-          href: 'https://www.linkedin.com/in/CodingWithAsim/',
+          href: 'https://www.linkedin.com/in/codingwithasim/',
         },
         {
           name: 'GitHub',
           icon: LuGithub,
-          href: 'https://github.com/asim-muhammad',
+          href: 'https://github.com/codingwithasim',
         },
         {
           name: 'X',
           icon: RiTwitterXFill,
-          href: "https://x.com/CodingWithAsim"
+          href: "https://x.com/codingwithasim"
         },
         {
           name: 'Facebook',
