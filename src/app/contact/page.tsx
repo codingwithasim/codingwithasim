@@ -3,12 +3,13 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowBigRightDash } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { IconType } from 'react-icons';
-import { LuGithub, LuLinkedin, LuMail } from 'react-icons/lu';
+import { LuGithub, LuLinkedin, LuLoader } from 'react-icons/lu';
 import { MdOutlineArrowOutward } from 'react-icons/md';
+import emailjs from "@emailjs/browser";
+import { toast } from 'sonner';
 
 interface ContactMethod {
   name: string;
@@ -21,21 +22,111 @@ interface ContactMethod {
 
 export default function Contact() {
   const [formData, setFormData] = useState({
+    title: 'New proposal for you',
     name: '',
     email: '',
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateForm = () => {
+    const newErrors = {
+      name: '',
+      email: '',
+      message: ''
+    };
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    }
+
+    setErrors(newErrors);
+    return !newErrors.name && !newErrors.email && !newErrors.message;
+  };
+
+  const isFormValid = () => {
+    return formData.name.trim() && 
+           formData.email.trim() && 
+           validateEmail(formData.email) && 
+           formData.message.trim();
+  };
+
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
+
+    if (!validateForm()) {
+      return;
+    }
+
+    if(!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ||!process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || !process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY){
+      toast.error("Email service is not configured properly");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+        formData,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+      );
+      
+      toast.success("Message sent successfully! I'll get back to you soon.");
+      
+      // Reset form
+      setFormData({
+        title: 'New proposal for you',
+        name: '',
+        email: '',
+        message: ''
+      });
+    } catch (error) {
+      toast.error("Failed to send message. Please try again.");
+      console.error('Email send error:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value,
     });
+
+    // Clear error when user starts typing
+    if (errors[name as keyof typeof errors]) {
+      setErrors({
+        ...errors,
+        [name]: '',
+      });
+    }
   };
 
   const contactMethods: ContactMethod[] = [
@@ -52,7 +143,7 @@ export default function Contact() {
       name: 'GitHub',
       value: 'muhammadasim',
       icon: LuGithub  ,
-      link: 'https://github.com/asim-muhammad',
+      link: 'https://github.com/codingwithasim',
       description: 'View my code and open source contributions',
       actionLabel: "Let's talk"
     }
@@ -96,7 +187,11 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   placeholder="Your name"
+                  className={errors.name ? 'border-red-500' : 'border-dark-800'}
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                )}
               </div>
 
               <div>
@@ -111,7 +206,11 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   placeholder="your.email@example.com"
+                  className={errors.email ? 'border-red-500' : 'border-dark-800'}
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                )}
               </div>
 
               <div>
@@ -125,16 +224,27 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  
                   placeholder="Tell me about your project or what you'd like to discuss..."
-                ></Textarea>
+                  className={errors.message ? 'border-red-500' : 'border-dark-800'}
+                />
+                {errors.message && (
+                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                )}
               </div>
 
               <Button
                 type="submit"
                 className="w-full"
+                disabled={!isFormValid() || isLoading}
               >
-                Send Message
+                {isLoading ? (
+                  <>
+                    <LuLoader className="mr-2 h-4 w-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  'Send Message'
+                )}
               </Button>
             </form>
           </div>
@@ -169,10 +279,10 @@ export default function Contact() {
             </ul>
 
             {/* Additional Info */}
-            <div className="mt-12 p-6 border border-dark-900 rounded-xl">
-              <h3 className="text-lg font-semibold text-white mb-4">
+            <div className="mt-12 p-6 border border-dark-800 rounded-xl">
+              <h5 className="text-lg font-semibold text-white mb-4">
                 What to Expect
-              </h3>
+              </h5>
               <ul className="space-y-2 text-white/70 text-sm">
               {
                 ["Response within 24 hours", 

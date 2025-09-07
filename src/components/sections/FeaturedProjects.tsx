@@ -13,7 +13,7 @@ import ProjectCard from '../ui/project.card';
         name: "Nexusflow",
         description: "A modern, responsive React landing page for NexusFlow - a fictional team collaboration and workflow automation platform. Built with React, Tailwind CSS, and Framer Motion.",
         technologies: ["React", "Tailwind", "Framer Motion"],
-        cover: "/assets/img.png",
+        cover: "/assets/nexus.webp",
         status: "Complete",
         features: [
           "Responsive design",
@@ -34,7 +34,7 @@ import ProjectCard from '../ui/project.card';
         name: "Key Genie",
         description: "A modern, client-side password generator that creates random, memorable passwords and PINs with built-in strength indicators and export functionality.",
         technologies: ["Next.js", "Tailwind", "JavaScript"],
-        cover: "/assets/key_genie.png",
+        cover: "/assets/genie.webp",
         status: "Complete",
         features: [
           "Password generator",
@@ -54,7 +54,7 @@ import ProjectCard from '../ui/project.card';
         name: "Mobile App Backend",
         description: "Scalable backend infrastructure supporting 50k+ mobile app users with real-time features.",
         technologies: ["Go", "gRPC", "Kubernetes", "Elasticsearch"],
-        cover: "/api/placeholder/400/250",
+        cover: "/assets/bistro.webp",
         status: "Beta",
         features: [
           "Real-time data handling",

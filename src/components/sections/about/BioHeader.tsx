@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 import Link from "next/link";
 import { IconType } from "react-icons";
 import { FaFacebookF } from "react-icons/fa";
@@ -43,16 +44,16 @@ export default function AboutHeader(){
 
 
     return (
-        <section className="pt-32 pb-16">
-        <div className="flex flex-col">
+        <section className="pt-32 pb-16 relative">
+          <div className="flex flex-col relative">
           <div className="grid place-items-center gap-4">
-            <div className="size-16 grid place-items-center bg-[#252525] rounded-full relative">
-              <LuCodeXml size={22} />
+            <div className="size-36 grid place-items-center overflow-clip bg-[#252525] rounded-full relative">
+              <Image fill src="/assets/profile.jpeg" alt="Muhammad Asim" />
               <div className="inset-0 absolute rounded-full">
 
               </div>
             </div>
-            <h5>Hey, I'm Muhammad Asim</h5>
+            <h5>Hi there! I’m Muhammad Asim</h5>
             <span className="text-[#7e7e7e] max-w-2xl text-center">
             A passionate full-stack developer with 2+ years of experience crafting digital experiences that blend beautiful design with powerful functionality.
             </span>

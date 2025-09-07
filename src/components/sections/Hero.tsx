@@ -10,9 +10,9 @@ const Hero = () => {
 
   return (
     <section className="py-32 bg-black">
-      <div className="container-custom relative max-w-[1100px]">
+      <div className="relative ">
         
-        <div className="flex items-center justify-center h-[550px]">
+        <div className="flex items-center px-8 justify-center h-[550px]">
           <div className="flex flex-col h-fit mb-32 items-center justify-center space-y-7 z-9 text-center">
               <h2 className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-white via-[#bfbfbf] to-white">
                 I'm Asim, a web developer

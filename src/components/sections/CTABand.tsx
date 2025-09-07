@@ -23,15 +23,15 @@ const CTABand = () => {
       name: 'Email',
       value: 'hello@muhammadasim.dev',
       icon: LuMail,
-      link: '#',
+      link: '/contact',
       description: 'Direct communication for project discussions',
-      actionLabel: "Send a mail"
+      actionLabel: "Write me"
     },
     {
       name: 'LinkedIn',
       value: 'muhammadasim',
       icon: LuLinkedin,
-      link: 'https://www.linkedin.com/in/muhammad-asim-63057535a/',
+      link: 'https://www.linkedin.com/in/codingwithasim',
       description: 'Professional networking and updates',
       actionLabel: "Let's talk"
     },
@@ -39,7 +39,7 @@ const CTABand = () => {
       name: 'GitHub',
       value: 'muhammadasim',
       icon: LuGithub,
-      link: 'https://github.com/asim-muhammad',
+      link: 'https://github.com/codingwithasim',
       description: 'View my code and open source contributions',
       actionLabel: "Let's talk"
     }
@@ -67,26 +67,13 @@ const CTABand = () => {
                 <div key={method.name} className="text-center group flex flex-col items-center border border-[#444] hover:border-[#636363] py-6 px-4 rounded-md transition-colors">
                   <div className="text-4xl mb-3">
                     <Icon size={22} />
-                  </div>
-                  
-                  
-                  <p className="text-white/60 text-sm leading-relaxed">
+                  </div>          
+                  <p className="text-white/60 text-sm leading-relaxed flex-1">
                     {method.description}
                   </p>
-                  
-                  {
-                    method.name === "Email" 
-                    ?
-                    <Button 
-                      onClick={()=> setOpen(true)}
-                      variant="secondary"
-                      className='mt-4 cursor-pointer border border-[#363636]'>{method.actionLabel}</Button>
-                    :
-                    
-                      <Button variant="secondary" className='mt-4 border border-[#363636]'>
-                        <Link href={method.link} target='_blank'>{method.actionLabel}</Link>
-                      </Button>
-                  }
+                  <Button variant="secondary" className='mt-4 border border-[#363636]'>
+                        <Link href={method.link} target={method.name === "Email" ? "" : '_blank'}>{method.actionLabel}</Link>
+                  </Button>
                 </div>
               ))}
             </div>
