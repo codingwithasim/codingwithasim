@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "Muhammad Asim - Full Stack Developer Portfolio",
     description: "Full-Stack Developer specializing in React, Next.js, and modern web technologies. Explore my projects and services.",
     type: "website",
-    images: ["/assets/og-image.png"],
+    images: ["/assets/og_image.png"],
   },
 };
 
