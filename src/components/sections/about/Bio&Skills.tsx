@@ -9,9 +9,9 @@ type SkillProps = {
 export default function BioSkills() {
 
     const techSkills: SkillProps = [
-        { name: "Web basics", level: 80 },
-        { name: "React", level: 75 },
-        { name: "Next.js", level: 70 },
+        { name: "Web basics", level: 90 },
+        { name: "React", level: 85 },
+        { name: "Next.js", level: 75 },
         { name: "Tailwind CSS", level: 70 },
         { name: "Node.js", level: 65 },
         { name: "Git/GitHub", level: 75 },
