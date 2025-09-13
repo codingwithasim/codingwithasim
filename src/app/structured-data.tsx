@@ -43,3 +43,48 @@ export const websiteSchema = {
     "name": "Muhammad Asim"
   },
 };
+
+export const servicesSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Web Development Services",
+  "description": "Professional web development services including landing pages, e-commerce solutions, and custom web applications built with modern technologies.",
+  "provider": {
+    "@type": "Person",
+    "name": "Muhammad Asim",
+    "jobTitle": "Full-Stack Developer",
+    "url": "https://codingwithasim.vercel.app/"
+  },
+  "serviceType": "Web Development",
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Web Development Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Landing Page Development",
+          "description": "High-converting landing pages with SEO optimization and fast loading times"
+        }
+      },
+      {
+        "@type": "Offer", 
+        "itemOffered": {
+          "@type": "Service",
+          "name": "E-commerce Development",
+          "description": "Complete online stores with payment processing and inventory management"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service", 
+          "name": "Custom Web Applications",
+          "description": "Tailored web applications built with modern frameworks"
+        }
+      }
+    ]
+  }
+};

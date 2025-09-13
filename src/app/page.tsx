@@ -54,7 +54,7 @@ export default function Home() {
       </section>
       
       {/* Floating Action Button*/}
-      <FAB icon={LucideMessageCircleMore}/>
+      {/* <FAB icon={LucideMessageCircleMore}/> */}
 
     </div>
   );

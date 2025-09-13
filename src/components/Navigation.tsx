@@ -26,6 +26,7 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
   const navItems = [
     { path: '/', label: 'Home' },
     { path: '/projects', label: 'Projects' },
+    { path: '/services', label: 'Services' },
     { path: '/about', label: 'About' },
     { path: '/uses', label: 'Uses' },
   ];
