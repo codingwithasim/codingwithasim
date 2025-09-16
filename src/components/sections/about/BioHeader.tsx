@@ -47,14 +47,14 @@ export default function AboutHeader(){
         <section className="pt-32 pb-16 relative">
           <div className="flex flex-col relative">
           <div className="grid place-items-center gap-4">
-            <div className="size-36 grid place-items-center overflow-clip bg-[#252525] rounded-full relative">
+            <div className="size-36 grid place-items-center overflow-clip bg-muted rounded-full relative">
               <Image fill src="/assets/profile.jpeg" alt="Muhammad Asim" />
               <div className="inset-0 absolute rounded-full">
 
               </div>
             </div>
             <h5>Hi there! I’m Muhammad Asim</h5>
-            <span className="text-[#7e7e7e] max-w-2xl text-center">
+            <span className="text-muted-foreground max-w-2xl text-center">
             A passionate full-stack developer with 2+ years of experience crafting digital experiences that blend beautiful design with powerful functionality.
             </span>
           </div>
@@ -64,7 +64,7 @@ export default function AboutHeader(){
             <ul className="flex gap-2 justify-center py-8">
               {contactMethods.map(({icon: Icon, ...social}, index) => (
                     <li key={index} >
-                      <Link href={social.href} target="_blank" className="size-12 grid place-items-center rounded-full border border-dark-800 hover:border-dark-700 transition-colors hover:bg-[#181818] mb-3 cursor-pointer">
+                      <Link href={social.href} target="_blank" className="size-12 grid place-items-center rounded-full border border-border hover:border-muted-foreground transition-colors hover:bg-muted mb-3 cursor-pointer">
                         <Icon size={18} />
                       </Link>
                     </li>
@@ -75,7 +75,7 @@ export default function AboutHeader(){
           </nav>
 
           <Badge variant="secondary" className="place-self-center py-1.5 flex gap-2">
-          <div className="size-1.5 bg-white animate-pulse rounded-full"></div>
+          <div className="size-1.5 bg-foreground animate-pulse rounded-full"></div>
 
           Currently Taking on Projects
           </Badge>

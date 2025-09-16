@@ -86,7 +86,7 @@ const SkillsStack = () => {
       <div className="container-custom flex flex-col">
         <div className="text-center mb-20">
         <h4 className="font-bold mb-6 max-w-2xl mx-auto">
-          Technologies & Tools<span className='text-gray-400 font-medium'> I most commonly use.</span>
+          Technologies & Tools<span className='text-muted-foreground font-medium'> I most commonly use.</span>
           </h4>
         </div>
 
@@ -94,7 +94,7 @@ const SkillsStack = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {coreSkills.map(({icon: Icon, ...skill}) => (
             <div key={skill.name} className="group">
-              <div className="card bg-black border-[#323232] rounded-lg  h-full transition-all duration-300 hover:border-[#585858]">
+              <div className="card bg-card border-border rounded-lg h-full transition-all duration-300 hover:border-muted-foreground">
                 {/* Skill Icon */}
                 <div className={`text-5xl h-30  polka mb-4 grid place-items-center ${skill.iconColor}`}>
                   <Icon size={28}/>
@@ -102,18 +102,18 @@ const SkillsStack = () => {
                 
                 <div className="flex items-center justify-between">
                   {/* Skill Name */}
-                <h5 className="text-xl font-semibold text-white">
+                <h5 className="text-xl font-semibold text-foreground">
                   {skill.name}
                 </h5>
                 
                 {/* Level Badge */}
-                <Badge variant="outline" className="border-[#4a4a4a]">
+                <Badge variant="outline" className="border-border">
                   {skill.level}
                 </Badge>
                 </div>
                 
                 {/* Description */}
-                <p className="text-white/60 pt-2 text-sm leading-relaxed">
+                <p className="text-foreground/60 pt-2 text-sm leading-relaxed">
                   {skill.description}
                 </p>
               </div>
@@ -130,10 +130,10 @@ const SkillsStack = () => {
                 <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300`}>
                   <Icon size={20} className="text-white"/>
                 </div>
-                <h5 className="text-2xl font-bold text-white group-hover:text-white/90 transition-colors duration-300">
+                <h5 className="text-2xl font-bold text-foreground group-hover:text-foreground/90 transition-colors duration-300">
                   {category.name}
                 </h5>
-                <div className="ml-6 h-px flex-1 bg-gradient-to-r from-white/20 via-white/10 to-transparent"></div>
+                <div className="ml-6 h-px flex-1 bg-gradient-to-r from-foreground/20 via-foreground/10 to-transparent"></div>
               </div>
               
               {/* Technologies in a flowing layout */}
@@ -145,7 +145,7 @@ const SkillsStack = () => {
                       className="group/tech relative overflow-hidden"
                       
                     >
-                      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer">
+                      <div className="bg-foreground/5 backdrop-blur-sm border border-foreground/10 rounded-full px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-foreground/10 hover:border-foreground/20 transition-all cursor-pointer">
                         {tech}
                       </div>
                       
@@ -158,7 +158,7 @@ const SkillsStack = () => {
               
               {/* Connecting line to next category */}
               {index < techCategories.length - 1 && (
-                <div className="absolute left-6 -bottom-8 w-px h-8 bg-gradient-to-b from-white/20 to-transparent"></div>
+                <div className="absolute left-6 -bottom-8 w-px h-8 bg-gradient-to-b from-foreground/20 to-transparent"></div>
               )}
             </div>
           ))}
