@@ -160,7 +160,7 @@ export default function ServicesPage() {
                 itemScope 
                 itemType="https://schema.org/Service"
               >
-                <div className="flex items-start gap-4">
+                <div className="flex flex-col sm:flex-row items-start gap-4">
                   <div className="p-3 rounded-lg bg-white/5 border border-white/10 flex-shrink-0">
                     <Icon size={20} className="text-white" aria-hidden="true" />
                   </div>
