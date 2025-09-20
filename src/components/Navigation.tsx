@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
+import ThemeToggle from './ui/ThemeToggle';
 import Image from 'next/image';
 
 type NavigationProps = {
@@ -32,10 +33,10 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-dark-800 ${
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
       isScrolled 
-        ? 'bg-black/75 backdrop-blur-xl border-b border-[#1F2937]/50' 
-        : 'bg-black'
+        ? 'bg-background/75 backdrop-blur-xl border-border' 
+        : 'bg-background'
     }`}>
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
@@ -44,7 +45,7 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
             <div className="w-8 h-8 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
               <Image
               src="/assets/a_logo.png"
-              className='invert'
+              className='invert dark:invert-0'
               alt="Muhammad Asim Logo"
               width={50}
               height={50}
@@ -73,6 +74,7 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
 
           {/* CTA Button */}
           <div className="flex items-center space-x-4">
+            <ThemeToggle />
             <Button asChild>
               <Link
                 href="/contact"
@@ -85,7 +87,7 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
             {/* Mobile Menu Button */}
             <button 
               onClick={onMenuClick} 
-              className="md:hidden p-2 rounded-lg hover:bg-[#1F2937] focus:bg-[#1F2937] focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:ring-opacity-50 transition-colors duration-200"
+              className="md:hidden p-2 rounded-lg hover:bg-muted focus:bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 transition-colors duration-200"
               aria-label="Open navigation menu"
               aria-expanded="false"
             >

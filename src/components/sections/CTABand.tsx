@@ -49,14 +49,14 @@ const CTABand = () => {
   return (
     <section className="py-24 ">
       <div className="container-custom">
-        <div className="card bg-black max-w-5xl mx-auto text-center border-[#22C55E]/20">
+        <div className="card bg-card max-w-5xl mx-auto text-center border-[#22C55E]/20">
           <div className="space-y-8 ">
             {/* Main CTA */}
             <div className="space-y-4">
               <h4 className="font-bold mb-6 max-w-2xl mx-auto">
-                Let's Build<span className='text-gray-400 font-medium'> Something Amazing.</span>
+                Let's Build<span className='text-muted-foreground font-medium'> Something Amazing.</span>
               </h4>
-              <p className=" text-white/70 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-foreground/70 max-w-2xl mx-auto leading-relaxed">
                 Ready to turn your ideas into reality? Whether it's a web application,
                 performance optimization, or a development tool, I'm here to help.
               </p>
@@ -65,14 +65,14 @@ const CTABand = () => {
             {/* Contact Methods */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {contactMethods.map(({icon: Icon, ...method}) => (
-                <div key={method.name} className="text-center group flex flex-col items-center border border-[#444] hover:border-[#636363] py-6 px-4 rounded-md transition-colors">
+                <div key={method.name} className="text-center group flex flex-col items-center border border-border hover:border-muted-foreground py-6 px-4 rounded-md transition-colors">
                   <div className="text-4xl mb-3">
                     <Icon size={22} />
                   </div>          
-                  <p className="text-white/60 text-sm leading-relaxed flex-1">
+                  <p className="text-foreground/60 text-sm leading-relaxed flex-1">
                     {method.description}
                   </p>
-                  <Button variant="secondary" className='mt-4 border border-[#363636]'>
+                  <Button variant="secondary" className='mt-4 border border-border'>
                         <Link href={method.link} target={method.name === "Email" ? "" : '_blank'}>{method.actionLabel}</Link>
                   </Button>
                 </div>
@@ -89,7 +89,7 @@ const CTABand = () => {
                 </Link>
               </Button>
 
-              <Button variant="secondary" className='py-5 border border-gray-700 bg-black'>
+              <Button variant="secondary" className='py-5 border border-border bg-card'>
                 <Link href="/projects">
                   View My Work
                 </Link>
@@ -98,19 +98,19 @@ const CTABand = () => {
             </div>
 
             {/* Additional Info */}
-            <div className="pt-8 border-t border-[#1F2937]/30">
+            <div className="pt-8 border-t border-border/30">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
                 <div className="text-center">
                   <div className="font-semibold mb-1">Response Time</div>
-                  <div className="text-white/60">Within 24 hours</div>
+                  <div className="text-foreground/60">Within 24 hours</div>
                 </div>
                 <div className="text-center">
                   <div className="font-semibold mb-1">Project Types</div>
-                  <div className="text-white/60">Web Apps, APIs, Tools</div>
+                  <div className="text-foreground/60">Web Apps, APIs, Tools</div>
                 </div>
                 <div className="text-center">
                   <div className="font-semibold mb-1">Availability</div>
-                  <div className="text-white/60">Currently accepting projects</div>
+                  <div className="text-foreground/60">Currently accepting projects</div>
                 </div>
               </div>
             </div>

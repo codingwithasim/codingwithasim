@@ -16,17 +16,17 @@
   --color-accent: #8B5CF6;
   --color-accent-dark: #7C3AED;
 
-  /* Background Colors */
-  --color-bg-primary: #000000;
-  --color-bg-secondary: #0F1115;
-  --color-bg-tertiary: #111318;
-  --color-bg-card: #1F2937;
+  /* Light Mode Colors */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F8F9FA;
+  --color-bg-tertiary: #F1F3F4;
+  --color-bg-card: #FFFFFF;
 
-  /* Text Colors */
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: rgba(255, 255, 255, 0.8);
-  --color-text-muted: rgba(255, 255, 255, 0.6);
-  --color-text-muted-dark: rgba(255, 255, 255, 0.4);
+  /* Light Mode Text Colors */
+  --color-text-primary: #111827;
+  --color-text-secondary: rgba(17, 24, 39, 0.8);
+  --color-text-muted: rgba(17, 24, 39, 0.6);
+  --color-text-muted-dark: rgba(17, 24, 39, 0.4);
 
   /* Spacing Scale */
   --spacing-xs: 0.5rem;    /* 8px */
@@ -158,6 +158,10 @@ pre {
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: var(--color-bg-tertiary);
+  border: 1px solid var(--color-bg-card);
+}
+
+.dark pre {
   border: 1px solid rgba(31, 41, 55, 0.5);
 }
 
@@ -181,7 +185,7 @@ pre {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-bg-card);
+  background: var(--color-bg-tertiary);
   border-radius: 4px;
 }
 
@@ -193,8 +197,16 @@ pre {
 @layer components {
   /* Card Component */
   .card {
-    @apply bg-[#111318] border border-[#1F2937]/50 rounded-3xl p-6 shadow-lg shadow-black/10;
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-bg-tertiary);
+    @apply rounded-3xl p-6 shadow-lg;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     transition: all var(--transition-normal);
+  }
+
+  .dark .card {
+    border: 1px solid rgba(31, 41, 55, 0.5);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
   }
 
 
@@ -224,15 +236,23 @@ pre {
   }
 
   .btn-secondary {
-    @apply bg-[#1F2937] hover:bg-[#374151] text-white font-medium px-4 py-2.5 rounded-lg transition-all duration-200 text-sm border border-[#374151] hover:border-[#4B5563];
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-bg-card);
+    @apply font-medium px-4 py-2.5 rounded-lg transition-all duration-200 text-sm;
     font-weight: 500;
     line-height: 1.25;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
 
   .btn-secondary:hover {
+    background-color: var(--color-bg-secondary);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .dark .btn-secondary {
+    @apply bg-[#1F2937] hover:bg-[#374151] text-white border-[#374151] hover:border-[#4B5563];
   }
 
   .btn-secondary:active {
@@ -245,13 +265,20 @@ pre {
   }
 
   .btn-ghost {
-    @apply bg-transparent hover:bg-[#1F2937] text-white/70 hover:text-white font-medium px-4 py-2.5 rounded-lg transition-all duration-200 text-sm;
+    @apply bg-transparent font-medium px-4 py-2.5 rounded-lg transition-all duration-200 text-sm;
+    color: var(--color-text-secondary);
     font-weight: 500;
     line-height: 1.25;
   }
 
   .btn-ghost:hover {
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
     transform: translateY(-1px);
+  }
+
+  .dark .btn-ghost {
+    @apply text-white/70 hover:bg-[#1F2937] hover:text-white;
   }
 
   .btn-ghost:focus {
@@ -296,30 +323,55 @@ pre {
 
   /* Navigation Links */
   .nav-link {
-    @apply text-white/70 hover:text-white rounded-full transition-colors duration-200 font-medium relative px-4 py-1.5 ;
+    @apply rounded-full transition-colors duration-200 font-medium relative px-4 py-1.5;
+    color: var(--color-text-secondary);
   }
 
   .nav-link:hover {
-    @apply bg-[#1d1d1d] 
+    background-color: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
   }
 
   .nav-link.active {
-    @apply text-white;
+    color: var(--color-text-primary);
   }
 
   .nav-link.active::after {
     content: '';
-    @apply absolute -bottom-2 left-0 right-0 h-0.5 bg-white rounded-full;
+    @apply absolute -bottom-2 left-0 right-0 h-0.5 rounded-full;
+    background-color: var(--color-text-primary);
+  }
+
+  .dark .nav-link {
+    @apply text-white/70;
+  }
+
+  .dark .nav-link:hover {
+    @apply bg-[#1d1d1d] text-white;
+  }
+
+  .dark .nav-link.active {
+    @apply text-white;
+  }
+
+  .dark .nav-link.active::after {
+    @apply bg-white;
   }
 
   /* Code Block */
   .code-block {
-    @apply bg-[#111318] border border-[#1F2937] rounded-3xl shadow-lg;
+    background-color: var(--color-bg-tertiary);
+    border: 1px solid var(--color-bg-card);
+    @apply rounded-3xl shadow-lg;
     transition: all var(--transition-normal);
   }
 
   .code-block:hover {
     @apply border-[#22C55E]/30 shadow-xl shadow-[#22C55E]/10;
+  }
+
+  .dark .code-block {
+    @apply bg-[#111318] border-[#1F2937];
   }
 
   /* Badge Components */
@@ -342,7 +394,7 @@ pre {
 
 .fancy-border {
   position: relative;
-  background: black;        /* Inner background stays visible */
+  background: hsl(var(--card));        /* Inner background stays visible */
   z-index: 0;
   overflow: hidden;         /* Make sure the pseudo-element clips */
 }
@@ -445,6 +497,19 @@ pre {
 }
 
 .dark {
+  /* Dark Mode Colors */
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #0F1115;
+  --color-bg-tertiary: #111318;
+  --color-bg-card: #1F2937;
+
+  /* Dark Mode Text Colors */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: rgba(255, 255, 255, 0.8);
+  --color-text-muted: rgba(255, 255, 255, 0.6);
+  --color-text-muted-dark: rgba(255, 255, 255, 0.4);
+
+  /* Shadcn UI Variables for Dark Mode */
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);

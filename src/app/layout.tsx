@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import NavDrawerWrapper from "@/components/ui/NavDrawerWrapper";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import { organizationSchema, websiteSchema } from "./structured-data";
 
 const inter = Inter({
@@ -80,7 +81,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased dark`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>
+        <ThemeProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -102,6 +104,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <Toaster position="bottom-right" />
+        </ThemeProvider>
       </body>
     </html>
   );

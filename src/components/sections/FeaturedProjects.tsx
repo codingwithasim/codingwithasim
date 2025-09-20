@@ -77,7 +77,7 @@ import ProjectCard from '../ui/project.card';
         <div className="container-custom max-w-6xl">
           <div className="text-center mb-20 space-y-4">
           <h4 className="font-bold mb-6 max-w-2xl mx-auto">
-  Featured Work<span className="text-gray-400 font-medium"> Showcasing Scalable Solutions.</span>
+  Featured Work<span className="text-muted-foreground font-medium"> Showcasing Scalable Solutions.</span>
 </h4>
 
           </div>

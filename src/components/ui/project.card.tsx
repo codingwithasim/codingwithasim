@@ -39,7 +39,7 @@ export default function ProjectCard({project} : ProjectCardProps) {
                             height={250}
                         />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/50 to-transparent opacity-0 transition-opacity duration-300"></div>
                 </div>
 
                 {/* Project Content */}
@@ -48,7 +48,7 @@ export default function ProjectCard({project} : ProjectCardProps) {
                         {project.name}
                     </h5>
 
-                    <p className="text-white/70 text-sm leading-relaxed">
+                    <p className="text-foreground/70 text-sm leading-relaxed">
                         {project.description}
                     </p>
 
@@ -59,7 +59,7 @@ export default function ProjectCard({project} : ProjectCardProps) {
                                 variant="outline"
                                 title={tag}
                                 key={index}
-                                className='border border-gray-700'>{tag}</Badge>
+                                className='border border-border'>{tag}</Badge>
                         ))}
                     </div>
 
@@ -84,7 +84,7 @@ export default function ProjectCard({project} : ProjectCardProps) {
             <Link
                 href={project.links.demo}
                 target='_blank'
-                className='w-10 h-10 border grid place-items-center text-gray-500 border-gray-600 absolute bottom-4 right-4 rounded-full opacity-0 group-hover:opacity-100 hover:text-white hover:border-white transition-all'>
+                className='w-10 h-10 border grid place-items-center text-muted-foreground border-border absolute bottom-4 right-4 rounded-full opacity-0 group-hover:opacity-100 hover:text-foreground hover:border-foreground transition-all'>
                 <LucideMoveUpRight size={16} />
             </Link>
         </div>
