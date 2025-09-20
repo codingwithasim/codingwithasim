@@ -29,27 +29,27 @@ export default function Home() {
       <Hero />
 
       {/* Social Proof Strip */}
-      <section className="py-16" aria-labelledby="social-proof-heading">
+      <section aria-labelledby="social-proof-heading">
         <SocialProof />
       </section>
 
       {/* Services */}
-      <section className="py-16" aria-labelledby="services-heading">
+      <section aria-labelledby="services-heading">
         <Services />
       </section>
 
       {/* Featured Projects */}
-      <section className="py-16" aria-labelledby="projects-heading">
+      <section aria-labelledby="projects-heading">
         <FeaturedProjects />
       </section>
 
       {/* Skills & Stack */}
-      <section className="py-16" aria-labelledby="skills-heading">
+      <section aria-labelledby="skills-heading">
         <SkillsStack />
       </section>
 
       {/* CTA Band */}
-      <section className="py-16" aria-labelledby="cta-heading">
+      <section aria-labelledby="cta-heading">
         <CTABand />
       </section>
       

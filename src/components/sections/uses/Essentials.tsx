@@ -7,10 +7,10 @@ import { useEffect, useRef } from "react";
 import { FaCode } from "react-icons/fa6";
 import { HiOutlineLightningBolt } from "react-icons/hi";
 import { MdOutlineDesktopWindows } from "react-icons/md";
-
-
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Essentials() {
+    const { t } = useLanguage();
 
     return (
         <section className="mx-auto max-w-6xl">
@@ -25,21 +25,21 @@ export default function Essentials() {
                             1+
                         </h5>
                         <span className="text-white/60 text-sm">
-                            Year Using
+                            {t('usesPage.react.yearUsing')}
                         </span>
                     </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <h5 className="text-xl md:text-2xl font-medium text-white">
-                        React + TypeScript
+                        {t('usesPage.react.title')}
                     </h5>
-                    <span className="text-white/70 text-sm md:text-base">The cornerstone of my development workflow</span>
+                    <span className="text-white/70 text-sm md:text-base">{t('usesPage.react.subtitle')}</span>
                     <p className="text-white/50 text-sm md:text-base leading-relaxed">
-                        React with TypeScript provides the perfect balance of flexibility and type safety. I use it for everything from small components to large-scale applications, leveraging hooks, context, and modern patterns.
+                        {t('usesPage.react.description')}
                     </p>
                     <div className="flex flex-wrap gap-2">
                         {
-                            ["Frontend", "Type Safety", "Component-Based", "Modern"].map(
+                            [t('usesPage.react.tags.frontend'), t('usesPage.react.tags.typeSafety'), t('usesPage.react.tags.componentBased'), t('usesPage.react.tags.modern')].map(
                                 (tag, idx)=> {
                                     return(
                                         <Badge key={idx} variant="secondary" className="text-xs">{tag}</Badge>
@@ -64,21 +64,21 @@ export default function Essentials() {
                                 &lt; 1
                             </h5>
                             <span className="text-white/60 text-sm">
-                                Year Using
+                                {t('usesPage.nextjs.yearUsing')}
                             </span>
                         </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <h5 className="text-lg md:text-xl font-medium text-white">
-                            Next.js
+                            {t('usesPage.nextjs.title')}
                         </h5>
-                        <span className="text-white/70 text-sm">Full-stack React framework</span>
+                        <span className="text-white/70 text-sm">{t('usesPage.nextjs.subtitle')}</span>
                         <p className="text-white/50 text-sm leading-relaxed">
-                            Next.js provides server-side rendering, static site generation, and full-stack capabilities. Perfect for building performant, SEO-friendly applications with great developer experience.
+                            {t('usesPage.nextjs.description')}
                         </p>
                         <div className="flex flex-wrap gap-2">
                             {
-                                ["Full-stack", "SSR/SSG", "Performance", "Production"].map(
+                                [t('usesPage.nextjs.tags.fullstack'), t('usesPage.nextjs.tags.ssr'), t('usesPage.nextjs.tags.performance'), t('usesPage.nextjs.tags.production')].map(
                                     (tag, idx)=> {
                                         return(
                                             <Badge key={idx} variant="secondary" className="text-xs">{tag}</Badge>
@@ -100,21 +100,21 @@ export default function Essentials() {
                                 3+
                             </h5>
                             <span className="text-white/60 text-sm">
-                                Years Using
+                                {t('usesPage.vscode.yearUsing')}
                             </span>
                         </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <h5 className="text-lg md:text-xl font-medium text-white">
-                            VS Code
+                            {t('usesPage.vscode.title')}
                         </h5>
-                        <span className="text-white/70 text-sm">My primary development environment</span>
+                        <span className="text-white/70 text-sm">{t('usesPage.vscode.subtitle')}</span>
                         <p className="text-white/50 text-sm leading-relaxed">
-                            Extensively customized with extensions, themes, and shortcuts. Features like GitHub Copilot, live collaboration, and integrated terminal make it indispensable for my daily workflow.
+                            {t('usesPage.vscode.description')}
                         </p>
                         <div className="flex flex-wrap gap-2">
                             {
-                                ["Editor", "Extensions", "Customizable", "Productivity"].map(
+                                [t('usesPage.vscode.tags.editor'), t('usesPage.vscode.tags.extensions'), t('usesPage.vscode.tags.customizable'), t('usesPage.vscode.tags.productivity')].map(
                                     (tag, idx)=> {
                                         return(
                                             <Badge key={idx} variant="secondary" className="text-xs">{tag}</Badge>

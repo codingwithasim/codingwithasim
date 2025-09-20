@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { Project } from '../types/project';
 import ProjectCard from '@/components/ui/project.card';
 import { Badge } from '@/components/ui/badge';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Projects() {
+  const { t } = useLanguage();
   const [selectedTech, setSelectedTech] = useState('all');
   const [selectedType, setSelectedType] = useState('all');
 
@@ -87,12 +89,10 @@ export default function Projects() {
         <div className="container-custom">
           <div className="text-center">
             <h3 className="mb-6">
-              My Projects
+              {t('projectsPage.title')}
             </h3>
             <p className="text-white/70 max-w-3xl mx-auto leading-relaxed">
-              A collection of projects showcasing my expertise in building scalable web applications, 
-              backend systems, and developer tools. Each project focuses on performance, 
-              user experience, and clean code architecture.
+              {t('projectsPage.description')}
             </p>
           </div>
         </div>
@@ -111,7 +111,7 @@ export default function Projects() {
                   variant={selectedTech === tech ? "default" : "secondary"}
                   className='py-1 cursor-pointer'
                 >
-                  {tech === 'all' ? 'All' : tech}
+                  {tech === 'all' ? t('projectsPage.filter.all') : tech}
                 </Badge>
               ))}
             </div>
@@ -133,9 +133,9 @@ export default function Projects() {
           ) : (
             <div className="text-center py-16">
               <div className="text-6xl mb-6">🔍</div>
-              <h3 className="text-2xl font-semibold text-white mb-4">No projects found</h3>
+              <h3 className="text-2xl font-semibold text-white mb-4">{t('projectsPage.noProjects.title')}</h3>
               <p className="text-white/60 mb-8">
-                Try adjusting your filters to see more projects.
+                {t('projectsPage.noProjects.description')}
               </p>
               <button
                 onClick={() => {
@@ -144,7 +144,7 @@ export default function Projects() {
                 }}
                 className="btn-secondary"
               >
-                Clear Filters
+                {t('projectsPage.clearFilters')}
               </button>
             </div>
           )}

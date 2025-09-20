@@ -48,40 +48,55 @@ const Services = () => {
   
 
   return (
-    <section>
-      <div className="container-custom">
-        <div className="text-center mb-20">
-        <h4 className="font-bold mb-6 max-w-2xl mx-auto">
-          {t('services.title')}<span className="text-muted-foreground font-medium"> {t('services.subtitle')}</span>
-        </h4>
-
+    <section className="py-24 relative">
+      {/* Subtle background element */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/10 to-transparent"></div>
+      
+      <div className="container-custom relative">
+        {/* Section header */}
+        <div className="text-center mb-16 space-y-4">
+          <h3 className="text-3xl md:text-4xl font-bold tracking-tight">
+            {t('services.title')}
+          </h3>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            {t('services.subtitle')}
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Services grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {services.map(({ icon: Icon, ...service }) => (
             <div key={service.title} className="group">
-              <div className="card bg-card border-border rounded-lg h-full transition-all duration-300 hover:border-muted-foreground">
-                <div className={`text-5xl h-20 polka mb-6 grid place-items-center ${service.iconColor}`}>
-                  <Icon size={32}/>
+              <div className="relative p-8 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-border hover:shadow-lg hover:shadow-primary/5">
+                
+                {/* Icon */}
+                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-6 ${service.iconColor} bg-gradient-to-br from-background to-muted/20`}>
+                  <Icon size={24} />
                 </div>
                 
-                <div className="mb-4">
-                  <h5 className="text-xl font-semibold text-foreground mb-3">
+                {/* Content */}
+                <div className="space-y-4">
+                  <h4 className="text-xl font-semibold text-foreground">
                     {service.title}
-                  </h5>
-                  <p className="text-foreground/60 text-sm leading-relaxed mb-4">
+                  </h4>
+                  
+                  <p className="text-muted-foreground leading-relaxed">
                     {service.description}
                   </p>
+                  
+                  {/* Features list */}
+                  <div className="space-y-2 pt-2">
+                    {service.features.map((feature) => (
+                      <div key={feature} className="flex items-start gap-3 text-sm text-muted-foreground">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary/60 mt-2 flex-shrink-0"></div>
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
                 
-                <div className="space-y-2">
-                  {service.features.map((feature) => (
-                    <div key={feature} className="flex items-center text-foreground/50 text-sm">
-                      <div className="w-1.5 h-1.5 rounded-full bg-foreground/30 mr-3 flex-shrink-0"></div>
-                      {feature}
-                    </div>
-                  ))}
-                </div>
+                {/* Hover effect */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               </div>
             </div>
           ))}

@@ -75,24 +75,32 @@ import { useLanguage } from '@/contexts/LanguageContext';
     
 
     return (
-      <section className="py-32">
-        <div className="container-custom max-w-6xl">
-          <div className="text-center mb-20 space-y-4">
-          <h4 className="font-bold mb-6 max-w-2xl mx-auto">
-  {t('projects.title')}<span className="text-muted-foreground font-medium"> {t('projects.subtitle')}</span>
-</h4>
-
+      <section className="py-24 relative">
+        {/* Background decoration */}
+        <div className="absolute inset-0 bg-gradient-to-b from-muted/5 to-transparent"></div>
+        
+        <div className="container-custom relative">
+          {/* Section header */}
+          <div className="text-center mb-16 space-y-4">
+            <h3 className="text-3xl md:text-4xl font-bold tracking-tight">
+              {t('projects.title')}
+            </h3>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              {t('projects.subtitle')}
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {/* Projects grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {projects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
 
-          <div className="text-center mt-20">
-            <Button asChild>
-              <Link href="/projects" className='py-6 px-8 text-base'>
+          {/* View all button */}
+          <div className="text-center">
+            <Button variant="outline" size="lg" asChild>
+              <Link href="/projects">
                 {t('projects.viewAll')}
               </Link>
             </Button>

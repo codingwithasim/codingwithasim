@@ -50,73 +50,84 @@ const CTABand = () => {
   
 
   return (
-    <section className="py-24 ">
-      <div className="container-custom">
-        <div className="card bg-card max-w-5xl mx-auto text-center border-[#22C55E]/20">
-          <div className="space-y-8 ">
-            {/* Main CTA */}
-            <div className="space-y-4">
-              <h4 className="font-bold mb-6 max-w-2xl mx-auto">
-                {t('cta.title')}<span className='text-muted-foreground font-medium'> {t('cta.subtitle')}</span>
-              </h4>
-              <p className="text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-                {t('cta.description')}
-              </p>
-            </div>
+    <section className="py-24 relative">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent"></div>
+      
+      <div className="container-custom relative">
+        <div className="max-w-4xl mx-auto">
+          
+          {/* Main CTA */}
+          <div className="text-center mb-16 space-y-6">
+            <h3 className="text-3xl md:text-4xl font-bold tracking-tight">
+              {t('cta.title')}
+            </h3>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              {t('cta.description')}
+            </p>
+          </div>
 
-            {/* Contact Methods */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {contactMethods.map(({icon: Icon, ...method}) => (
-                <div key={method.name} className="text-center group flex flex-col items-center border border-border hover:border-muted-foreground py-6 px-4 rounded-md transition-colors">
-                  <div className="text-4xl mb-3">
-                    <Icon size={22} />
-                  </div>          
-                  <p className="text-foreground/60 text-sm leading-relaxed flex-1">
+          {/* Contact Methods */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {contactMethods.map(({icon: Icon, ...method}) => (
+              <div key={method.name} className="group text-center">
+                <div className="relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-border hover:shadow-lg hover:shadow-primary/5">
+                  
+                  {/* Icon */}
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 text-primary bg-primary/10">
+                    <Icon size={20} />
+                  </div>
+                  
+                  {/* Content */}
+                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                     {method.description}
                   </p>
-                  <Button variant="secondary" className='mt-4 border border-border'>
-                        <Link href={method.link} target={method.name === "Email" ? "" : '_blank'}>{method.actionLabel}</Link>
+                  
+                  {/* Action button */}
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href={method.link} target={method.name === "Email" ? "" : '_blank'}>
+                      {method.actionLabel}
+                    </Link>
                   </Button>
-                </div>
-              ))}
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-              
-
-              <Button  className='py-5'>
-                <Link href="/contact">
-                  {t('cta.startProject')}
-                </Link>
-              </Button>
-
-              <Button variant="secondary" className='py-5 border border-border bg-card'>
-                <Link href="/projects">
-                  {t('cta.viewWork')}
-                </Link>
-              </Button>
-
-            </div>
-
-            {/* Additional Info */}
-            <div className="pt-8 border-t border-border/30">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
-                <div className="text-center">
-                  <div className="font-semibold mb-1">{t('cta.responseTime')}</div>
-                  <div className="text-foreground/60">{t('cta.responseTimeValue')}</div>
-                </div>
-                <div className="text-center">
-                  <div className="font-semibold mb-1">{t('cta.projectTypes')}</div>
-                  <div className="text-foreground/60">{t('cta.projectTypesValue')}</div>
-                </div>
-                <div className="text-center">
-                  <div className="font-semibold mb-1">{t('cta.availability')}</div>
-                  <div className="text-foreground/60">{t('cta.availabilityValue')}</div>
+                  
+                  {/* Hover effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                 </div>
               </div>
+            ))}
+          </div>
+
+          {/* Primary Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <Button size="lg" asChild>
+              <Link href="/contact">
+                {t('cta.startProject')}
+              </Link>
+            </Button>
+
+            <Button variant="outline" size="lg" asChild>
+              <Link href="/projects">
+                {t('cta.viewWork')}
+              </Link>
+            </Button>
+          </div>
+
+          {/* Additional Info */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-border/50">
+            <div className="text-center space-y-2">
+              <div className="font-semibold text-sm text-foreground">{t('cta.responseTime')}</div>
+              <div className="text-sm text-muted-foreground">{t('cta.responseTimeValue')}</div>
+            </div>
+            <div className="text-center space-y-2">
+              <div className="font-semibold text-sm text-foreground">{t('cta.projectTypes')}</div>
+              <div className="text-sm text-muted-foreground">{t('cta.projectTypesValue')}</div>
+            </div>
+            <div className="text-center space-y-2">
+              <div className="font-semibold text-sm text-foreground">{t('cta.availability')}</div>
+              <div className="text-sm text-muted-foreground">{t('cta.availabilityValue')}</div>
             </div>
           </div>
+          
         </div>
       </div>
 
