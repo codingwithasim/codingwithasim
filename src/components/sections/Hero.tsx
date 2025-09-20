@@ -3,9 +3,12 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 import Image from 'next/image';
 
 const Hero = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="py-32 bg-background">
       <div className="relative">
@@ -15,30 +18,29 @@ const Hero = () => {
             
             {/* Status */}
             <div className="text-foreground/30 text-xs tracking-widest uppercase">
-              Available for work
+              {t('hero.availability')}
             </div>
 
             <div className="space-y-3">
               <h1 className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground via-muted-foreground to-foreground">
-                I'm Muhammad Asim
+                {t('hero.name')}
               </h1>
               
               {/* Minimal rotating text */}
               <h2 className="font-medium text-foreground/60 transition-opacity duration-500">
-                Full-Stack Developer
+                {t('hero.title')}
               </h2>
             </div>
 
             <p className="text-lg text-foreground/70 leading-relaxed max-w-2xl">
-              I craft beautiful, functional web experiences that bring ideas to life. 
-              Specializing in modern web technologies and user-centered design.
+              {t('hero.description')}
             </p>
 
             {/* Minimal stats */}
             <div className="text-foreground/40 text-sm space-x-6">
-              <span>France</span>
+              <span>{t('hero.location')}</span>
               <span>•</span>
-              <span>2+ Years</span>
+              <span>{t('hero.experience')}</span>
               
             </div>
 
@@ -46,13 +48,13 @@ const Hero = () => {
               
               <Button className='rounded-full' asChild>
                 <Link href="/contact" className='py-6'>
-                  Get in Touch
+                  {t('hero.getInTouch')}
                 </Link>
               </Button>
 
               <Button variant="secondary" asChild className='bg-background rounded-full'>
                 <Link href="/projects" className='py-6'>
-                  View Projects
+                  {t('hero.viewProjects')}
                 </Link>
               </Button>
               
@@ -63,7 +65,7 @@ const Hero = () => {
               <div className="w-6 h-10 border-2 border-foreground/20 rounded-full flex justify-center">
                 <div className="w-1 h-3 bg-foreground/20 rounded-full mt-2 animate-bounce"></div>
               </div>
-              <span className="text-foreground/20 text-xs">Scroll</span>
+              <span className="text-foreground/20 text-xs">{t('hero.scroll')}</span>
             </div>
 
           </div>

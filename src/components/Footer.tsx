@@ -1,15 +1,19 @@
-import { Github, Linkedin, Twitter, TwitterIcon } from 'lucide-react';
+'use client';
+
+import { Github, Linkedin, Twitter } from 'lucide-react';
 import Link from 'next/link';
 import { BsInstagram } from 'react-icons/bs';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   const footerLinks = [
-    { path: '/projects', label: 'Projects' },
-    { path: '/about', label: 'About me' },
-    { path: '/uses', label: 'Uses' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/projects', label: t('nav.projects') },
+    { path: '/about', label: t('nav.about') },
+    { path: '/uses', label: t('nav.uses') },
+    { path: '/contact', label: t('nav.contact') },
   ];
 
   const socialLinks = [
@@ -26,7 +30,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center sm:text-left">
           {/* Navigation */}
           <div>
-            <h6 className="font-medium mb-4">Navigation</h6>
+            <h6 className="font-medium mb-4">{t('footer.navigation')}</h6>
             <ul className="space-y-2">
               {footerLinks.map((link) => (
                 <li key={link.path}>
@@ -43,7 +47,7 @@ const Footer = () => {
 
           {/* Social Links */}
           <div className="flex flex-col items-center">
-            <h6 className="font-medium mb-4">Se connecter</h6>
+            <h6 className="font-medium mb-4">{t('footer.connect')}</h6>
             <div className="flex space-x-4 justify-center">
               {socialLinks.map(({icon: Icon, ...social}) => (
                 <a
@@ -63,12 +67,12 @@ const Footer = () => {
 
           {/* Copyright */}
           <div>
-            <h6 className="font-medium mb-4">Portfolio</h6>
+            <h6 className="font-medium mb-4">{t('footer.portfolio')}</h6>
             <p className="text-white/40 text-sm leading-relaxed">
-              Built with Next.js, Tailwind CSS, and a passion for clean code.
+              {t('footer.description')}
             </p>
             <p className="text-white/30 text-xs mt-4">
-              © {currentYear} Muhammad Asim. All rights reserved.
+              © {currentYear} Muhammad Asim. {t('footer.copyright')}
             </p>
           </div>
         </div>

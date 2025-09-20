@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
-import ThemeToggle from './ui/ThemeToggle';
+import LanguageSwitcher from './ui/LanguageSwitcher';
+import { useLanguage } from '@/contexts/LanguageContext';
 import Image from 'next/image';
 
 type NavigationProps = {
@@ -14,6 +15,7 @@ type NavigationProps = {
 const Navigation = ({onMenuClick}: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,11 +27,11 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
   }, []);
 
   const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/projects', label: 'Projects' },
-    { path: '/services', label: 'Services' },
-    { path: '/about', label: 'About' },
-    { path: '/uses', label: 'Uses' },
+    { path: '/', label: t('nav.home') },
+    { path: '/projects', label: t('nav.projects') },
+    { path: '/services', label: t('nav.services') },
+    { path: '/about', label: t('nav.about') },
+    { path: '/uses', label: t('nav.uses') },
   ];
 
   return (
@@ -74,13 +76,14 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
 
           {/* CTA Button */}
           <div className="flex items-center space-x-4">
-            <ThemeToggle />
+            <LanguageSwitcher />
+            {/* <ThemeToggle /> */}
             <Button asChild>
               <Link
                 href="/contact"
                 aria-label="Contact Muhammad Asim"
               >
-                Contact
+                {t('nav.contact')}
               </Link>
             </Button>
             

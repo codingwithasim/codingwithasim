@@ -4,21 +4,23 @@ import Link from 'next/link';
 import { Button } from '../ui/button';
 import { Project } from '@/app/types/project';
 import ProjectCard from '../ui/project.card';
+import { useLanguage } from '@/contexts/LanguageContext';
 
   const FeaturedProjects = () => {
+    const { t } = useLanguage();
 
     const projects: Project[] = [
       {
         id: "1",
         name: "Nexusflow",
-        description: "A modern, responsive React landing page for NexusFlow - a fictional team collaboration and workflow automation platform. Built with React, Tailwind CSS, and Framer Motion.",
+        description: t('projects.nexus.description'),
         technologies: ["React", "Tailwind", "Framer Motion"],
         cover: "/assets/nexus.webp",
         status: "Complete",
         features: [
-          "Responsive design",
-          "Workflow automation simulation",
-          "Interactive UI"
+          t('projects.nexus.feature1'),
+          t('projects.nexus.feature2'),
+          t('projects.nexus.feature3')
         ],
         role: "Full-Stack Developer",
         links: {
@@ -32,14 +34,14 @@ import ProjectCard from '../ui/project.card';
       {
         id: "2",
         name: "Key Genie",
-        description: "A modern, client-side password generator that creates random, memorable passwords and PINs with built-in strength indicators and export functionality.",
+        description: t('projects.keygenie.description'),
         technologies: ["Next.js", "Tailwind", "JavaScript"],
         cover: "/assets/genie.webp",
         status: "Complete",
         features: [
-          "Password generator",
-          "Strength indicators",
-          "Export functionality"
+          t('projects.keygenie.feature1'),
+          t('projects.keygenie.feature2'),
+          t('projects.keygenie.feature3')
         ],
         role: "Frontend Developer",
         links: {
@@ -52,14 +54,14 @@ import ProjectCard from '../ui/project.card';
       {
         id: "3",
         name: "Mobile App Backend",
-        description: "Scalable backend infrastructure supporting 50k+ mobile app users with real-time features.",
+        description: t('projects.backend.description'),
         technologies: ["Go", "gRPC", "Kubernetes", "Elasticsearch"],
         cover: "/assets/bistro.webp",
         status: "Beta",
         features: [
-          "Real-time data handling",
-          "High scalability",
-          "Kubernetes orchestration"
+          t('projects.backend.feature1'),
+          t('projects.backend.feature2'),
+          t('projects.backend.feature3')
         ],
         role: "Backend Developer",
         links: {
@@ -77,7 +79,7 @@ import ProjectCard from '../ui/project.card';
         <div className="container-custom max-w-6xl">
           <div className="text-center mb-20 space-y-4">
           <h4 className="font-bold mb-6 max-w-2xl mx-auto">
-  Featured Work<span className="text-muted-foreground font-medium"> Showcasing Scalable Solutions.</span>
+  {t('projects.title')}<span className="text-muted-foreground font-medium"> {t('projects.subtitle')}</span>
 </h4>
 
           </div>
@@ -91,7 +93,7 @@ import ProjectCard from '../ui/project.card';
           <div className="text-center mt-20">
             <Button asChild>
               <Link href="/projects" className='py-6 px-8 text-base'>
-                View All Projects
+                {t('projects.viewAll')}
               </Link>
             </Button>
           </div>

@@ -3,8 +3,10 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import NavDrawerWrapper from "@/components/ui/NavDrawerWrapper";
+import SkipToContent from "@/components/SkipToContent";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import { organizationSchema, websiteSchema } from "./structured-data";
 
 const inter = Inter({
@@ -83,6 +85,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}>
         <ThemeProvider>
+          <LanguageProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -95,15 +98,14 @@ export default function RootLayout({
             __html: JSON.stringify(websiteSchema),
           }}
         />
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-black text-white p-2 rounded z-50">
-          Skip to main content
-        </a>
+        <SkipToContent />
         <NavDrawerWrapper/>
         <main id="main-content" className="pt-16">
           {children}
         </main>
         <Footer />
         <Toaster position="bottom-right" />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

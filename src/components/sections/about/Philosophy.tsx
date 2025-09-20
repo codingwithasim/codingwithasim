@@ -1,22 +1,27 @@
+'use client';
+
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 
 export default function PhilosophySection() {
+    const { t } = useLanguage();
+    
     return (
         <>
-            <h4 className="place-self-center py-12 pt-18"> Building with Purpose</h4>
+            <h4 className="place-self-center py-12 pt-18"> {t('about.philosophy.title')}</h4>
             <div className="grid grid-cols-1 md:grid-cols-2  relative">
 
 
                 <Card className="border-dark-800 order-1 md:order-0 rounded-t-none  md:border-b md:border-l md:rounded-l-lg  md:border-r-0 md:rounded-r-none bg-black">
                     <CardContent className="text-justify text-gray-200 py-12  md:py-24">
                         <span className="text-xl font-[300]">
-                            Code with Intention
+                            {t('about.philosophy.subtitle')}
                         </span>
 
                         <p className=" text-gray-300 font-[250] mt-2  ">
-                            I believe great software isn’t just about clean code — it’s about solving real problems for real people. Every project I build focuses on performance, simplicity, and user experience, so that the end result is something both developers and users enjoy using.
+                            {t('about.philosophy.description')}
                         </p>
                     </CardContent>
                 </Card>

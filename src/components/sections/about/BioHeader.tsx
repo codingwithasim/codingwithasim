@@ -1,3 +1,5 @@
+'use client';
+
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,6 +7,7 @@ import { IconType } from "react-icons";
 import { FaFacebookF } from "react-icons/fa";
 import { LuGithub, LuInstagram, LuLinkedin } from "react-icons/lu";
 import { RiTwitterXFill } from "react-icons/ri";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type ContactMethod = {
   name: string,
@@ -13,6 +16,7 @@ type ContactMethod = {
 }
 
 export default function AboutHeader(){
+    const { t } = useLanguage();
 
     const contactMethods: ContactMethod[] = [
         {
@@ -53,9 +57,9 @@ export default function AboutHeader(){
 
               </div>
             </div>
-            <h5>Hi there! I’m Muhammad Asim</h5>
+            <h5>{t('about.header.greeting')}</h5>
             <span className="text-muted-foreground max-w-2xl text-center">
-            A passionate full-stack developer with 2+ years of experience crafting digital experiences that blend beautiful design with powerful functionality.
+            {t('about.header.description')}
             </span>
           </div>
 
@@ -77,7 +81,7 @@ export default function AboutHeader(){
           <Badge variant="secondary" className="place-self-center py-1.5 flex gap-2">
           <div className="size-1.5 bg-foreground animate-pulse rounded-full"></div>
 
-          Currently Taking on Projects
+          {t('about.header.status')}
           </Badge>
         </div>
       </section>

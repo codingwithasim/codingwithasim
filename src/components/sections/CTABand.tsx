@@ -6,6 +6,7 @@ import { LuGithub, LuLinkedin, LuMail } from 'react-icons/lu';
 import { Button } from '../ui/button';
 import { useState } from 'react';
 import ContactDialog from '../models/Contact';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ContactMethod {
   name: string;
@@ -18,30 +19,32 @@ interface ContactMethod {
 
 const CTABand = () => {
   const [open, setOpen]  = useState(false)
+  const { t } = useLanguage();
+  
   const contactMethods: ContactMethod[] = [
     {
       name: 'Email',
       value: 'hello@muhammadasim.dev',
       icon: LuMail,
       link: '/contact',
-      description: 'Reach out directly to discuss projects or collaborations',
-      actionLabel: "Send a Message"
+      description: t('cta.email.description'),
+      actionLabel: t('cta.email.action')
     },
     {
       name: 'LinkedIn',
       value: 'muhammadasim',
       icon: LuLinkedin,
       link: 'https://www.linkedin.com/in/codingwithasim',
-      description: 'Connect professionally and follow my development journey',
-      actionLabel: "Connect"
+      description: t('cta.linkedin.description'),
+      actionLabel: t('cta.linkedin.action')
     },
     {
       name: 'GitHub',
       value: 'muhammadasim',
       icon: LuGithub,
       link: 'https://github.com/codingwithasim',
-      description: 'Explore my code, projects, and open source contributions',
-      actionLabel: "Check it out"
+      description: t('cta.github.description'),
+      actionLabel: t('cta.github.action')
     }
   ];
   
@@ -54,11 +57,10 @@ const CTABand = () => {
             {/* Main CTA */}
             <div className="space-y-4">
               <h4 className="font-bold mb-6 max-w-2xl mx-auto">
-                Let's Build<span className='text-muted-foreground font-medium'> Something Amazing.</span>
+                {t('cta.title')}<span className='text-muted-foreground font-medium'> {t('cta.subtitle')}</span>
               </h4>
               <p className="text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-                Ready to turn your ideas into reality? Whether it's a web application,
-                performance optimization, or a development tool, I'm here to help.
+                {t('cta.description')}
               </p>
             </div>
 
@@ -85,13 +87,13 @@ const CTABand = () => {
 
               <Button  className='py-5'>
                 <Link href="/contact">
-                  Start a Project
+                  {t('cta.startProject')}
                 </Link>
               </Button>
 
               <Button variant="secondary" className='py-5 border border-border bg-card'>
                 <Link href="/projects">
-                  View My Work
+                  {t('cta.viewWork')}
                 </Link>
               </Button>
 
@@ -101,16 +103,16 @@ const CTABand = () => {
             <div className="pt-8 border-t border-border/30">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
                 <div className="text-center">
-                  <div className="font-semibold mb-1">Response Time</div>
-                  <div className="text-foreground/60">Within 24 hours</div>
+                  <div className="font-semibold mb-1">{t('cta.responseTime')}</div>
+                  <div className="text-foreground/60">{t('cta.responseTimeValue')}</div>
                 </div>
                 <div className="text-center">
-                  <div className="font-semibold mb-1">Project Types</div>
-                  <div className="text-foreground/60">Web Apps, APIs, Tools</div>
+                  <div className="font-semibold mb-1">{t('cta.projectTypes')}</div>
+                  <div className="text-foreground/60">{t('cta.projectTypesValue')}</div>
                 </div>
                 <div className="text-center">
-                  <div className="font-semibold mb-1">Availability</div>
-                  <div className="text-foreground/60">Currently accepting projects</div>
+                  <div className="font-semibold mb-1">{t('cta.availability')}</div>
+                  <div className="text-foreground/60">{t('cta.availabilityValue')}</div>
                 </div>
               </div>
             </div>

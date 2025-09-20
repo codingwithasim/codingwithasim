@@ -1,5 +1,8 @@
+'use client';
+
 import { LucideCode, LucideServer, LucideGlobe, LucideBrainCircuit } from "lucide-react";
 import { IconType } from "react-icons";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Service {
   title: string;
@@ -10,33 +13,35 @@ interface Service {
 }
 
 const Services = () => {
+  const { t } = useLanguage();
+  
   const services: Service[] = [
     {
-      title: "Full-Stack Development",
-      description: "End-to-end web applications built with modern frameworks and clean architectures.",
+      title: t('services.fullstack.title'),
+      description: t('services.fullstack.description'),
       icon: LucideCode,
-      features: ["React / Next.js Frontend", "Node.js Backend", "Database Design", "REST APIs"],
+      features: [t('services.fullstack.feature1'), t('services.fullstack.feature2'), t('services.fullstack.feature3'), t('services.fullstack.feature4')],
       iconColor: "text-[#22C55E]"
     },
     {
-      title: "Frontend Engineering",
-      description: "Fast, responsive, and accessible interfaces that focus on user experience.",
+      title: t('services.frontend.title'),
+      description: t('services.frontend.description'),
       icon: LucideGlobe,
-      features: ["Next.js & React", "Tailwind CSS", "Performance Optimization", "SEO Best Practices"],
+      features: [t('services.frontend.feature1'), t('services.frontend.feature2'), t('services.frontend.feature3'), t('services.frontend.feature4')],
       iconColor: "text-[#8B5CF6]"
     },
     {
-      title: "Backend Development",
-      description: "Scalable server-side solutions with secure and efficient APIs.",
+      title: t('services.backend.title'),
+      description: t('services.backend.description'),
       icon: LucideServer,
-      features: ["Node.js & Express", "Database Optimization", "Authentication & Security"],
+      features: [t('services.backend.feature1'), t('services.backend.feature2'), t('services.backend.feature3')],
       iconColor: "text-[#14B8A6]"
     },
     {
-      title: "Automation & AI Integration",
-      description: "Enhance applications and workflows by integrating automation and AI-driven features where it adds real value.",
+      title: t('services.ai.title'),
+      description: t('services.ai.description'),
       icon: LucideBrainCircuit,
-      features: ["Process Automation", "API Integrations", "Basic AI Features", "Workflow Optimization"],
+      features: [t('services.ai.feature1'), t('services.ai.feature2'), t('services.ai.feature3'), t('services.ai.feature4')],
       iconColor: "text-[#F59E0B]"
     }
   ];
@@ -47,7 +52,7 @@ const Services = () => {
       <div className="container-custom">
         <div className="text-center mb-20">
         <h4 className="font-bold mb-6 max-w-2xl mx-auto">
-          Services<span className="text-muted-foreground font-medium"> Turning Ideas Into Reality.</span>
+          {t('services.title')}<span className="text-muted-foreground font-medium"> {t('services.subtitle')}</span>
         </h4>
 
         </div>
