@@ -38,7 +38,9 @@ module.exports = {
         }
       },
     },
-    plugins: [],
+    plugins: [
+      
+    ],
     safelist: [
       'group-hover:text-yellow-400',
       'group-hover:text-blue-600',

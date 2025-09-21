@@ -25,7 +25,7 @@ const Footer = () => {
 
 
   return (
-    <footer className="border-t border-[#1F2937]/20">
+    <footer className="border-t border-border/20">
       <div className="container-custom py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center sm:text-left">
           {/* Navigation */}
@@ -36,7 +36,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     href={link.path}
-                    className="text-white/40 hover:text-white/60 transition-colors duration-200 text-sm"
+                    className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm"
                   >
                     {link.label}
                   </Link>
@@ -55,7 +55,7 @@ const Footer = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/40 hover:text-white/60 transition-colors duration-200 p-2 rounded-lg hover:bg-[#1F2937]/30"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 p-2 rounded-lg hover:bg-muted/30"
                   aria-label={social.name}
                 >
                   <Icon size={18}/>
@@ -68,10 +68,10 @@ const Footer = () => {
           {/* Copyright */}
           <div>
             <h6 className="font-medium mb-4">{t('footer.portfolio')}</h6>
-            <p className="text-white/40 text-sm leading-relaxed">
+            <p className="text-muted-foreground text-sm leading-relaxed">
               {t('footer.description')}
             </p>
-            <p className="text-white/30 text-xs mt-4">
+            <p className="text-muted-foreground/80 text-xs mt-4">
               © {currentYear} Muhammad Asim. {t('footer.copyright')}
             </p>
           </div>

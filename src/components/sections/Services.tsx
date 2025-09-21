@@ -1,7 +1,6 @@
 'use client';
 
 import { LucideCode, LucideServer, LucideGlobe, LucideBrainCircuit } from "lucide-react";
-import { IconType } from "react-icons";
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Service {
@@ -66,11 +65,10 @@ const Services = () => {
         {/* Services grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {services.map(({ icon: Icon, ...service }) => (
-            <div key={service.title} className="group">
-              <div className="relative p-8 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-border hover:shadow-lg hover:shadow-primary/5">
+              <div key={service.title}  className="group relative p-8 rounded-2xl border border-border bg-card backdrop-blur-sm transition-all duration-300 hover:border-border/80 hover:shadow-lg hover:shadow-primary/5 dark:border-border/50 dark:bg-card/80 dark:hover:border-border/70">
                 
                 {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-6 ${service.iconColor} bg-gradient-to-br from-background to-muted/20`}>
+                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-6 ${service.iconColor} bg-gradient-to-br from-background to-muted/20 dark:from-muted/30 dark:to-muted/10`}>
                   <Icon size={24} />
                 </div>
                 
@@ -88,7 +86,7 @@ const Services = () => {
                   <div className="space-y-2 pt-2">
                     {service.features.map((feature) => (
                       <div key={feature} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary/60 mt-2 flex-shrink-0"></div>
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary/60 mt-2 flex-shrink-0 dark:bg-primary/80"></div>
                         <span>{feature}</span>
                       </div>
                     ))}
@@ -96,9 +94,8 @@ const Services = () => {
                 </div>
                 
                 {/* Hover effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none dark:from-primary/10"></div>
               </div>
-            </div>
           ))}
         </div>
       </div>

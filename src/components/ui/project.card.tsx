@@ -27,7 +27,7 @@ export default function ProjectCard({project} : ProjectCardProps) {
             key={project.id}
             className="group relative overflow-clip rounded-3xl"
         >
-            <div className="card fancy-border h-full flex flex-col transition-all duration-300">
+            <div className="card border border-dark-200 hover:border-dark-300 dark:border-none fancy-border h-full flex flex-col transition-all duration-300">
                 {/* Project Image */}
                 <div className="relative mb-6 overflow-hidden rounded-t-xl z-10">
                     <div className="w-full h-48 flex items-center justify-center">

@@ -158,7 +158,7 @@ export default function Contact() {
             <h4 className="text-5xl md:text-6xl font-bold mb-6">
               Let's Stay Connected
             </h4>
-            <p className="text-white/70 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-black/60 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
               Ready to start a project or just want to discuss technology?
               I'm always open to new opportunities and collaborations.
             </p>
@@ -170,13 +170,13 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Contact Form */}
           <div>
-            <h5 className="text-3xl font-bold text-white mb-8">
+            <h5 className="text-3xl font-bold text-black dark:text-white mb-8">
               Send a Message
             </h5>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-white/80 font-medium mb-2">
+                <label htmlFor="name" className="block text-black/80 dark:text-white/80 font-medium mb-2">
                   Name
                 </label>
                 <Input
@@ -195,7 +195,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-white/80 font-medium mb-2">
+                <label htmlFor="email" className="block text-black/80 dark:text-white/80 font-medium mb-2">
                   Email
                 </label>
                 <Input
@@ -214,7 +214,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-white/80 font-medium mb-2">
+                <label htmlFor="message" className="block text-black/80 dark:text-white/80 font-medium mb-2">
                   Message
                 </label>
                 <Textarea
@@ -251,27 +251,27 @@ export default function Contact() {
 
           {/* Contact Information */}
           <div>
-            <h5 className="text-3xl font-bold text-white mb-8">
+            <h5 className="text-3xl font-bold text-black dark:text-white mb-8">
               Get in Touch
             </h5>
             
             <ul className="space-y-8">
               {contactMethods.map(({icon: Icon, ...method}) => (
                 <li key={method.name} className="flex group items-start space-x-4">
-                  <div className='p-1 text-dark-300 group-hover:text-white transition-colors'>
+                  <div className='p-1 text-black/70 dark:text-dark-300 group-hover:text-black dark:group-hover:text-white transition-colors'>
                     <Icon/>
                   </div>
                   <div className="flex-1">
-                    <h6 className="text-lg font-semibold text-dark-300 group-hover:text-white transition-colors mb-2">
+                    <h6 className="text-lg font-semibold text-black/70 dark:text-dark-300 group-hover:text-black dark:group-hover:text-white transition-colors mb-2">
                       {method.name}
                     </h6>
                     
-                    <p className="text-white/60 text-sm leading-relaxed">
+                    <p className="text-black/60 dark:text-white/60 text-sm leading-relaxed">
                       {method.description}
                     </p>
                   </div>
 
-                  <Link target='_blank' href={method.link} className='border p-2 rounded-full text-gray-400 hover:border-gray-400 hover:text-gray-200 transition-colors cursor-pointer'>
+                  <Link target='_blank' href={method.link} className='border border-gray-300 dark:border-gray-600 p-2 rounded-full text-black/60 dark:text-gray-400 hover:border-black/60 dark:hover:border-gray-400 hover:text-black dark:hover:text-gray-200 transition-colors cursor-pointer'>
                     <MdOutlineArrowOutward/>
                   </Link>
                 </li>
@@ -279,11 +279,11 @@ export default function Contact() {
             </ul>
 
             {/* Additional Info */}
-            <div className="mt-12 p-6 border border-dark-800 rounded-xl">
-              <h5 className="text-lg font-semibold text-white mb-4">
+            <div className="mt-12 p-6 border border-gray-200 dark:border-dark-800 rounded-xl">
+              <h5 className="text-lg font-semibold text-black dark:text-white mb-4">
                 What to Expect
               </h5>
-              <ul className="space-y-2 text-white/70 text-sm">
+              <ul className="space-y-2 text-black/70 dark:text-white/70 text-sm">
               {
                 ["Response within 24 hours", 
                   "Free initial consultation", 
@@ -292,7 +292,7 @@ export default function Contact() {
                 ].map((info, idx) => {
                   return (
                     <li key={idx}  className="flex items-center space-x-2">
-                      <div className="w-1.5 h-1.5 bg-dark-400 rounded-full"></div>
+                      <div className="w-1.5 h-1.5 bg-black/40 dark:bg-dark-400 rounded-full"></div>
                       <span>{info}</span>
                     </li>
                   )

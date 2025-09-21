@@ -23,11 +23,11 @@ export default function BioSkills() {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2">
-            <Card className="border-dark-800 border-b-0 rounded-b-none md:border-b md:border-l md:rounded-l-lg  md:border-r-0 md:rounded-r-none bg-black">
+            <Card className="border-dark-200 dark:border-dark-800 border-b-0 rounded-b-none md:border-b md:border-l md:rounded-l-lg  md:border-r-0 md:rounded-r-none dark:bg-black">
               <CardTitle className="px-6 py-12">
                 {t('about.bio.title')}
               </CardTitle>
-              <CardContent className="text-justify text-gray-200 flex flex-col gap-8">
+              <CardContent className="text-justify text-dark-800 dark:text-dark-200 flex flex-col gap-8">
                 <p>
                   {t('about.bio.paragraph1')}
                 </p>
@@ -38,7 +38,7 @@ export default function BioSkills() {
               </CardContent>
             </Card>
 
-            <Card className="border-dark-800 rounded-t-none md:rounded-r-lg md:rounded-l-none bg-black">
+            <Card className="border-dark-200 dark:border-dark-800 rounded-t-none md:rounded-r-lg md:rounded-l-none dark:bg-black">
               <CardTitle className="px-6 py-12">
                 {t('about.skills.title')}
               </CardTitle>
@@ -49,9 +49,9 @@ export default function BioSkills() {
                         return (
                           <li key={skill.name} className="py-3 flex flex-col text-sm gap-4 group">
                             <div className="flex items-center gap-4">
-                              <span className="text-gray-300 group-hover:text-white w-[180px]">{skill.name}</span>
-                              <Progress indicatorStyle="bg-[#717171] group-hover:bg-white transition-colors" value={skill.level} max={100}/>
-                              <span className="text-gray-300 group-hover:text-white w-[100px]">{skill.level}%</span>
+                              <span className="text-dark-700 dark:text-dark-300 dark:group-hover:text-white group-hover:text-black w-[180px]">{skill.name}</span>
+                              <Progress indicatorStyle="bg-[#717171] group-hover:bg-black dark:group-hover:bg-white transition-colors" value={skill.level} max={100}/>
+                              <span className="text-dark-700 group-hover:text-black dark:text-dark-300 dark:group-hover:text-white w-[100px]">{skill.level}%</span>
                             </div>
                           </li>
                         )

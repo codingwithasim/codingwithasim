@@ -200,7 +200,7 @@ export default function ProcessSection() {
             <p className="text-lg text-foreground/60">
               Ready to start your project?
             </p>
-            <button className="group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-teal-500 text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/25">
+            <button className="group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-teal-500 text-black font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/25">
               <span className="relative z-10">Let's Work Together</span>
               <div className="absolute inset-0 bg-gradient-to-r from-teal-500 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>

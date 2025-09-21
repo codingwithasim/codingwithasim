@@ -45,10 +45,10 @@ export default function Workflow() {
   return (
     <section className="max-w-6xl mx-auto my-16">
       <div className="text-center mb-12">
-        <h4 className="text-2xl md:text-3xl font-light text-white mb-4">
+        <h4 className="text-2xl md:text-3xl font-light text-foreground mb-4">
           Development Workflow
         </h4>
-        <p className="text-white/60 max-w-2xl mx-auto">
+        <p className="text-muted-foreground max-w-2xl mx-auto">
           My step-by-step approach to building high-quality applications from
           concept to deployment
         </p>
@@ -58,7 +58,7 @@ export default function Workflow() {
         {workflowSteps.map((workflow, index) => (
           <Card
             key={index}
-            className="bg-black p-6 border-dark-800 group hover:border-dark-700 transition-colors"
+            className="bg-card p-6 border-border group hover:border-muted-foreground transition-colors"
           >
             <CardHeader className="pb-4">
               <div className="flex items-center gap-4 mb-3">
@@ -78,12 +78,12 @@ export default function Workflow() {
                   {workflow.step}
                 </span>
               </div>
-              <h5 className="text-lg font-medium text-white group-hover:text-white/90 transition-colors">
+              <h5 className="text-lg font-medium text-foreground group-hover:text-foreground/90 transition-colors">
                 {workflow.title}
               </h5>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="text-white/60 text-sm leading-relaxed">
+              <p className="text-muted-foreground text-sm leading-relaxed">
                 {workflow.description}
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -91,7 +91,7 @@ export default function Workflow() {
                   <Badge
                     key={idx}
                     variant="secondary"
-                    className="text-xs bg-dark-900 text-white/70"
+                    className="text-xs bg-muted text-muted-foreground"
                   >
                     {tool}
                   </Badge>

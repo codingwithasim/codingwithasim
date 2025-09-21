@@ -53,8 +53,8 @@ export default function Toolkit() {
     return (
         <section className="max-w-6xl mx-auto my-12">
             <div className="">
-                <h4 className="text-center mx-auto text-dark-400 font-bold max-w-4xl">
-                    Browse through my <span className="text-white">toolkit</span> that power my development workflow
+                <h4 className="text-center mx-auto text-muted-foreground font-bold max-w-4xl">
+                    Browse through my <span className="text-foreground">toolkit</span> that power my development workflow
                 </h4>
 
                 <div className="flex flex-wrap gap-2 w-full mt-8 justify-center">
@@ -63,7 +63,7 @@ export default function Toolkit() {
                             <Badge 
                                 key={f} 
                                 variant={filter === f ? "default" : "outline"} 
-                                className="py-1 border-dark-800 cursor-pointer min-w-fit" 
+                                className="py-1 border-border cursor-pointer min-w-fit" 
                                 onClick={() => setFilter(f)}
                             >
                                 {f}
@@ -84,7 +84,7 @@ type Props = { skill: SkillCardProps }
 
 function SkillCard({ skill }: Props){
     return (
-        <Card className="w-full bg-black p-4 border-dark-800 hover:border-dark-700 transition-colors">
+        <Card className="w-full bg-card p-4 border-border hover:border-muted-foreground transition-colors">
             <CardHeader className="flex flex-row gap-4 items-center">
                 <div 
                     className="w-10 h-10 border rounded-md grid place-items-center" 
@@ -93,13 +93,13 @@ function SkillCard({ skill }: Props){
                     <skill.icon size={18} style={{ color: skill.color }} />
                 </div>
                 <div>
-                    <h5 className="text-white">{skill.title}</h5>
-                    <p className="text-sm" style={{ color: "#9CA3AF" }}>{skill.subtitle}</p>
+                    <h5 className="text-foreground">{skill.title}</h5>
+                    <p className="text-sm text-muted-foreground">{skill.subtitle}</p>
                 </div>
             </CardHeader>
 
             <CardContent>
-                <p className="text-dark-400 text-sm">{skill.description}</p>
+                <p className="text-muted-foreground text-sm">{skill.description}</p>
             </CardContent>
         </Card>
     )

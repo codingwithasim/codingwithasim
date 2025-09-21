@@ -9,7 +9,7 @@ export default function Uses() {
   
 
   return (
-    <div className="min-h-screen mx-auto flex flex-col gap-4 px-4 bg-black">
+    <div className="min-h-screen mx-auto flex flex-col gap-4 px-4 bg-background">
       <UsesHeader/>
 
       <Essentials/>

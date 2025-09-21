@@ -124,7 +124,7 @@ export default function ServicesPage() {
             <h3 className="mb-6">
               {t('servicesPage.title')}
             </h3>
-            <p className="text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-black/60 dark:text-white/60 max-w-2xl mx-auto leading-relaxed">
               {t('servicesPage.description')}
             </p>
             <div className="flex flex-wrap justify-center gap-2 pt-4">
@@ -154,38 +154,38 @@ export default function ServicesPage() {
             {services.map(({ icon: Icon, ...service }) => (
               <article 
                 key={service.id}
-                className="group border border-[#323232] rounded-lg p-8 hover:border-[#585858] transition-all duration-300 bg-black"
+                className="group  border dark:border-dark-800 rounded-lg p-8 dark:hover:border-dark-600 hover:border-dark-300 transition-all duration-300"
                 itemScope 
                 itemType="https://schema.org/Service"
               >
                 <div className="flex flex-col sm:flex-row items-start gap-4">
-                  <div className="p-3 rounded-lg bg-white/5 border border-white/10 flex-shrink-0">
-                    <Icon size={20} className="text-white" aria-hidden="true" />
+                  <div className="p-3 rounded-lgborder border-white/10 flex-shrink-0">
+                    <Icon size={20} className="" aria-hidden="true" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 
-                      className="text-xl font-medium text-white mb-2"
+                      className="text-xl font-medium mb-2"
                       itemProp="name"
                     >
                       {service.title}
                     </h3>
                     <p 
-                      className="text-white/60 text-sm leading-relaxed mb-4"
+                      className="text-black/60 dark:text-white/60 text-sm leading-relaxed mb-4"
                       itemProp="description"
                     >
                       {service.description}
                     </p>
                     
                     <div className="flex items-center gap-4 text-sm mb-4">
-                      <span className="text-white font-medium">{service.pricing[0] + " - " + service.pricing[1]}</span>
-                      <span className="text-white/40">•</span>
-                      <span className="text-white/50">{service.timeline}</span>
+                      <span className="font-medium">{service.pricing[0] + " - " + service.pricing[1]}</span>
+                      <span className="text-black/40 dark:text-white/40">•</span>
+                      <span className="text-black/50 dark:text-white/50">{service.timeline}</span>
                     </div>
 
                     <div className="space-y-2">
                       {service.features.map((feature) => (
-                        <div key={feature} className="flex items-center text-white/50 text-sm">
-                          <div className="w-1 h-1 rounded-full bg-white/30 mr-3 flex-shrink-0" aria-hidden="true"></div>
+                        <div key={feature} className="flex items-center text-black/50 dark:text-white/50 text-sm">
+                          <div className="w-1 h-1 rounded-full bg-black/30 dark:bg-white/30 mr-3 flex-shrink-0" aria-hidden="true"></div>
                           {feature}
                         </div>
                       ))}
@@ -200,24 +200,24 @@ export default function ServicesPage() {
 
       {/* Process */}
       <section className="py-16" aria-labelledby="process-heading">
-        <div className="container-custom max-w-4xl">
+        <div className="container-custom max-w-5xl">
           <div className="text-center mb-16">
             <h4 className="font-bold mb-6 max-w-2xl mx-auto" id="process-heading">
               {t('servicesPage.process.title')}
             </h4>
-            <p className="text-white/60 max-w-2xl mx-auto">
+            <p className="text-black/60 dark:text-white/60 max-w-2xl mx-auto">
               {t('servicesPage.process.description')}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid w-full grid-cols-1 md:grid-cols-3 gap-8">
             {process.map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/10 border border-white/20 text-white text-sm font-medium mb-4">
+              <div key={index} className="text-center border dark:border-dark-800 p-4">
+                <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/10 border dark:border-white/20 text-sm font-medium mb-4">
                   {String(index + 1).padStart(2, '0')}
                 </div>
-                <h3 className="text-lg font-medium text-white mb-2">{item.step}</h3>
-                <p className="text-white/60 text-sm leading-relaxed">{item.description}</p>
+                <h5 className="text-lg font-medium mb-2">{item.step}</h5>
+                <p className="text-black/60 dark:text-white/60 text-sm leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
@@ -240,8 +240,8 @@ export default function ServicesPage() {
               t('servicesPage.additional.maintenance'),
               t('servicesPage.additional.consulting')
             ].map((service) => (
-              <div key={service} className="p-4 border border-[#323232] rounded-lg bg-black/50">
-                <p className="text-white/70 text-sm">{service}</p>
+              <div key={service} className="p-4 border dark:border-[#323232] rounded-lg ">
+                <p className="text-black/70 dark:text-white/70 text-sm">{service}</p>
               </div>
             ))}
           </div>
@@ -251,11 +251,11 @@ export default function ServicesPage() {
       {/* CTA */}
       <section className="py-16" aria-labelledby="cta-heading">
         <div className="container-custom max-w-2xl">
-          <div className="text-center border border-[#323232] rounded-lg p-8 bg-black/50">
+          <div className="text-center border dark:border-[#323232] rounded-lg p-8">
             <h4 className="font-bold mb-6 max-w-2xl mx-auto" id="cta-heading">
               {t('servicesPage.cta.title')}
             </h4>
-            <p className="text-white/60 mb-6">
+            <p className="text-black/60 dark:text-white/60 mb-6">
               {t('servicesPage.cta.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

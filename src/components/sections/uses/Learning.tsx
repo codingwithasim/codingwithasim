@@ -35,46 +35,46 @@ export default function Learning() {
             case "In Progress": return "bg-[#22C55E]/10 text-[#22C55E] border-[#22C55E]/20";
             case "Starting": return "bg-[#F59E0B]/10 text-[#F59E0B] border-[#F59E0B]/20";
             case "Planning": return "bg-[#8B5CF6]/10 text-[#8B5CF6] border-[#8B5CF6]/20";
-            default: return "bg-white/10 text-white/70 border-white/20";
+            default: return "bg-muted/10 text-muted-foreground border-border";
         }
     };
 
     return (
         <section className="max-w-6xl mx-auto my-16">
             <div className="text-center mb-12">
-                <h4 className="text-2xl md:text-3xl font-light text-white mb-4">
+                <h4 className="text-2xl md:text-3xl font-light text-foreground mb-4">
                     Continuous Learning
                 </h4>
-                <p className="text-white/60 max-w-2xl mx-auto">
+                <p className="text-muted-foreground max-w-2xl mx-auto">
                     Staying current with emerging technologies and deepening expertise in core areas
                 </p>
             </div>
 
             {/* Current Learning Projects */}
             <div className="mb-12">
-                <h5 className="text-xl font-medium text-white mb-6 flex items-center gap-2">
+                <h5 className="text-xl font-medium text-foreground mb-6 flex items-center gap-2">
                     <BookOpen size={20} className="text-[#22C55E]" />
                     Active Learning
                 </h5>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {currentLearning.map((item, index) => (
-                        <Card key={index} className="bg-black p-6 border-dark-800 hover:border-dark-700 transition-colors">
+                        <Card key={index} className="bg-card p-6 border-border hover:border-muted-foreground transition-colors">
                             <CardHeader className="pb-4">
                                 <div className="flex items-center justify-between mb-3">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 bg-dark-900 rounded-lg flex items-center justify-center">
-                                            <item.icon size={16} className="text-white/70" />
+                                        <div className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center">
+                                            <item.icon size={16} className="text-muted-foreground" />
                                         </div>
                                         <Badge className={`text-xs ${getStatusColor(item.status)}`}>
                                             {item.status}
                                         </Badge>
                                     </div>
-                                    <span className="text-white/40 text-xs">{item.progress}%</span>
+                                    <span className="text-muted-foreground/60 text-xs">{item.progress}%</span>
                                 </div>
-                                <h5 className="text-lg font-medium text-white">
+                                <h5 className="text-lg font-medium text-foreground">
                                     {item.title}
                                 </h5>
-                                <div className="w-full bg-dark-900 rounded-full h-1.5 mt-2">
+                                <div className="w-full bg-muted rounded-full h-1.5 mt-2">
                                     <div 
                                         className="bg-[#22C55E] h-1.5 rounded-full transition-all duration-300"
                                         style={{ width: `${item.progress}%` }}
@@ -82,10 +82,10 @@ export default function Learning() {
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                <p className="text-white/60 text-sm leading-relaxed mb-3">
+                                <p className="text-muted-foreground text-sm leading-relaxed mb-3">
                                     {item.description}
                                 </p>
-                                <Badge variant="secondary" className="text-xs bg-dark-900 text-white/60">
+                                <Badge variant="secondary" className="text-xs bg-muted text-muted-foreground">
                                     {item.category}
                                 </Badge>
                             </CardContent>

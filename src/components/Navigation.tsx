@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from './ui/button';
 import LanguageSwitcher from './ui/LanguageSwitcher';
+import ThemeToggle from './ui/ThemeToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Image from 'next/image';
 
@@ -47,7 +48,7 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
             <div className="w-8 h-8 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
               <Image
               src="/assets/a_logo.png"
-              className='invert dark:invert-0'
+              className='dark:invert'
               alt="Muhammad Asim Logo"
               width={50}
               height={50}
@@ -77,7 +78,7 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
           {/* CTA Button */}
           <div className="flex items-center space-x-4">
             <LanguageSwitcher />
-            {/* <ThemeToggle /> */}
+            <ThemeToggle />
             <Button asChild>
               <Link
                 href="/contact"

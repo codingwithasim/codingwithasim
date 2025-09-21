@@ -91,7 +91,7 @@ export default function Projects() {
             <h3 className="mb-6">
               {t('projectsPage.title')}
             </h3>
-            <p className="text-white/70 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               {t('projectsPage.description')}
             </p>
           </div>
@@ -133,8 +133,8 @@ export default function Projects() {
           ) : (
             <div className="text-center py-16">
               <div className="text-6xl mb-6">🔍</div>
-              <h3 className="text-2xl font-semibold text-white mb-4">{t('projectsPage.noProjects.title')}</h3>
-              <p className="text-white/60 mb-8">
+              <h3 className="text-2xl font-semibold text-foreground mb-4">{t('projectsPage.noProjects.title')}</h3>
+              <p className="text-muted-foreground mb-8">
                 {t('projectsPage.noProjects.description')}
               </p>
               <button

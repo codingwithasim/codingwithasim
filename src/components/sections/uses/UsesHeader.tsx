@@ -11,10 +11,10 @@ export default function UsesHeader () {
         <div className="container-custom max-w-4xl relative">
 
           <div className="text-center space-y-6 z-1 relative">
-            <h3 className="text-4xl md:text-5xl font-light text-white">
+            <h3 className="text-4xl md:text-5xl font-light text-foreground">
               {t('usesPage.title')}
             </h3>
-            <p className="text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               {t('usesPage.description')}
             </p>
 

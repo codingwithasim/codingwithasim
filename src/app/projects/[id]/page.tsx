@@ -15,7 +15,7 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
   const { id } = params;
 
   return (
-    <div className="min-h-screen bg-[#0B0F14]">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <section className="pt-32 pb-16">
         <div className="container-custom">
@@ -32,7 +32,7 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Project <span className="text-[#22C55E]">Case Study</span>
             </h1>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
               Detailed case study for project ID: {id}
             </p>
           </div>
@@ -44,17 +44,17 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
         <div className="card max-w-4xl mx-auto text-center">
           <div className="space-y-8 p-12">
             <div className="text-6xl mb-6">🚧</div>
-            <h2 className="text-2xl font-bold text-white">
+            <h2 className="text-2xl font-bold text-foreground">
               Case Study Coming Soon
             </h2>
-            <p className="text-white/70 leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed">
               This project case study is currently being developed. It will include:
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
               <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-white">Project Overview</h3>
-                <ul className="space-y-2 text-white/60 text-sm">
+                <h3 className="text-lg font-semibold text-foreground">Project Overview</h3>
+                <ul className="space-y-2 text-muted-foreground text-sm">
                   <li>• Problem statement & objectives</li>
                   <li>• Constraints & requirements</li>
                   <li>• My role & team structure</li>
@@ -63,8 +63,8 @@ export default function ProjectDetail({ params }: ProjectDetailProps) {
               </div>
               
               <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-white">Technical Details</h3>
-                <ul className="space-y-2 text-white/60 text-sm">
+                <h3 className="text-lg font-semibold text-foreground">Technical Details</h3>
+                <ul className="space-y-2 text-muted-foreground text-sm">
                   <li>• Tech stack & architecture</li>
                   <li>• Key challenges & solutions</li>
                   <li>• Performance optimizations</li>

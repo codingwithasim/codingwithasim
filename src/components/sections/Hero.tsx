@@ -8,7 +8,7 @@ const Hero = () => {
   const { t } = useLanguage();
   
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section className="min-h-[calc(100vh-68px)] flex items-center justify-center relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),rgba(255,255,255,0))]"></div>
       
@@ -60,7 +60,7 @@ const Hero = () => {
           </div>
 
           {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
+          <div className="absolute bottom-0 translate-y-full left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
             <div className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center">
               <div className="w-1 h-3 bg-muted-foreground/50 rounded-full mt-2 animate-bounce"></div>
             </div>

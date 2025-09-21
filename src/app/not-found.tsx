@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-black" role="main" aria-labelledby="error-heading">
+    <main className="min-h-screen bg-background" role="main" aria-labelledby="error-heading">
       <div className="relative">
         <div className="flex items-center px-8 justify-center min-h-screen">
           <div className="flex flex-col h-fit items-center justify-center space-y-8 z-10 text-center max-w-4xl mx-auto">
@@ -27,12 +27,12 @@ export default function NotFound() {
               <h1 id="error-heading" className="text-8xl md:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-[#bfbfbf] to-white" aria-label="Error 404">
                 404
               </h1>
-              <h2 className="text-2xl md:text-3xl font-medium text-white/90">
+              <h2 className="text-2xl md:text-3xl font-medium text-foreground/90">
                 Oops! This page seems to have wandered off
               </h2>
             </div>
 
-            <p className="text-white/70 leading-relaxed max-w-2xl">
+            <p className="text-muted-foreground leading-relaxed max-w-2xl">
               The page you're looking for doesn't exist or has been moved. 
               Don't worry though - let's get you back to exploring amazing content.
             </p>
@@ -51,7 +51,7 @@ export default function NotFound() {
                 </Link>
               </Button>
 
-              <Button variant="secondary" asChild className='bg-black rounded-full border-white/20 hover:border-white/40'>
+              <Button variant="secondary" asChild className='bg-background rounded-full border-border/20 hover:border-border/40'>
                 <Link href="/projects" className='py-6' aria-label="Browse my projects">
                   View Projects
                 </Link>
@@ -60,11 +60,11 @@ export default function NotFound() {
 
             {/* Quick Links */}
             <nav className="pt-8" aria-label="Quick navigation">
-              <p className="text-white/60 mb-4 text-sm">Quick navigation:</p>
+              <p className="text-muted-foreground mb-4 text-sm">Quick navigation:</p>
               <ul className="flex flex-wrap justify-center gap-6 text-sm" role="list">
-                <li><Link href="/about" className="text-white/50 hover:text-[#22C55E] transition-colors duration-300 focus:text-[#22C55E] focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:ring-opacity-50 rounded" aria-label="Learn about me">About</Link></li>
-                <li><Link href="/contact" className="text-white/50 hover:text-[#22C55E] transition-colors duration-300 focus:text-[#22C55E] focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:ring-opacity-50 rounded" aria-label="Get in touch">Contact</Link></li>
-                <li><Link href="/uses" className="text-white/50 hover:text-[#22C55E] transition-colors duration-300 focus:text-[#22C55E] focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:ring-opacity-50 rounded" aria-label="See tools I use">Uses</Link></li>
+                <li><Link href="/about" className="text-muted-foreground hover:text-primary transition-colors duration-300 focus:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 rounded" aria-label="Learn about me">About</Link></li>
+                <li><Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors duration-300 focus:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 rounded" aria-label="Get in touch">Contact</Link></li>
+                <li><Link href="/uses" className="text-muted-foreground hover:text-primary transition-colors duration-300 focus:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 rounded" aria-label="See tools I use">Uses</Link></li>
               </ul>
             </nav>
 
