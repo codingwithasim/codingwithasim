@@ -3,30 +3,31 @@
 import { useState } from 'react';
 import { Project } from '../types/project';
 import ProjectCard from '@/components/ui/project.card';
-import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 import { useLanguage } from '@/contexts/LanguageContext';
+import PageTransition from '@/components/animations/PageTransition';
+import ScrollFadeIn from '@/components/animations/ScrollFadeIn';
 
 export default function Projects() {
   const { t } = useLanguage();
   const [selectedTech, setSelectedTech] = useState('all');
-  const [selectedType, setSelectedType] = useState('all');
 
   const projects: Project[] = [
     {
       id: "1",
-      name: "Nexusflow",
-      description: "A modern, responsive React landing page for NexusFlow - a fictional team collaboration and workflow automation platform. Built with React, Tailwind CSS, and Framer Motion.",
+      name: "ParlezPro",
+      description: t('projects.nexus.description'),
       technologies: ["React", "Tailwind", "Framer Motion"],
-      cover: "/assets/nexus.webp",
+      cover: "/assets/tutor.png",
       status: "Complete",
       features: [
-        "Responsive design",
-        "Workflow automation simulation",
-        "Interactive UI"
+        t('projects.nexus.feature1'),
+        t('projects.nexus.feature2'),
+        t('projects.nexus.feature3'),
       ],
       role: "Full-Stack Developer",
       links: {
-        demo: "https://nexusflow-landing.vercel.app/"
+        demo: "https://parlez-pro.vercel.app/"
         // github_repo: optional
       },
       development_time: "2 months",
@@ -35,10 +36,10 @@ export default function Projects() {
     },
     {
       id: "2",
-      name: "Key Genie",
-      description: "A modern, client-side password generator that creates random, memorable passwords and PINs with built-in strength indicators and export functionality.",
-      technologies: ["Next.js", "Tailwind", "JavaScript"],
-      cover: "/assets/genie.webp",
+      name: "Savora",
+      description: t('projects.savora.description'),
+      technologies: ["React", "Tailwind", "JavaScript"],
+      cover: "/assets/savora.png",
       status: "Complete",
       features: [
         "Password generator",
@@ -53,26 +54,26 @@ export default function Projects() {
       other_notes: null,
       visuals: ["/assets/key_genie.png"]
     },
-    {
-      id: "3",
-      name: "Mobile App Backend",
-      description: "Scalable backend infrastructure supporting 50k+ mobile app users with real-time features.",
-      technologies: ["Go", "gRPC", "Kubernetes", "Elasticsearch"],
-      cover: "/assets/bistro.webp",
-      status: "Beta",
-      features: [
-        "Real-time data handling",
-        "High scalability",
-        "Kubernetes orchestration"
-      ],
-      role: "Backend Developer",
-      links: {
-        demo: "/projects/mobile-backend"
-      },
-      development_time: "3 months",
-      other_notes: null,
-      visuals: ["/api/placeholder/400/250"]
-    }
+    // {
+    //   id: "3",
+    //   name: "Mobile App Backend",
+    //   description: "Scalable backend infrastructure supporting 50k+ mobile app users with real-time features.",
+    //   technologies: ["Go", "gRPC", "Kubernetes", "Elasticsearch"],
+    //   cover: "/assets/bistro.webp",
+    //   status: "Beta",
+    //   features: [
+    //     "Real-time data handling",
+    //     "High scalability",
+    //     "Kubernetes orchestration"
+    //   ],
+    //   role: "Backend Developer",
+    //   links: {
+    //     demo: "/projects/mobile-backend"
+    //   },
+    //   development_time: "3 months",
+    //   other_notes: null,
+    //   visuals: ["/api/placeholder/400/250"]
+    // }
   ];
 
   const technologies = ['all', 'React', 'Next.js', 'Node.js', 'Python', 'Java'];
@@ -83,73 +84,83 @@ export default function Projects() {
   });
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <section className="pt-32 pb-16">
-        <div className="container-custom">
-          <div className="text-center">
-            <h3 className="mb-6">
-              {t('projectsPage.title')}
-            </h3>
-            <p className="text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              {t('projectsPage.description')}
-            </p>
-          </div>
+    <PageTransition>
+      <div className="relative min-h-screen isolate overflow-hidden">
+        <div className="absolute inset-0 -z-20 bg-gradient-to-br from-indigo-500/5 via-accent/10 to-secondary/15 dark:from-indigo-500/10 dark:via-blue-700/15 dark:to-accent/15" />
+        <div className="absolute inset-0 -z-10 opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)] dark:opacity-45">
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-[720px] w-[720px] rounded-full bg-gradient-to-br from-primary/25 via-transparent to-accent/20 blur-[140px]" />
+          <div className="absolute bottom-[-260px] right-[-160px] h-[520px] w-[520px] rounded-full bg-gradient-to-tl from-secondary/20 via-transparent to-primary/20 blur-[140px]" />
         </div>
-      </section>
 
-      {/* Filters */}
-      <section className="pb-16">
-        <div className="container-custom">
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            {/* Technology Filter */}
-            <div className="flex flex-wrap justify-center gap-3">
-              {technologies.map((tech) => (
-                <Badge
-                  key={tech}
-                  onClick={() => setSelectedTech(tech)}
-                  variant={selectedTech === tech ? "default" : "secondary"}
-                  className='py-1 cursor-pointer'
-                >
-                  {tech === 'all' ? t('projectsPage.filter.all') : tech}
-                </Badge>
-              ))}
-            </div>
-
-            
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Grid */}
-      <section className="pb-24 mx-auto max-w-6xl">
-        <div className="container-custom">
-          {filteredProjects.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProjects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-6">🔍</div>
-              <h3 className="text-2xl font-semibold text-foreground mb-4">{t('projectsPage.noProjects.title')}</h3>
-              <p className="text-muted-foreground mb-8">
-                {t('projectsPage.noProjects.description')}
+        {/* Header */}
+        <section className="pt-28 pb-16">
+          <div className="container-custom">
+            <ScrollFadeIn className="mx-auto max-w-3xl text-center space-y-6">
+              <span className="text-xs uppercase tracking-[0.35em] text-foreground/60 dark:text-foreground/65">
+                {t('projectsPage.filter.all')}
+              </span>
+              <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
+                {t('projectsPage.title')}
+              </h1>
+              <p className="text-base md:text-lg leading-relaxed text-foreground/70 dark:text-foreground/75">
+                {t('projectsPage.description')}
               </p>
-              <button
-                onClick={() => {
-                  setSelectedTech('all');
-                  setSelectedType('all');
-                }}
-                className="btn-secondary"
-              >
-                {t('projectsPage.clearFilters')}
-              </button>
-            </div>
-          )}
-        </div>
-      </section>
-    </div>
+            </ScrollFadeIn>
+
+            <ScrollFadeIn delay={0.2} className="mt-12">
+              <div className="flex flex-wrap justify-center gap-3">
+                {technologies.map((tech) => (
+                  <button
+                    key={tech}
+                    onClick={() => setSelectedTech(tech)}
+                    className={cn(
+                      'rounded-full border px-4 py-2 text-sm font-medium transition-colors',
+                      selectedTech === tech
+                        ? 'border-primary bg-primary text-primary-foreground'
+                        : 'border-foreground/15 text-foreground/70 hover:border-primary/40 hover:text-primary'
+                    )}
+                  >
+                    {tech === 'all' ? t('projectsPage.filter.all') : tech}
+                  </button>
+                ))}
+              </div>
+            </ScrollFadeIn>
+          </div>
+        </section>
+
+        {/* Projects Grid */}
+        <section className="pb-24">
+          <div className="container-custom">
+            {filteredProjects.length > 0 ? (
+              <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+                {filteredProjects.map((project, index) => (
+                  <ScrollFadeIn key={project.id} delay={index * 0.15}>
+                    <ProjectCard project={project} />
+                  </ScrollFadeIn>
+                ))}
+              </div>
+            ) : (
+              <ScrollFadeIn delay={0.4}>
+                <div className="mx-auto max-w-md rounded-3xl border border-foreground/10 bg-white/90 p-12 text-center dark:bg-foreground/[0.12]">
+                  <div className="text-5xl mb-4">🔍</div>
+                  <h3 className="text-2xl font-semibold text-foreground mb-3">
+                    {t('projectsPage.noProjects.title')}
+                  </h3>
+                  <p className="text-sm text-foreground/70 mb-6">
+                    {t('projectsPage.noProjects.description')}
+                  </p>
+                  <button
+                    onClick={() => setSelectedTech('all')}
+                    className="rounded-full border border-primary px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 dark:border-primary/60 dark:text-primary/80 dark:hover:bg-primary/10"
+                  >
+                    {t('projectsPage.clearFilters')}
+                  </button>
+                </div>
+              </ScrollFadeIn>
+            )}
+          </div>
+        </section>
+      </div>
+    </PageTransition>
   );
 }

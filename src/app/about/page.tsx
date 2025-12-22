@@ -1,27 +1,43 @@
+'use client';
+
 import BioSkills from "@/components/sections/about/Bio&Skills";
 import AboutHeader from "@/components/sections/about/BioHeader";
 import CTABand from "@/components/sections/about/CTABand";
 import Hobbies from "@/components/sections/about/Hobbies";
 import PhilosophySection from "@/components/sections/about/Philosophy";
+import PageTransition from "@/components/animations/PageTransition";
+import ScrollFadeIn from "@/components/animations/ScrollFadeIn";
 
 export default function About() {
 
   return (
+    <PageTransition>
       <div className="min-h-screen container-custom flex flex-col">
         {/* Header */}
-        <AboutHeader/>
+        <ScrollFadeIn>
+          <AboutHeader/>
+        </ScrollFadeIn>
 
         {/* Bio & Technologies Section  */}
-        <BioSkills/>
+        <ScrollFadeIn delay={0.2}>
+          <BioSkills/>
+        </ScrollFadeIn>
         
         {/*Philosophy section with image*/}
-        <PhilosophySection/>
+        <ScrollFadeIn delay={0.4}>
+          <PhilosophySection/>
+        </ScrollFadeIn>
 
         {/*Hobbies section*/}
-        <Hobbies/>
+        <ScrollFadeIn delay={0.6}>
+          <Hobbies/>
+        </ScrollFadeIn>
 
         {/* CTA */}
-        <CTABand/>
+        <ScrollFadeIn delay={0.8}>
+          <CTABand/>
+        </ScrollFadeIn>
       </div>
+    </PageTransition>
   );
 }

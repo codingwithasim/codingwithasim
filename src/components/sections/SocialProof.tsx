@@ -7,6 +7,7 @@ import { IoLogoJavascript } from 'react-icons/io';
 import { RiSupabaseLine, RiTailwindCssFill } from 'react-icons/ri';
 import { SiTypescript } from 'react-icons/si';
 import { TbBrandNextjs, TbBrandNodejs } from 'react-icons/tb';
+import ScrollFadeIn from '../animations/ScrollFadeIn';
 
 interface Company {
   name: string;
@@ -25,32 +26,38 @@ const SocialProof = () => {
     { name: 'Supabase', logo: RiSupabaseLine, color: 'text-teal-400' },         // teal
     { name: 'Tailwind', logo: RiTailwindCssFill, color: 'text-teal-500' },      // slightly darker teal
   ];
-  
+
 
   return (
-    <section className="py-16 border-y border-border">
+    <section className="relative isolate overflow-hidden py-20">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/12 via-secondary/10 to-accent/12 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]" />
       <div className="container-custom">
-        <div className="text-center mb-12">
-          <p className="text-foreground/40 text-sm font-medium uppercase tracking-wider">
-          Technologies I Use
+        <ScrollFadeIn className="text-center mb-12 space-y-3">
+          <p className="text-xs uppercase tracking-[0.35em] text-foreground/50">
+            Technologies I Use
           </p>
-        </div>
-        
-        <div className="relative overflow-hidden">
-          <div className="flex animate-marquee space-x-16">
-            {[...companies, ...companies].map(({logo: Logo, ...company}, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 flex items-center justify-center w-32 h-16 bg-card border border-border/30 rounded-lg group transition-all duration-300">
-              
-                <div className={`text-2xl font-bold text-foreground/30 transition-colors duration-300
-                    group-hover:${company.color}`}>
-                  {<Logo/>}
+          <p className="text-sm text-foreground/60 max-w-xl mx-auto">
+            A colorful toolkit of frameworks and platforms I rely on every day.
+          </p>
+        </ScrollFadeIn>
+
+        <ScrollFadeIn delay={0.2}>
+          <div className="relative overflow-hidden rounded-full border border-foreground/10 bg-foreground/[0.04] py-6">
+            <div className="flex animate-marquee items-center gap-14 px-8 text-foreground/40">
+              {[...companies, ...companies].map(({ logo: Logo, ...company }, index) => (
+                <div
+                  key={`${company.name}-${index}`}
+                  className="flex min-w-[120px] flex-col items-center justify-center gap-3"
+                >
+                  <Logo className={`text-3xl ${company.color}`} />
+                  <span className="text-xs font-medium tracking-wider uppercase text-foreground/60">
+                    {company.name}
+                  </span>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        </ScrollFadeIn>
       </div>
     </section>
   );

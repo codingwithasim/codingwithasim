@@ -3,15 +3,11 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Code, 
-  Globe, 
-  ShoppingCart, 
-  Smartphone
-} from 'lucide-react';
-import {  Utensils, RefreshCcw, Zap, Shield } from "lucide-react";
+import { Globe, Utensils, RefreshCcw, Zap, Shield } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-
+import PageTransition from '@/components/animations/PageTransition';
+import ScrollFadeIn from '@/components/animations/ScrollFadeIn';
+import { motion } from 'framer-motion';
 
 interface Service {
   id: string;
@@ -23,12 +19,45 @@ interface Service {
   timeline: string;
 }
 
+const accentStyles = [
+  {
+    background: 'from-primary/10 via-white to-white dark:from-black dark:via-green-500/20 dark:to-black',
+    badge: 'border-green-500/45 text-green-500',
+    dot: 'bg-green-500',
+    icon: 'border-primary/30 text-green-500',
+  },
+  {
+    background: 'from-accent/10 via-white to-white dark:black dark:via-violet-500/20 dark:to-black',
+    badge: 'border-violet-500/45 text-violet-600 dark:text-violet-400',
+    dot: 'bg-violet-500',
+    icon: 'border-accent/30 text-violet-500',
+  },
+  {
+    background: 'from-teal-100/30 via-white to-white dark:from-black dark:via-cyan-500/20 dark:to-black',
+    badge: 'border-teal-300/40 text-teal-600',
+    dot: 'bg-cyan-500',
+    icon: 'border-teal-300/50 text-teal-500',
+  },
+  {
+    background: 'from-yellow-100/30 via-white to-white dark:from-yellow-500/15 dark:via-yellow-800/15 dark:to-black',
+    badge: 'border-yellow-300/40 text-yellow-600',
+    dot: 'bg-yellow-400',
+    icon: 'border-yellow-300/50 text-yellow-500',
+  },
+  {
+    background: 'from-blue-100/30 via-white to-white dark:from-blue-500/5 dark:via-blue-600/15 dark:to-black',
+    badge: 'border-blue-300/40 text-blue-500',
+    dot: 'bg-blue-400',
+    icon: 'border-blue-300/50 text-blue-500',
+  },
+];
+
 export default function ServicesPage() {
   const { t } = useLanguage();
 
   const services: Service[] = [
     {
-      id: "onepage",
+      id: 'onepage',
       title: t('servicesPage.onepage.title'),
       description: t('servicesPage.onepage.description'),
       icon: Globe,
@@ -38,11 +67,11 @@ export default function ServicesPage() {
         t('servicesPage.onepage.feature3'),
         t('servicesPage.onepage.feature4'),
       ],
-      pricing: ["200€", "600€"],
+      pricing: ['200€', '600€'],
       timeline: t('servicesPage.onepage.timeline'),
     },
     {
-      id: "restaurant",
+      id: 'restaurant',
       title: t('servicesPage.restaurant.title'),
       description: t('servicesPage.restaurant.description'),
       icon: Utensils,
@@ -52,11 +81,11 @@ export default function ServicesPage() {
         t('servicesPage.restaurant.feature3'),
         t('servicesPage.restaurant.feature4'),
       ],
-      pricing: ["300€", "1200€"],
+      pricing: ['300€', '1200€'],
       timeline: t('servicesPage.restaurant.timeline'),
     },
     {
-      id: "redesign",
+      id: 'redesign',
       title: t('servicesPage.redesign.title'),
       description: t('servicesPage.redesign.description'),
       icon: RefreshCcw,
@@ -66,11 +95,11 @@ export default function ServicesPage() {
         t('servicesPage.redesign.feature3'),
         t('servicesPage.redesign.feature4'),
       ],
-      pricing: ["300€", "1000€"],
+      pricing: ['300€', '1000€'],
       timeline: t('servicesPage.redesign.timeline'),
     },
     {
-      id: "performance",
+      id: 'performance',
       title: t('servicesPage.performance.title'),
       description: t('servicesPage.performance.description'),
       icon: Zap,
@@ -80,11 +109,11 @@ export default function ServicesPage() {
         t('servicesPage.performance.feature3'),
         t('servicesPage.performance.feature4'),
       ],
-      pricing: ["150€", "400€"],
+      pricing: ['150€', '400€'],
       timeline: t('servicesPage.performance.timeline'),
     },
     {
-      id: "maintenance",
+      id: 'maintenance',
       title: t('servicesPage.maintenance.title'),
       description: t('servicesPage.maintenance.description'),
       icon: Shield,
@@ -94,191 +123,206 @@ export default function ServicesPage() {
         t('servicesPage.maintenance.feature3'),
         t('servicesPage.maintenance.feature4'),
       ],
-      pricing: ["50€/month", "150€/month"],
+      pricing: ['50€/month', '150€/month'],
       timeline: t('servicesPage.maintenance.timeline'),
     },
   ];
 
-
   const process = [
     {
       step: t('servicesPage.process.discovery.title'),
-      description: t('servicesPage.process.discovery.description')
+      description: t('servicesPage.process.discovery.description'),
     },
     {
-      step: t('servicesPage.process.development.title'), 
-      description: t('servicesPage.process.development.description')
+      step: t('servicesPage.process.development.title'),
+      description: t('servicesPage.process.development.description'),
     },
     {
       step: t('servicesPage.process.launch.title'),
-      description: t('servicesPage.process.launch.description')
-    }
+      description: t('servicesPage.process.launch.description'),
+    },
+  ];
+
+  const additional = [
+    t('servicesPage.additional.seo'),
+    t('servicesPage.additional.performance'),
+    t('servicesPage.additional.maintenance'),
+    t('servicesPage.additional.consulting'),
   ];
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <section className="pt-32 pb-16" role="banner">
-        <div className="container-custom max-w-4xl">
-          <div className="text-center space-y-6">
-            <h3 className="mb-6">
-              {t('servicesPage.title')}
-            </h3>
-            <p className="text-lg text-black/60 dark:text-white/60 max-w-2xl mx-auto leading-relaxed">
-              {t('servicesPage.description')}
-            </p>
-            <div className="flex flex-wrap justify-center gap-2 pt-4">
-              {[t('servicesPage.badges.modernStack'), t('servicesPage.badges.seoReady'), t('servicesPage.badges.mobileFirst'), t('servicesPage.badges.performanceOptimized')].map((badge) => (
-                <Badge key={badge} variant="secondary" className="text-xs">
-                  {badge}
-                </Badge>
+    <PageTransition>
+      <div className="min-h-screen bg-background">
+        <section className="pt-28 pb-16" role="banner">
+          <div className="container-custom max-w-5xl">
+            <ScrollFadeIn className="text-center space-y-6">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+                {t('servicesPage.title')}
+              </h1>
+              <p className="text-base md:text-lg leading-relaxed text-foreground/70 dark:text-foreground/75">
+                {t('servicesPage.description')}
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 pt-4">
+                {[t('servicesPage.badges.modernStack'), t('servicesPage.badges.seoReady'), t('servicesPage.badges.mobileFirst'), t('servicesPage.badges.performanceOptimized')].map((badge, index) => (
+                  <motion.div
+                    key={badge}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.08 + 0.2, duration: 0.25 }}
+                  >
+                    <Badge variant="outline" className="border border-primary/25 text-primary">
+                      {badge}
+                    </Badge>
+                  </motion.div>
+                ))}
+              </div>
+            </ScrollFadeIn>
+          </div>
+        </section>
+
+        <section className="py-16" aria-labelledby="services-heading">
+          <div className="container-custom max-w-5xl">
+            <ScrollFadeIn delay={0.2} className="mb-14 space-y-4 text-center">
+              <h2 className="text-3xl font-semibold text-foreground" id="services-heading">
+                {t('servicesPage.whatIBuild.title')}
+                <span className="text-foreground/60"> {t('servicesPage.whatIBuild.subtitle')}</span>
+              </h2>
+              <p className="text-sm md:text-base text-foreground/70 dark:text-foreground/75">
+                {t('servicesPage.whatIBuild.description')}
+              </p>
+            </ScrollFadeIn>
+
+            <div className="space-y-10 grid grid-cols-1 gap-4 lg:grid-cols-2">
+              {services.map(({ icon: Icon, ...service }, index) => {
+                const accent = accentStyles[index % accentStyles.length];
+
+                return (
+                  <ScrollFadeIn key={service.id} delay={index * 0.12 + 0.3}>
+                    <article
+                      className={`flex group h-full flex-col gap-6 rounded-2xl border border-foreground/12 bg-gradient-to-br ${accent.background} px-8 py-10 text-left`}
+                      itemScope
+                      itemType="https://schema.org/Service"
+                    >
+                      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                        <div className="flex items-center gap-4">
+                          <Icon size={22} aria-hidden="true" className={accent.icon} />
+                          <div>
+                            <h3 className="text-xl font-semibold text-foreground" itemProp="name">
+                              {service.title}
+                            </h3>
+                            <p className="text-sm text-foreground/65 dark:text-foreground/70">{service.timeline}</p>
+                          </div>
+                        </div>
+                        
+                      </div>
+
+                      <p className="text-sm leading-relaxed text-foreground/70 dark:text-foreground/75" itemProp="description">
+                        {service.description}
+                      </p>
+
+                      <div className="grid gap-2 text-sm text-foreground/70 dark:text-foreground/75 sm:grid-cols-2 lg:grid-cols-1">
+                        {service.features.map((feature) => (
+                          <div key={feature} className="flex items-start gap-3 rounded-xl border border-foreground/10  px-4 py-3 dark:border-foreground/20 ">
+                            <span className={`mt-2 inline-flex h-1.5 w-1.5 rounded-full ${accent.dot}`} />
+                            <span>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-foreground/65 dark:text-foreground/70">
+                        <span className="h-px flex-1 bg-foreground/15" />
+                        <span className={`inline-flex items-center rounded-full ${accent.badge} border px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] ${service.accent}`}>
+                          {service.pricing[0]} – {service.pricing[1]}
+                        </span>
+                      </div>
+                    </article>
+                  </ScrollFadeIn>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16" aria-labelledby="process-heading">
+          <div className="container-custom max-w-4xl">
+            <ScrollFadeIn delay={0.4} className="mb-12 space-y-4 text-center">
+              <h2 className="text-3xl font-semibold text-foreground" id="process-heading">
+                {t('servicesPage.process.title')}
+              </h2>
+              <p className="text-sm md:text-base text-foreground/70 dark:text-foreground/75">
+                {t('servicesPage.process.description')}
+              </p>
+            </ScrollFadeIn>
+
+            <div className="space-y-6 grid-cols-1 grid md:grid-cols-3 gap-3">
+              {process.map((item, index) => (
+                <ScrollFadeIn key={item.step} delay={index * 0.1 + 0.5}>
+                  <div className="flex flex-col gap-3 rounded-2xl border border-foreground/12 bg-white/95 px-6 py-5 text-left dark:border-foreground/20 dark:bg-foreground/[0.08]">
+                    <span className="text-xs font-medium uppercase tracking-[0.3em] text-primary">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="text-lg font-semibold text-foreground">{item.step}</h3>
+                    <p className="text-sm leading-relaxed text-foreground/70 dark:text-foreground/75">{item.description}</p>
+                  </div>
+                </ScrollFadeIn>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Services */}
-      <section className="py-16" aria-labelledby="services-heading">
-        <div className="container-custom max-w-6xl">
-          <div className="text-center mb-16">
-            <h4 className="font-bold mb-6 max-w-2xl mx-auto" id="services-heading">
-              {t('servicesPage.whatIBuild.title')}<span className="text-gray-400 font-medium"> {t('servicesPage.whatIBuild.subtitle')}</span>
-            </h4>
-            <p className="text-white/60 max-w-2xl mx-auto">
-              {t('servicesPage.whatIBuild.description')}
-            </p>
-          </div>
+        <section className="py-12" aria-labelledby="additional-services-heading">
+          <div className="container-custom max-w-4xl">
+            <ScrollFadeIn delay={0.5} className="mb-10 text-center">
+              <h2 className="text-2xl font-semibold text-foreground" id="additional-services-heading">
+                {t('servicesPage.additional.title')}
+              </h2>
+            </ScrollFadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {services.map(({ icon: Icon, ...service }) => (
-              <article 
-                key={service.id}
-                className="group  border dark:border-dark-800 rounded-lg p-8 dark:hover:border-dark-600 hover:border-dark-300 transition-all duration-300"
-                itemScope 
-                itemType="https://schema.org/Service"
-              >
-                <div className="flex flex-col sm:flex-row items-start gap-4">
-                  <div className="p-3 rounded-lgborder border-white/10 flex-shrink-0">
-                    <Icon size={20} className="" aria-hidden="true" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 
-                      className="text-xl font-medium mb-2"
-                      itemProp="name"
-                    >
-                      {service.title}
-                    </h3>
-                    <p 
-                      className="text-black/60 dark:text-white/60 text-sm leading-relaxed mb-4"
-                      itemProp="description"
-                    >
-                      {service.description}
-                    </p>
-                    
-                    <div className="flex items-center gap-4 text-sm mb-4">
-                      <span className="font-medium">{service.pricing[0] + " - " + service.pricing[1]}</span>
-                      <span className="text-black/40 dark:text-white/40">•</span>
-                      <span className="text-black/50 dark:text-white/50">{service.timeline}</span>
-                    </div>
-
-                    <div className="space-y-2">
-                      {service.features.map((feature) => (
-                        <div key={feature} className="flex items-center text-black/50 dark:text-white/50 text-sm">
-                          <div className="w-1 h-1 rounded-full bg-black/30 dark:bg-white/30 mr-3 flex-shrink-0" aria-hidden="true"></div>
-                          {feature}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="py-16" aria-labelledby="process-heading">
-        <div className="container-custom max-w-5xl">
-          <div className="text-center mb-16">
-            <h4 className="font-bold mb-6 max-w-2xl mx-auto" id="process-heading">
-              {t('servicesPage.process.title')}
-            </h4>
-            <p className="text-black/60 dark:text-white/60 max-w-2xl mx-auto">
-              {t('servicesPage.process.description')}
-            </p>
-          </div>
-
-          <div className="grid w-full grid-cols-1 md:grid-cols-3 gap-8">
-            {process.map((item, index) => (
-              <div key={index} className="text-center border dark:border-dark-800 p-4">
-                <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/10 border dark:border-white/20 text-sm font-medium mb-4">
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-                <h5 className="text-lg font-medium mb-2">{item.step}</h5>
-                <p className="text-black/60 dark:text-white/60 text-sm leading-relaxed">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Additional Services */}
-      <section className="py-16" aria-labelledby="additional-services-heading">
-        <div className="container-custom max-w-4xl">
-          <div className="text-center mb-12">
-            <h4 className="font-bold mb-6 max-w-2xl mx-auto" id="additional-services-heading">
-              {t('servicesPage.additional.title')}
-            </h4>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            {[
-              t('servicesPage.additional.seo'),
-              t('servicesPage.additional.performance'), 
-              t('servicesPage.additional.maintenance'),
-              t('servicesPage.additional.consulting')
-            ].map((service) => (
-              <div key={service} className="p-4 border dark:border-[#323232] rounded-lg ">
-                <p className="text-black/70 dark:text-white/70 text-sm">{service}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16" aria-labelledby="cta-heading">
-        <div className="container-custom max-w-2xl">
-          <div className="text-center border dark:border-[#323232] rounded-lg p-8">
-            <h4 className="font-bold mb-6 max-w-2xl mx-auto" id="cta-heading">
-              {t('servicesPage.cta.title')}
-            </h4>
-            <p className="text-black/60 dark:text-white/60 mb-6">
-              {t('servicesPage.cta.description')}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button asChild>
-                <Link 
-                  href="/contact"
-                  aria-label="Contact Muhammad Asim to discuss your project"
-                >
-                  {t('servicesPage.cta.getInTouch')}
-                </Link>
-              </Button>
-              <Button variant="secondary" asChild>
-                <Link 
-                  href="/projects"
-                  aria-label="View Muhammad Asim's previous work and projects"
-                >
-                  {t('servicesPage.cta.viewWork')}
-                </Link>
-              </Button>
+            <div className="flex flex-wrap justify-center gap-3 text-sm text-foreground/70 dark:text-foreground/75">
+              {additional.map((item, index) => (
+                <ScrollFadeIn key={item} delay={index * 0.08 + 0.55}>
+                  <span className="inline-flex items-center gap-2 rounded-full border border-foreground/15 px-4 py-2 dark:border-foreground/20">
+                    <Shield size={14} />
+                    {item}
+                  </span>
+                </ScrollFadeIn>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+
+        <section className="pb-24" aria-labelledby="services-cta">
+          <div className="container-custom max-w-3xl">
+            <ScrollFadeIn delay={0.6}>
+              <article className="rounded-3xl border border-foreground/12 bg-white/95 p-10 text-center dark:border-foreground/20 dark:bg-foreground/[0.08]">
+                <h2 className="text-3xl font-semibold text-foreground mb-4" id="services-cta">
+                  {t('servicesPage.cta.title')}
+                </h2>
+                <p className="text-sm md:text-base text-foreground/70 dark:text-foreground/75 mb-6">
+                  {t('servicesPage.cta.description')}
+                </p>
+                <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="border border-primary bg-primary text-primary-foreground hover:bg-primary dark:border-primary/60 dark:bg-primary dark:hover:bg-primary"
+                  >
+                    <Link href="/contact">{t('servicesPage.cta.getInTouch')}</Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="lg"
+                    className="border border-primary text-primary hover:bg-transparent dark:border-primary/55 dark:text-primary/80 dark:hover:bg-transparent"
+                  >
+                    <Link href="/projects">{t('servicesPage.cta.viewWork')}</Link>
+                  </Button>
+                </div>
+              </article>
+            </ScrollFadeIn>
+          </div>
+        </section>
+      </div>
+    </PageTransition>
   );
 }

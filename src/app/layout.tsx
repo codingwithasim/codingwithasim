@@ -22,19 +22,19 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://codingwithasim.vercel.app/'),
+  metadataBase: new URL('https://codingwithasim.site/'),
   title: {
     default: "Muhammad Asim - Full Stack Developer | React & Next.js Expert",
     template: "%s | Muhammad Asim - Full Stack Developer",
   },
   description: "Full-Stack Web Developer with 2+ years of experience. Specializing in React, Next.js, TypeScript, and modern web technologies. Building scalable applications and beautiful user experiences.",
   keywords: ["web developer", "full-stack developer", "react developer", "nextjs", "typescript", "javascript", "frontend developer", "backend developer", "portfolio", "Muhammad Asim"],
-  authors: [{ name: "Muhammad Asim", url: "https://codingwithasim.vercel.app/" }],
+  authors: [{ name: "Muhammad Asim", url: "https://codingwithasim.site/" }],
   creator: "Muhammad Asim",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://codingwithasim.vercel.app/",
+    url: "https://codingwithasim.site/",
     title: "Muhammad Asim - Full Stack Developer | React & Next.js Expert",
     description: "Full-Stack Web Developer with 2+ years of experience. Building scalable applications and beautiful user experiences with React, Next.js, and TypeScript.",
     siteName: "Muhammad Asim",

@@ -1,60 +1,76 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { BookOpen, Brain, Code2, Globe, Rocket, Sparkles } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { BookOpen, Brain, Code2, Rocket } from "lucide-react";
+
+type LearningStatus = 'inProgress' | 'starting' | 'planning';
+type LearningCategory = 'framework' | 'language' | 'database';
+
+const statusColorMap: Record<LearningStatus, string> = {
+    inProgress: "bg-[#22C55E]/10 text-[#22C55E] border-[#22C55E]/20",
+    starting: "bg-[#F59E0B]/10 text-[#F59E0B] border-[#F59E0B]/20",
+    planning: "bg-[#8B5CF6]/10 text-[#8B5CF6] border-[#8B5CF6]/20",
+};
+
+const statusLabelKeys: Record<LearningStatus, string> = {
+    inProgress: "usesPage.learning.status.inProgress",
+    starting: "usesPage.learning.status.starting",
+    planning: "usesPage.learning.status.planning",
+};
+
+const categoryLabelKeys: Record<LearningCategory, string> = {
+    framework: "usesPage.learning.categories.framework",
+    language: "usesPage.learning.categories.language",
+    database: "usesPage.learning.categories.database",
+};
+
+const currentLearning = [
+    {
+      title: "Next.js",
+      status: "inProgress" as const,
+      descriptionKey: "usesPage.learning.items.next.description",
+      progress: 75,
+      icon: Code2,
+      category: "framework" as const
+    },
+    {
+      title: "TypeScript",
+      status: "inProgress" as const,
+      descriptionKey: "usesPage.learning.items.ts.description",
+      progress: 55,
+      icon: Rocket,
+      category: "language" as const
+    },
+    {
+      title: "Postgres",
+      status: "inProgress" as const,
+      descriptionKey: "usesPage.learning.items.postgres.description",
+      progress: 35,
+      icon: Brain,
+      category: "database" as const
+    }
+  ];
+
+const getStatusColor = (status: LearningStatus) => statusColorMap[status];
 
 export default function Learning() {
-    const currentLearning = [
-        {
-          title: "Next.js",
-          status: "In Progress",
-          description: "Exploring advanced concepts like server actions, streaming, and app router.",
-          progress: 75,
-          icon: Code2,
-          category: "Framework"
-        },
-        {
-          title: "TypeScript",
-          status: "In Progress",
-          description: "Improving type safety, generics, and advanced utility types for scalable apps.",
-          progress: 55,
-          icon: Rocket,
-          category: "Language"
-        },
-        {
-          title: "Postgres",
-          status: "In Progress",
-          description: "Learning advanced querying, indexing, and optimization techniques.",
-          progress: 35,
-          icon: Brain,
-          category: "Database"
-        }
-      ];
-
-    const getStatusColor = (status: string) => {
-        switch (status) {
-            case "In Progress": return "bg-[#22C55E]/10 text-[#22C55E] border-[#22C55E]/20";
-            case "Starting": return "bg-[#F59E0B]/10 text-[#F59E0B] border-[#F59E0B]/20";
-            case "Planning": return "bg-[#8B5CF6]/10 text-[#8B5CF6] border-[#8B5CF6]/20";
-            default: return "bg-muted/10 text-muted-foreground border-border";
-        }
-    };
+    const { t } = useLanguage();
 
     return (
         <section className="max-w-6xl mx-auto my-16">
             <div className="text-center mb-12">
                 <h4 className="text-2xl md:text-3xl font-light text-foreground mb-4">
-                    Continuous Learning
+                    {t('usesPage.learning.title')}
                 </h4>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
-                    Staying current with emerging technologies and deepening expertise in core areas
+                    {t('usesPage.learning.description')}
                 </p>
             </div>
 
-            {/* Current Learning Projects */}
             <div className="mb-12">
                 <h5 className="text-xl font-medium text-foreground mb-6 flex items-center gap-2">
                     <BookOpen size={20} className="text-[#22C55E]" />
-                    Active Learning
+                    {t('usesPage.learning.active')}
                 </h5>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {currentLearning.map((item, index) => (
@@ -66,7 +82,7 @@ export default function Learning() {
                                             <item.icon size={16} className="text-muted-foreground" />
                                         </div>
                                         <Badge className={`text-xs ${getStatusColor(item.status)}`}>
-                                            {item.status}
+                                            {t(statusLabelKeys[item.status])}
                                         </Badge>
                                     </div>
                                     <span className="text-muted-foreground/60 text-xs">{item.progress}%</span>
@@ -83,36 +99,16 @@ export default function Learning() {
                             </CardHeader>
                             <CardContent>
                                 <p className="text-muted-foreground text-sm leading-relaxed mb-3">
-                                    {item.description}
+                                    {t(item.descriptionKey)}
                                 </p>
                                 <Badge variant="secondary" className="text-xs bg-muted text-muted-foreground">
-                                    {item.category}
+                                    {t(categoryLabelKeys[item.category])}
                                 </Badge>
                             </CardContent>
                         </Card>
                     ))}
                 </div>
             </div>
-
-            {/* Future Interests not sure what to put yet*/}
-            {/* <Card className="bg-black p-8 border-dark-800">
-                <CardHeader className="pb-6">
-                    <h5 className="text-xl font-medium text-white flex items-center gap-2">
-                        <Sparkles size={20} className="text-[#8B5CF6]" />
-                        Areas of Interest
-                    </h5>
-                </CardHeader>
-                <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {interests.map((interest, index) => (
-                            <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-dark-900/50 hover:bg-dark-900 transition-colors">
-                                <div className="w-2 h-2 bg-[#8B5CF6] rounded-full flex-shrink-0"></div>
-                                <span className="text-white/70 text-sm">{interest}</span>
-                            </div>
-                        ))}
-                    </div>
-                </CardContent>
-            </Card> */}
         </section>
     );
 }

@@ -1,13 +1,6 @@
 
 import { Metadata } from 'next';
-import SocialProof from '@/components/sections/SocialProof';
-import FeaturedProjects from '@/components/sections/FeaturedProjects';
-import SkillsStack from '@/components/sections/SkillsStack';
-import Services from '@/components/sections/Services';
-import CTABand from '@/components/sections/CTABand';
-import FAB from '@/components/ui/fab';
-import Hero from '@/components/sections/Hero';
-import { LucideMessageCircleMore } from 'lucide-react';
+import HomePage from '@/components/HomePage';
 
 export const metadata: Metadata = {
   title: "Muhammad Asim - Full Stack Developer | React & Next.js Expert",
@@ -22,40 +15,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return (
-    <div className="min-h-screen bg-background">
-      
-      {/* Hero Section */}
-      <Hero />
-
-      {/* Social Proof Strip */}
-      <section aria-labelledby="social-proof-heading">
-        <SocialProof />
-      </section>
-
-      {/* Services */}
-      <section aria-labelledby="services-heading">
-        <Services />
-      </section>
-
-      {/* Featured Projects */}
-      <section aria-labelledby="projects-heading">
-        <FeaturedProjects />
-      </section>
-
-      {/* Skills & Stack */}
-      <section aria-labelledby="skills-heading">
-        <SkillsStack />
-      </section>
-
-      {/* CTA Band */}
-      <section aria-labelledby="cta-heading">
-        <CTABand />
-      </section>
-      
-      {/* Floating Action Button*/}
-      {/* <FAB icon={LucideMessageCircleMore}/> */}
-
-    </div>
-  );
+  return <HomePage />;
 }

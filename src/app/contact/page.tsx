@@ -1,14 +1,18 @@
 'use client';
 
+import PageTransition from '@/components/animations/PageTransition';
+import ScrollFadeIn from '@/components/animations/ScrollFadeIn';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useLanguage } from '@/contexts/LanguageContext';
+import emailjs from '@emailjs/browser';
 import Link from 'next/link';
 import { useState } from 'react';
 import { IconType } from 'react-icons';
 import { LuGithub, LuLinkedin, LuLoader } from 'react-icons/lu';
 import { MdOutlineArrowOutward } from 'react-icons/md';
-import emailjs from "@emailjs/browser";
+import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 
 interface ContactMethod {
@@ -20,18 +24,38 @@ interface ContactMethod {
   actionLabel: string
 }
 
+type ContactFormState = {
+  name: string;
+  email: string;
+  message: string;
+};
+
+type ContactField = keyof ContactFormState;
+
+type ContactErrorKey =
+  | ''
+  | 'contact.form.errors.nameRequired'
+  | 'contact.form.errors.emailRequired'
+  | 'contact.form.errors.emailInvalid'
+  | 'contact.form.errors.messageRequired';
+
+type ContactErrors = Record<ContactField, ContactErrorKey>;
+
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    title: 'New proposal for you',
+  const { t } = useLanguage();
+
+  const getInitialFormData = (): ContactFormState => ({
     name: '',
     email: '',
-    message: ''
+    message: '',
   });
 
-  const [errors, setErrors] = useState({
+  const [formData, setFormData] = useState<ContactFormState>(getInitialFormData);
+
+  const [errors, setErrors] = useState<ContactErrors>({
     name: '',
     email: '',
-    message: ''
+    message: '',
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -42,24 +66,24 @@ export default function Contact() {
   };
 
   const validateForm = () => {
-    const newErrors = {
+    const newErrors: ContactErrors = {
       name: '',
       email: '',
-      message: ''
+      message: '',
     };
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = 'contact.form.errors.nameRequired';
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'contact.form.errors.emailRequired';
     } else if (!validateEmail(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = 'contact.form.errors.emailInvalid';
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = 'contact.form.errors.messageRequired';
     }
 
     setErrors(newErrors);
@@ -67,10 +91,12 @@ export default function Contact() {
   };
 
   const isFormValid = () => {
-    return formData.name.trim() && 
-           formData.email.trim() && 
-           validateEmail(formData.email) && 
-           formData.message.trim();
+    return Boolean(
+      formData.name.trim() &&
+      formData.email.trim() &&
+      validateEmail(formData.email) &&
+      formData.message.trim()
+    );
   };
 
 
@@ -82,31 +108,36 @@ export default function Contact() {
     }
 
     if(!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ||!process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || !process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY){
-      toast.error("Email service is not configured properly");
+      toast.error(t('contact.toast.emailConfigError'));
       return;
     }
 
     setIsLoading(true);
 
     try {
+      const submissionData = {
+        ...formData,
+        title: t('contact.form.defaultTitle'),
+      };
+
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-        formData,
+        submissionData,
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
       );
       
-      toast.success("Message sent successfully! I'll get back to you soon.");
+      toast.success(t('contact.toast.success'));
       
       // Reset form
-      setFormData({
-        title: 'New proposal for you',
+      setFormData(getInitialFormData());
+      setErrors({
         name: '',
         email: '',
-        message: ''
+        message: '',
       });
     } catch (error) {
-      toast.error("Failed to send message. Please try again.");
+      toast.error(t('contact.toast.error'));
       console.error('Email send error:', error);
     } finally {
       setIsLoading(false);
@@ -115,17 +146,18 @@ export default function Contact() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const fieldName = name as ContactField;
+    setFormData((prev) => ({
+      ...prev,
+      [fieldName]: value,
+    }));
 
     // Clear error when user starts typing
-    if (errors[name as keyof typeof errors]) {
-      setErrors({
-        ...errors,
-        [name]: '',
-      });
+    if (errors[fieldName]) {
+      setErrors((prev) => ({
+        ...prev,
+        [fieldName]: '',
+      }));
     }
   };
 
@@ -136,48 +168,60 @@ export default function Contact() {
       value: 'muhammadasim',
       icon: LuLinkedin,
       link: 'https://www.linkedin.com/in/codingwithasim/',
-      description: 'Professional networking and updates',
-      actionLabel: "Let's talk"
+      description: t('contact.methods.linkedin.description'),
+      actionLabel: t('contact.methods.linkedin.action')
     },
     {
       name: 'GitHub',
       value: 'muhammadasim',
       icon: LuGithub  ,
       link: 'https://github.com/codingwithasim',
-      description: 'View my code and open source contributions',
-      actionLabel: "Let's talk"
+      description: t('contact.methods.github.description'),
+      actionLabel: t('contact.methods.github.action')
     }
   ];
 
-  return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <section className="pt-32 pb-16">
-        <div className="container-custom">
-          <div className="text-center">
-            <h4 className="text-5xl md:text-6xl font-bold mb-6">
-              Let's Stay Connected
-            </h4>
-            <p className="text-black/60 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
-              Ready to start a project or just want to discuss technology?
-              I'm always open to new opportunities and collaborations.
-            </p>
-          </div>
-        </div>
-      </section>
+  const expectationKeys = [
+    'contact.info.expectation1',
+    'contact.info.expectation2',
+    'contact.info.expectation3',
+    'contact.info.expectation4',
+  ] as const;
 
-      <div className="container-custom pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Contact Form */}
-          <div>
+  return (
+    <PageTransition>
+      <div className="min-h-screen">
+        {/* Header */}
+        <section className="pt-32 pb-16">
+          <div className="container-custom">
+            <ScrollFadeIn className="text-center">
+              <h4 className="text-5xl md:text-6xl font-bold mb-6">
+                {t('contact.hero.title')}
+              </h4>
+              <p className="text-black/60 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
+                {t('contact.hero.description')}
+              </p>
+            </ScrollFadeIn>
+          </div>
+        </section>
+
+        <div className="container-custom pb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Contact Form */}
+            <ScrollFadeIn delay={0.2}>
+              <div>
             <h5 className="text-3xl font-bold text-black dark:text-white mb-8">
-              Send a Message
+              {t('contact.form.sectionTitle')}
             </h5>
             
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+              >
                 <label htmlFor="name" className="block text-black/80 dark:text-white/80 font-medium mb-2">
-                  Name
+                  {t('contact.form.nameLabel')}
                 </label>
                 <Input
                   type="text"
@@ -186,17 +230,21 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  placeholder="Your name"
+                  placeholder={t('contact.form.namePlaceholder')}
                   className={errors.name ? 'border-red-500' : 'border-dark-800'}
                 />
                 {errors.name && (
-                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  <p className="text-red-500 text-sm mt-1">{t(errors.name)}</p>
                 )}
-              </div>
+              </motion.div>
 
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
+              >
                 <label htmlFor="email" className="block text-black/80 dark:text-white/80 font-medium mb-2">
-                  Email
+                  {t('contact.form.emailLabel')}
                 </label>
                 <Input
                   type="email"
@@ -205,17 +253,21 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  placeholder="your.email@example.com"
+                  placeholder={t('contact.form.emailPlaceholder')}
                   className={errors.email ? 'border-red-500' : 'border-dark-800'}
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  <p className="text-red-500 text-sm mt-1">{t(errors.email)}</p>
                 )}
-              </div>
+              </motion.div>
 
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+              >
                 <label htmlFor="message" className="block text-black/80 dark:text-white/80 font-medium mb-2">
-                  Message
+                  {t('contact.form.messageLabel')}
                 </label>
                 <Textarea
                   id="message"
@@ -224,40 +276,55 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   rows={6}
-                  placeholder="Tell me about your project or what you'd like to discuss..."
+                  placeholder={t('contact.form.messagePlaceholder')}
                   className={errors.message ? 'border-red-500' : 'border-dark-800'}
                 />
                 {errors.message && (
-                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                  <p className="text-red-500 text-sm mt-1">{t(errors.message)}</p>
                 )}
-              </div>
+              </motion.div>
 
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={!isFormValid() || isLoading}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.0, duration: 0.6 }}
               >
-                {isLoading ? (
-                  <>
-                    <LuLoader className="mr-2 h-4 w-4 animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  'Send Message'
-                )}
-              </Button>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={!isFormValid() || isLoading}
+                >
+                  {isLoading ? (
+                    <>
+                      <LuLoader className="mr-2 h-4 w-4 animate-spin" />
+                      {t('contact.form.sending')}
+                    </>
+                  ) : (
+                    t('contact.form.submit')
+                  )}
+                </Button>
+              </motion.div>
             </form>
-          </div>
+              </div>
+            </ScrollFadeIn>
 
-          {/* Contact Information */}
-          <div>
+            {/* Contact Information */}
+            <ScrollFadeIn delay={0.4}>
+              <div>
             <h5 className="text-3xl font-bold text-black dark:text-white mb-8">
-              Get in Touch
+              {t('contact.info.title')}
             </h5>
             
             <ul className="space-y-8">
-              {contactMethods.map(({icon: Icon, ...method}) => (
-                <li key={method.name} className="flex group items-start space-x-4">
+              {contactMethods.map(({icon: Icon, ...method}, index) => (
+                <motion.li 
+                  key={method.name} 
+                  className="flex group items-start space-x-4"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 + index * 0.2, duration: 0.6 }}
+                  whileHover={{ x: 5 }}
+                >
                   <div className='p-1 text-black/70 dark:text-dark-300 group-hover:text-black dark:group-hover:text-white transition-colors'>
                     <Icon/>
                   </div>
@@ -274,35 +341,42 @@ export default function Contact() {
                   <Link target='_blank' href={method.link} className='border border-gray-300 dark:border-gray-600 p-2 rounded-full text-black/60 dark:text-gray-400 hover:border-black/60 dark:hover:border-gray-400 hover:text-black dark:hover:text-gray-200 transition-colors cursor-pointer'>
                     <MdOutlineArrowOutward/>
                   </Link>
-                </li>
+                </motion.li>
               ))}
             </ul>
 
             {/* Additional Info */}
-            <div className="mt-12 p-6 border border-gray-200 dark:border-dark-800 rounded-xl">
+            <motion.div 
+              className="mt-12 p-6 border border-gray-200 dark:border-dark-800 rounded-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.6 }}
+            >
               <h5 className="text-lg font-semibold text-black dark:text-white mb-4">
-                What to Expect
+                {t('contact.info.whatToExpect')}
               </h5>
               <ul className="space-y-2 text-black/70 dark:text-white/70 text-sm">
-              {
-                ["Response within 24 hours", 
-                  "Free initial consultation", 
-                  "Detailed project proposal",
-                  "Transparent pricing"
-                ].map((info, idx) => {
+              {expectationKeys.map((key, idx) => {
                   return (
-                    <li key={idx}  className="flex items-center space-x-2">
+                    <motion.li 
+                      key={key}  
+                      className="flex items-center space-x-2"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 1.4 + idx * 0.1, duration: 0.4 }}
+                    >
                       <div className="w-1.5 h-1.5 bg-black/40 dark:bg-dark-400 rounded-full"></div>
-                      <span>{info}</span>
-                    </li>
+                      <span>{t(key)}</span>
+                    </motion.li>
                   )
-                })
-              }
+                })}
               </ul>
-            </div>
+            </motion.div>
+              </div>
+            </ScrollFadeIn>
           </div>
         </div>
       </div>
-    </div>
+    </PageTransition>
   );
 }

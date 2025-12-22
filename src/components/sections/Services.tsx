@@ -1,7 +1,11 @@
 'use client';
 
-import { LucideCode, LucideServer, LucideGlobe, LucideBrainCircuit } from "lucide-react";
+import { Globe, RefreshCcw, Utensils } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
+import ScrollFadeIn from '../animations/ScrollFadeIn';
+import { motion } from 'framer-motion';
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 interface Service {
   title: string;
@@ -9,6 +13,19 @@ interface Service {
   icon: React.ComponentType<{ size?: number; className?: string }>;
   features: string[];
   iconColor: string;
+  label: string;
+  highlight: string;
+  accentGradient: string;
+  accentLine: string;
+  iconBackground: string;
+  chipGradient: string;
+  featureBackground: string;
+  detailBackground: string;
+  statsAccent: string;
+  stats: {
+    label: string;
+    value: string;
+  }[];
 }
 
 const Services = () => {
@@ -16,87 +33,179 @@ const Services = () => {
   
   const services: Service[] = [
     {
-      title: t('services.fullstack.title'),
-      description: t('services.fullstack.description'),
-      icon: LucideCode,
-      features: [t('services.fullstack.feature1'), t('services.fullstack.feature2'), t('services.fullstack.feature3'), t('services.fullstack.feature4')],
-      iconColor: "text-[#22C55E]"
+      title: t('servicesPage.onepage.title'),
+      description: t('servicesPage.onepage.description'),
+      icon: Globe,
+      features: [
+        t('servicesPage.onepage.feature1'),
+        t('servicesPage.onepage.feature2'),
+        t('servicesPage.onepage.feature3'),
+        t('servicesPage.onepage.feature4'),
+      ],
+      iconColor: 'text-[#22C55E]',
+      label: 'Landing Page Build',
+      highlight: t('servicesPage.onepage.description'),
+      accentGradient: "from-white/95 via-emerald-50/65 to-emerald-100/30 dark:from-black dark:via-emerald-500/10 dark:to-black",
+      accentLine: 'from-emerald-400/70 via-emerald-300/25 to-transparent',
+      iconBackground: 'bg-gradient-to-br from-emerald-200/75 via-emerald-100/70 to-white/70 dark:from-emerald-500/40 dark:via-emerald-500/15 dark:to-transparent',
+      chipGradient: 'from-emerald-400/35 via-emerald-300/25 to-emerald-200/25 dark:from-emerald-500/25 dark:via-emerald-500/20 dark:to-emerald-400/15',
+      featureBackground: 'bg-gradient-to-r from-emerald-100/65 via-white/80 to-white/70 dark:from-emerald-500/20 dark:via-emerald-500/10 dark:to-transparent',
+      detailBackground: 'from-white/95 via-emerald-50/60 to-white/80 dark:from-foreground/8 dark:via-emerald-500/20 dark:to-transparent',
+      statsAccent: 'text-emerald-600 dark:text-emerald-200',
+      stats: [
+        { label: 'Timeline', value: t('servicesPage.onepage.timeline') },
+        { label: 'Investment', value: '200€ – 600€' },
+        { label: 'Focus', value: 'Single-page marketing sites' },
+      ],
     },
     {
-      title: t('services.frontend.title'),
-      description: t('services.frontend.description'),
-      icon: LucideGlobe,
-      features: [t('services.frontend.feature1'), t('services.frontend.feature2'), t('services.frontend.feature3'), t('services.frontend.feature4')],
-      iconColor: "text-[#8B5CF6]"
+      title: t('servicesPage.restaurant.title'),
+      description: t('servicesPage.restaurant.description'),
+      icon: Utensils,
+      features: [
+        t('servicesPage.restaurant.feature1'),
+        t('servicesPage.restaurant.feature2'),
+        t('servicesPage.restaurant.feature3'),
+        t('servicesPage.restaurant.feature4'),
+      ],
+      iconColor: 'text-[#8B5CF6]',
+      label: 'Hospitality Website',
+      highlight: t('servicesPage.restaurant.description'),
+      accentGradient: "from-white/95 via-violet-50/65 to-violet-100/30 dark:from-black dark:via-violet-800/10 dark:to-black",
+      accentLine: 'from-violet-400/70 via-violet-300/35 to-transparent',
+      iconBackground: 'bg-gradient-to-br from-violet-200/75 via-violet-100/70 to-white/70 dark:from-violet-500/40 dark:via-violet-500/15 dark:to-transparent',
+      chipGradient: 'from-violet-400/35 via-violet-300/25 to-violet-200/25 dark:from-violet-500/25 dark:via-violet-500/20 dark:to-violet-400/15',
+      featureBackground: 'bg-gradient-to-r from-violet-100/65 via-white/80 to-white/70 dark:from-violet-500/20 dark:via-violet-500/10 dark:to-transparent',
+      detailBackground: 'from-white/95 via-violet-50/60 to-white/80 dark:from-foreground/20 dark:via-violet-500/20 dark:to-transparent',
+      statsAccent: 'text-violet-600 dark:text-violet-200',
+      stats: [
+        { label: 'Timeline', value: t('servicesPage.restaurant.timeline') },
+        { label: 'Investment', value: '300€ – 1200€' },
+        { label: 'Focus', value: 'Menus, bookings, local SEO' },
+      ],
     },
     {
-      title: t('services.backend.title'),
-      description: t('services.backend.description'),
-      icon: LucideServer,
-      features: [t('services.backend.feature1'), t('services.backend.feature2'), t('services.backend.feature3')],
-      iconColor: "text-[#14B8A6]"
+      title: t('servicesPage.redesign.title'),
+      description: t('servicesPage.redesign.description'),
+      icon: RefreshCcw,
+      features: [
+        t('servicesPage.redesign.feature1'),
+        t('servicesPage.redesign.feature2'),
+        t('servicesPage.redesign.feature3'),
+        t('servicesPage.redesign.feature4'),
+      ],
+      iconColor: 'text-[#14B8A6]',
+      label: 'Site Redesign',
+      highlight: t('servicesPage.redesign.description'),
+      accentGradient: "from-white/95 via-teal-50/65 to-teal-100/30 dark:from-black dark:via-teal-700/10 dark:to-teal-950/5",
+      accentLine: 'from-teal-400/70 via-teal-300/35 to-transparent',
+      iconBackground: 'bg-gradient-to-br from-teal-200/75 via-teal-100/70 to-white/70 dark:from-teal-500/40 dark:via-teal-500/15 dark:to-transparent',
+      chipGradient: 'from-teal-400/35 via-teal-300/25 to-teal-200/25 dark:from-teal-500/25 dark:via-teal-500/20 dark:to-teal-400/15',
+      featureBackground: 'bg-gradient-to-r from-teal-100/65 via-white/80 to-white/70 dark:from-teal-500/20 dark:via-teal-500/10 dark:to-transparent',
+      detailBackground: 'from-white/95 via-teal-50/60 to-white/80 dark:from-foreground/20 dark:via-teal-500/20 dark:to-transparent',
+      statsAccent: 'text-teal-600 dark:text-teal-200',
+      stats: [
+        { label: 'Timeline', value: t('servicesPage.redesign.timeline') },
+        { label: 'Investment', value: '300€ – 1000€' },
+        { label: 'Focus', value: 'UX audit + conversion lift' },
+      ],
     },
-    {
-      title: t('services.ai.title'),
-      description: t('services.ai.description'),
-      icon: LucideBrainCircuit,
-      features: [t('services.ai.feature1'), t('services.ai.feature2'), t('services.ai.feature3'), t('services.ai.feature4')],
-      iconColor: "text-[#F59E0B]"
-    }
   ];
   
 
   return (
-    <section className="py-24 relative">
-      {/* Subtle background element */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/10 to-transparent"></div>
-      
+    <section className="relative isolate py-24">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-foreground/3 to-transparent [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]" />
       <div className="container-custom relative">
-        {/* Section header */}
-        <div className="text-center mb-16 space-y-4">
-          <h3 className="text-3xl md:text-4xl font-bold tracking-tight">
+        <ScrollFadeIn className="text-center mb-16 space-y-4">
+          <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
             {t('services.title')}
           </h3>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
             {t('services.subtitle')}
           </p>
-        </div>
+          <Button variant="outline" size="lg" asChild className="border border-primary text-primary hover:bg-transparent dark:border-primary/60 dark:text-primary/80 dark:hover:bg-transparent">
+            <Link href="/services">
+              {t('service.more')}
+            </Link>
+          </Button>
+        </ScrollFadeIn>
 
-        {/* Services grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {services.map(({ icon: Icon, ...service }) => (
-              <div key={service.title}  className="group relative p-8 rounded-2xl border border-border bg-card backdrop-blur-sm transition-all duration-300 hover:border-border/80 hover:shadow-lg hover:shadow-primary/5 dark:border-border/50 dark:bg-card/80 dark:hover:border-border/70">
-                
-                {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-6 ${service.iconColor} bg-gradient-to-br from-background to-muted/20 dark:from-muted/30 dark:to-muted/10`}>
-                  <Icon size={24} />
-                </div>
-                
-                {/* Content */}
-                <div className="space-y-4">
-                  <h4 className="text-xl font-semibold text-foreground">
-                    {service.title}
-                  </h4>
-                  
-                  <p className="text-muted-foreground leading-relaxed">
-                    {service.description}
-                  </p>
-                  
-                  {/* Features list */}
-                  <div className="space-y-2 pt-2">
-                    {service.features.map((feature) => (
-                      <div key={feature} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary/60 mt-2 flex-shrink-0 dark:bg-primary/80"></div>
-                        <span>{feature}</span>
+        <div className="flex flex-col gap-14">
+          {services.map(({ icon: Icon, ...service }, index) => {
+            const displayIndex = String(index + 1).padStart(2, '0');
+
+            return (
+              <ScrollFadeIn key={service.title} delay={index * 0.15}>
+                <article className="relative overflow-hidden rounded-[2.75rem] border border-foreground/10 bg-white/92 p-8 md:p-12 backdrop-blur-xl dark:bg-foreground/[0.08]">
+                  <div className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${service.accentGradient}`} />
+                  <div className="relative grid gap-10 lg:grid-cols-[1.35fr_1fr] lg:items-start">
+                    <div className="space-y-8">
+                      <div className="flex flex-wrap items-center gap-4 text-[0.7rem] uppercase tracking-[0.35em] text-foreground/55">
+                        <span className="font-semibold">{displayIndex}</span>
+                        <span className={`hidden h-px flex-1 bg-gradient-to-r ${service.accentLine} lg:block`} />
+                        <span className={`inline-flex items-center rounded-full bg-gradient-to-r ${service.chipGradient} px-5 py-2 text-[0.65rem] font-medium tracking-[0.35em] text-foreground/80 dark:text-foreground`}>
+                          {service.label}
+                        </span>
                       </div>
-                    ))}
+
+                      <div className="space-y-6">
+                        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                          <div className={`grid h-14 w-14 place-items-center rounded-2xl shadow-inner ${service.iconBackground}`}>
+                            <Icon size={26} className={service.iconColor} />
+                          </div>
+                          <p className="text-sm md:text-base text-foreground/70 sm:max-w-sm">
+                            {service.highlight}
+                          </p>
+                        </div>
+
+                        <div className="space-y-3">
+                          <h4 className="text-2xl md:text-[2rem] font-semibold text-foreground">
+                            {service.title}
+                          </h4>
+                          <p className="text-sm md:text-base leading-relaxed text-foreground/70">
+                            {service.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h5 className="text-xs uppercase tracking-[0.3em] text-foreground/50">
+                          Core capabilities
+                        </h5>
+                        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                          {service.features.map((feature) => (
+                            <div
+                              key={feature}
+                              className={`relative overflow-hidden rounded-2xl border border-foreground/10 px-4 py-4 text-sm font-medium text-foreground/75 ${service.featureBackground}`}
+                            >
+                              <span className="relative z-10">{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-6">
+                      <div className={`relative overflow-hidden rounded-3xl border border-foreground/10 px-6 py-8 bg-gradient-to-br ${service.detailBackground}`}>
+                        <div className="text-xs uppercase tracking-[0.3em] text-foreground/55">
+                          Snapshot
+                        </div>
+                        <div className="mt-5 grid gap-4">
+                          {service.stats.map((stat) => (
+                            <div key={stat.label} className="flex items-center justify-between text-sm text-foreground/70">
+                              <span className="font-medium text-foreground/85">{stat.label}</span>
+                              <span className={`font-semibold ${service.statsAccent}`}>{stat.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                
-                {/* Hover effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none dark:from-primary/10"></div>
-              </div>
-          ))}
+                </article>
+              </ScrollFadeIn>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,3 +1,5 @@
+'use client';
+
 import { Badge } from "../ui/badge";
 import { FaNodeJs, FaReact } from "react-icons/fa";
 import { IconType } from "react-icons";
@@ -7,6 +9,7 @@ import { HiOutlineColorSwatch } from "react-icons/hi";
 import { LuSettings } from "react-icons/lu";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import ScrollFadeIn from "../animations/ScrollFadeIn";
 
 interface Skill {
   name: string;
@@ -14,7 +17,8 @@ interface Skill {
   level: string;
   icon: IconType;
   description: string;
-  iconColor: string
+  iconColor: string;
+  accent: string;
 }
 
 interface TechCategory {
@@ -32,7 +36,8 @@ const SkillsStack = () => {
       level: 'Expert',
       icon: FaReact,
       description: "Building modern user interfaces with hooks, context and performance optimization",
-      iconColor: "text-sky-400"
+      iconColor: "text-sky-400",
+      accent: "from-sky-400/20 via-sky-400/5 to-transparent"
     },
     {
       name: 'TypeScript',
@@ -40,7 +45,8 @@ const SkillsStack = () => {
       level: 'Advanced',
       icon: SiTypescript,
       description: 'Type-safe development with interfaces, generics and utility types',
-      iconColor: "text-blue-600"
+      iconColor: "text-blue-600",
+      accent: "from-blue-500/20 via-blue-500/5 to-transparent"
     },
     {
       name: 'Node.js',
@@ -48,7 +54,8 @@ const SkillsStack = () => {
       level: 'Advanced',
       icon: FaNodeJs,
       description: 'Server-side development with Express, APIs and microservices',
-      iconColor: "text-yellow-400"
+      iconColor: "text-yellow-400",
+      accent: "from-yellow-400/25 via-yellow-400/10 to-transparent"
     },
     {
       name: 'Supabase',
@@ -56,7 +63,8 @@ const SkillsStack = () => {
       level: 'Intermediate',
       icon: RiSupabaseLine,
       description: 'Relational databases, complex queries and data modeling',
-      iconColor: "text-green-500"
+      iconColor: "text-green-500",
+      accent: "from-emerald-400/20 via-emerald-400/5 to-transparent"
     }
   ];
 
@@ -82,92 +90,76 @@ const SkillsStack = () => {
   ];
 
   return (
-    <section>
-      <div className="container-custom flex flex-col">
-        <div className="text-center mb-20">
-        <h4 className="font-bold mb-6 max-w-2xl mx-auto">
-          Technologies & Tools<span className='text-muted-foreground font-medium'> I most commonly use.</span>
+    <section className="relative isolate py-24">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-transparent via-foreground/[0.03] to-transparent" />
+      <div className="container-custom flex flex-col gap-16">
+        <ScrollFadeIn className="text-center space-y-4">
+          <h4 className="text-3xl font-semibold text-foreground">
+            Technologies & Tools <span className="text-foreground/60">I rely on the most.</span>
           </h4>
-        </div>
+          <p className="mx-auto max-w-2xl text-sm md:text-base text-foreground/70">
+            A compact snapshot of the languages, frameworks, and systems I use to shape focused, resilient products.
+          </p>
+        </ScrollFadeIn>
 
-        {/* Core Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {coreSkills.map(({icon: Icon, ...skill}) => (
-            <div key={skill.name} className="group">
-              <div className="card bg-card border-border rounded-lg h-full transition-all duration-300 hover:border-muted-foreground">
-                {/* Skill Icon */}
-                <div className={`text-5xl h-30  polka mb-4 grid place-items-center ${skill.iconColor}`}>
-                  <Icon size={28}/>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {coreSkills.map(({icon: Icon, ...skill}, index) => (
+            <ScrollFadeIn key={skill.name} delay={index * 0.1}>
+              <div className={`relative h-full overflow-hidden rounded-3xl border border-foreground/10 bg-gradient-to-br ${skill.accent} p-6`}>
+                <div className="flex h-full flex-col gap-6">
+                  <div className="flex items-center justify-between">
+                    <div className={`grid h-12 w-12 place-items-center rounded-2xl bg-foreground/5 ${skill.iconColor}`}>
+                      <Icon size={22} />
+                    </div>
+                    <Badge variant="outline" className="border-foreground/20 bg-foreground/5 text-foreground/70">
+                      {skill.level}
+                    </Badge>
+                  </div>
+                  <div className="space-y-3">
+                    <h5 className="text-lg font-semibold text-foreground">{skill.name}</h5>
+                    <p className="text-sm leading-relaxed text-foreground/70">
+                      {skill.description}
+                    </p>
+                  </div>
+                  <span className="text-xs uppercase tracking-[0.3em] text-foreground/40">{skill.category}</span>
                 </div>
-                
-                <div className="flex items-center justify-between">
-                  {/* Skill Name */}
-                <h5 className="text-xl font-semibold text-foreground">
-                  {skill.name}
-                </h5>
-                
-                {/* Level Badge */}
-                <Badge variant="outline" className="border-border">
-                  {skill.level}
-                </Badge>
-                </div>
-                
-                {/* Description */}
-                <p className="text-foreground/60 pt-2 text-sm leading-relaxed">
-                  {skill.description}
-                </p>
               </div>
-            </div>
+            </ScrollFadeIn>
           ))}
         </div>
 
-        {/* Technology Categories */}
-        <div className="space-y-16">
+        <div className="space-y-12">
           {techCategories.map(({icon: Icon, ...category}, index) => (
-            <div key={category.name} className="group relative">
-              {/* Category Header with Icon */}
-              <div className="flex items-center mb-8">
-                <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <Icon size={20} className="text-white"/>
+            <ScrollFadeIn key={category.name} delay={index * 0.2}>
+              <div className="relative overflow-hidden rounded-3xl border border-foreground/10 bg-foreground/[0.035] p-8">
+                <div className="flex items-center gap-4">
+                  <div className={`grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br ${category.color}`}>
+                    <Icon size={20} className="text-white" />
+                  </div>
+                  <h5 className="text-2xl font-semibold text-foreground">{category.name}</h5>
+                  <div className="ml-auto h-px flex-1 bg-gradient-to-r from-foreground/20 via-foreground/10 to-transparent" />
                 </div>
-                <h5 className="text-2xl font-bold text-foreground group-hover:text-foreground/90 transition-colors duration-300">
-                  {category.name}
-                </h5>
-                <div className="ml-6 h-px flex-1 bg-gradient-to-r from-foreground/20 via-foreground/10 to-transparent"></div>
-              </div>
-              
-              {/* Technologies in a flowing layout */}
-              <div className="pl-16">
-                <div className="flex flex-wrap gap-3">
+                <div className="mt-6 flex flex-wrap gap-3">
                   {category.technologies.map((tech, techIndex) => (
-                    <div 
-                      key={techIndex} 
-                      className="group/tech relative overflow-hidden"
-                      
+                    <span
+                      key={techIndex}
+                      className="rounded-full border border-foreground/10 bg-foreground/5 px-4 py-2 text-sm font-medium text-foreground/70"
                     >
-                      <div className="bg-foreground/5 backdrop-blur-sm border border-foreground/10 rounded-full px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground hover:bg-foreground/10 hover:border-foreground/20 transition-all cursor-pointer">
-                        {tech}
-                      </div>
-                      
-                      {/* Subtle glow effect on hover */}
-                      <div className={`absolute inset-0 rounded-full bg-gradient-to-r ${category.color} opacity-0 group-hover/tech:opacity-20 blur-sm transition-opacity duration-300 -z-10`}></div>
-                    </div>
+                      {tech}
+                    </span>
                   ))}
                 </div>
               </div>
-              
-              {/* Connecting line to next category */}
-              {index < techCategories.length - 1 && (
-                <div className="absolute left-6 -bottom-8 w-px h-8 bg-gradient-to-b from-foreground/20 to-transparent"></div>
-              )}
-            </div>
+            </ScrollFadeIn>
           ))}
         </div>
-        <Button className="mt-8 w-fit self-center px-8" asChild>
-          <Link href="/uses">
-            View All
-          </Link>
-        </Button>
+        <ScrollFadeIn delay={0.6} className="mt-8 w-fit self-center">
+          <Button className="px-8 border border-foreground/20" variant="outline" asChild>
+            <Link href="/uses">
+              View All
+            </Link>
+          </Button>
+        </ScrollFadeIn>
       </div>
     </section>
   );

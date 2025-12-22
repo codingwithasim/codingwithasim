@@ -4,136 +4,101 @@ import Link from 'next/link';
 import { IconType } from 'react-icons';
 import { LuGithub, LuLinkedin, LuMail } from 'react-icons/lu';
 import { Button } from '../ui/button';
-import { useState } from 'react';
-import ContactDialog from '../models/Contact';
 import { useLanguage } from '@/contexts/LanguageContext';
+import ScrollFadeIn from '../animations/ScrollFadeIn';
 
 interface ContactMethod {
   name: string;
-  value: string;
   icon: IconType;
   link: string;
-  description: string;
-  actionLabel: string
 }
 
 const CTABand = () => {
-  const [open, setOpen]  = useState(false)
   const { t } = useLanguage();
-  
+
   const contactMethods: ContactMethod[] = [
     {
       name: 'Email',
-      value: 'hello@muhammadasim.dev',
       icon: LuMail,
       link: '/contact',
-      description: t('cta.email.description'),
-      actionLabel: t('cta.email.action')
     },
     {
       name: 'LinkedIn',
-      value: 'muhammadasim',
       icon: LuLinkedin,
       link: 'https://www.linkedin.com/in/codingwithasim',
-      description: t('cta.linkedin.description'),
-      actionLabel: t('cta.linkedin.action')
     },
     {
       name: 'GitHub',
-      value: 'muhammadasim',
       icon: LuGithub,
       link: 'https://github.com/codingwithasim',
-      description: t('cta.github.description'),
-      actionLabel: t('cta.github.action')
-    }
+    },
   ];
-  
 
   return (
-    <section className="py-24 relative">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent"></div>
-      
+    <section className="relative isolate py-24">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/20 via-secondary/15 to-accent/20 opacity-[0.12] dark:from-foreground/20 dark:via-foreground/12 dark:to-foreground/18" />
       <div className="container-custom relative">
-        <div className="max-w-4xl mx-auto">
-          
-          {/* Main CTA */}
-          <div className="text-center mb-16 space-y-6">
-            <h3 className="text-3xl md:text-4xl font-bold tracking-tight">
-              {t('cta.title')}
-            </h3>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              {t('cta.description')}
-            </p>
-          </div>
+        <ScrollFadeIn>
+          <article className="relative overflow-hidden rounded-[2.5rem] border border-foreground/10 bg-white/95 px-8 py-12 text-center md:text-left dark:bg-foreground/[0.08]">
+            <div className="relative space-y-8 md:max-w-3xl">
+              <span className="text-xs uppercase tracking-[0.35em] text-foreground/60 dark:text-foreground/65">
+                {t('cta.responseTime')}
+              </span>
+              <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+                {t('cta.title')}
+              </h3>
+              <p className="text-base md:text-lg leading-relaxed text-foreground/70 dark:text-foreground/75">
+                {t('cta.description')}
+              </p>
 
-          {/* Contact Methods */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {contactMethods.map(({icon: Icon, ...method}) => (
-              <div key={method.name} className="group text-center">
-                <div className="relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-border hover:shadow-lg hover:shadow-primary/5">
-                  
-                  {/* Icon */}
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 text-primary bg-primary/10">
-                    <Icon size={20} />
-                  </div>
-                  
-                  {/* Content */}
-                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                    {method.description}
-                  </p>
-                  
-                  {/* Action button */}
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href={method.link} target={method.name === "Email" ? "" : '_blank'}>
-                      {method.actionLabel}
-                    </Link>
-                  </Button>
-                  
-                  {/* Hover effect */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                </div>
+              <div className="rounded-2xl border border-foreground/10 bg-white/90 px-6 py-5 text-sm text-foreground/75 dark:bg-foreground/[0.12] dark:text-foreground/70">
+                <span className="font-semibold text-foreground/85 dark:text-foreground">
+                  {t('cta.availabilityValue')}
+                </span>
+                <span className="mx-3 text-foreground/45">•</span>
+                <span>{t('cta.projectTypesValue')}</span>
               </div>
-            ))}
-          </div>
 
-          {/* Primary Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Button size="lg" asChild>
-              <Link href="/contact">
-                {t('cta.startProject')}
-              </Link>
-            </Button>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button
+                  size="lg"
+                  asChild
+                  className="border border-primary bg-primary text-primary-foreground hover:bg-primary dark:border-primary/60 dark:bg-primary dark:hover:bg-primary"
+                >
+                  <Link href="/contact">
+                    {t('cta.startProject')}
+                  </Link>
+                </Button>
 
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/projects">
-                {t('cta.viewWork')}
-              </Link>
-            </Button>
-          </div>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  asChild
+                  className="border border-primary text-primary hover:bg-transparent dark:border-primary/55 dark:text-primary/80 dark:hover:bg-transparent"
+                >
+                  <Link href="/projects">
+                    {t('cta.viewWork')}
+                  </Link>
+                </Button>
+              </div>
 
-          {/* Additional Info */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-border/50">
-            <div className="text-center space-y-2">
-              <div className="font-semibold text-sm text-foreground">{t('cta.responseTime')}</div>
-              <div className="text-sm text-muted-foreground">{t('cta.responseTimeValue')}</div>
+              <div className="flex flex-wrap justify-center gap-3 pt-6 md:justify-start">
+                {contactMethods.map(({ icon: Icon, ...method }) => (
+                  <Link
+                    key={method.name}
+                    href={method.link}
+                    target={method.name === 'Email' ? undefined : '_blank'}
+                    className="inline-flex items-center gap-2 rounded-full border border-foreground/15 px-4 py-2 text-sm font-medium text-foreground/75 hover:border-primary/40 hover:text-primary dark:border-foreground/30 dark:text-foreground/70 dark:hover:border-primary/45 dark:hover:text-primary/80"
+                  >
+                    <Icon size={16} />
+                    <span>{method.name}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
-            <div className="text-center space-y-2">
-              <div className="font-semibold text-sm text-foreground">{t('cta.projectTypes')}</div>
-              <div className="text-sm text-muted-foreground">{t('cta.projectTypesValue')}</div>
-            </div>
-            <div className="text-center space-y-2">
-              <div className="font-semibold text-sm text-foreground">{t('cta.availability')}</div>
-              <div className="text-sm text-muted-foreground">{t('cta.availabilityValue')}</div>
-            </div>
-          </div>
-          
-        </div>
+          </article>
+        </ScrollFadeIn>
       </div>
-
-      {
-        open && <ContactDialog open={open} setOpen={setOpen}/>
-      }
     </section>
   );
 };

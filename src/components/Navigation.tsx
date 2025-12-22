@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import LanguageSwitcher from './ui/LanguageSwitcher';
 import ThemeToggle from './ui/ThemeToggle';
@@ -36,16 +37,28 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
-      isScrolled 
-        ? 'bg-background/75 backdrop-blur-xl border-border' 
-        : 'bg-background'
-    }`}>
-      <div className="container-custom">
-        <div className="flex items-center justify-between h-16">
+    <motion.nav 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={`fixed top-0 left-0  right-0 z-50 transition-all duration-300 border-b ${
+        isScrolled 
+          ? 'bg-background/75 backdrop-blur-xl border-border' 
+          : 'bg-background'
+      }`}>
+      <div className="container-custom relative">
+        <div className='absolute h-full w-1/3 bg-cyan-200  dark:bg-cyan-800 blur-3xl top-0 left-0'></div>
+        <div className='absolute h-full w-1/3 bg-amber-100 dark:bg-amber-800 blur-3xl top-0 right-0'></div>
+
+        <div className="flex items-center justify-between h-16 z-10">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group" aria-label="Go to homepage">
-            <div className="w-8 h-8 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+            <motion.div 
+              className="w-8 h-8 flex items-center justify-center"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+            >
               <Image
               src="/assets/a_logo.png"
               className='dark:invert'
@@ -53,7 +66,7 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
               width={50}
               height={50}
               />
-            </div>
+            </motion.div>
           </Link>
 
           {/* Navigation Links */}
@@ -76,7 +89,7 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
           </nav>
 
           {/* CTA Button */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 z-10">
             <LanguageSwitcher />
             <ThemeToggle />
             <Button asChild>
@@ -102,7 +115,7 @@ const Navigation = ({onMenuClick}: NavigationProps) => {
           </div>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 
