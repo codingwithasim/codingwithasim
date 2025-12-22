@@ -3,7 +3,6 @@
 import { Globe, RefreshCcw, Utensils } from "lucide-react";
 import { useLanguage } from '@/contexts/LanguageContext';
 import ScrollFadeIn from '../animations/ScrollFadeIn';
-import { motion } from 'framer-motion';
 import { Button } from "../ui/button";
 import Link from "next/link";
 

@@ -198,7 +198,7 @@ export default function TestimonialsSection() {
             { label: 'Satisfied Clients', value: '50+', icon: '🎯' },
             { label: 'Projects Completed', value: '80+', icon: '🚀' },
             { label: 'Average Rating', value: '4.9/5', icon: '⭐' }
-          ].map((stat, index) => (
+          ].map((stat) => (
             <div 
               key={stat.label}
               className="text-center p-6 rounded-2xl bg-card/30 border border-border/30 hover:bg-card/50 hover:border-border/50 transition-all duration-300 group"

@@ -231,7 +231,7 @@ export default function ServicesPage() {
 
                       <div className="flex flex-wrap items-center gap-4 text-sm text-foreground/65 dark:text-foreground/70">
                         <span className="h-px flex-1 bg-foreground/15" />
-                        <span className={`inline-flex items-center rounded-full ${accent.badge} border px-4 py-2 text-xs font-medium uppercase tracking-[0.2em] ${service.accent}`}>
+                        <span className={`inline-flex items-center rounded-full ${accent.badge} border px-4 py-2 text-xs font-medium uppercase tracking-[0.2em]`}>
                           {service.pricing[0]} – {service.pricing[1]}
                         </span>
                       </div>

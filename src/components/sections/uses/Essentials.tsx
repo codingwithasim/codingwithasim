@@ -2,8 +2,6 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { attachSpotlightTo } from "@/utils/spotlight";
-import { useEffect, useRef } from "react";
 import { FaCode } from "react-icons/fa6";
 import { HiOutlineLightningBolt } from "react-icons/hi";
 import { MdOutlineDesktopWindows } from "react-icons/md";

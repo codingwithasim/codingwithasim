@@ -32,10 +32,10 @@ const accentPalette = [
   },
 ];
 
-const projectsColors = {
-  1: "bg-[#fbf8f1]",
-  2: "bg-[#2a0907]",
-  3: "bg-[#fbf8f1]",
+const projectsColors: Record<string, string> = {
+  '1': "bg-[#fbf8f1]",
+  '2': "bg-[#2a0907]",
+  '3': "bg-[#fbf8f1]",
 }
 
 const FeaturedProjects = () => {
