@@ -36,10 +36,9 @@ const CTABand = () => {
 
   return (
     <section className="relative isolate py-24">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/20 via-secondary/15 to-accent/20 opacity-[0.12] dark:from-foreground/20 dark:via-foreground/12 dark:to-foreground/18" />
       <div className="container-custom relative">
         <ScrollFadeIn>
-          <article className="relative overflow-hidden rounded-[2.5rem] border border-foreground/10 bg-white/95 px-8 py-12 text-center md:text-left dark:bg-foreground/[0.08]">
+          <article className="relative overflow-hidden rounded-[2.5rem] border border-foreground/10 bg-white/95 px-8 py-12 text-center md:text-left dark:bg-foreground/[0.06]">
             <div className="relative space-y-8 md:max-w-3xl">
               <span className="text-xs uppercase tracking-[0.35em] text-foreground/60 dark:text-foreground/65">
                 {t('cta.responseTime')}
@@ -51,7 +50,7 @@ const CTABand = () => {
                 {t('cta.description')}
               </p>
 
-              <div className="rounded-2xl border border-foreground/10 bg-white/90 px-6 py-5 text-sm text-foreground/75 dark:bg-foreground/[0.12] dark:text-foreground/70">
+              <div className="rounded-2xl border border-foreground/10 bg-foreground/5 px-6 py-5 text-sm text-foreground/75 dark:bg-foreground/[0.08] dark:text-foreground/70">
                 <span className="font-semibold text-foreground/85 dark:text-foreground">
                   {t('cta.availabilityValue')}
                 </span>

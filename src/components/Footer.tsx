@@ -4,10 +4,16 @@ import { Github, Linkedin, Twitter } from 'lucide-react';
 import Link from 'next/link';
 import { BsInstagram } from 'react-icons/bs';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { t } = useLanguage();
+  const pathname = usePathname();
+
+  if (pathname?.startsWith('/tools')) {
+    return null;
+  }
 
   const footerLinks = [
     { path: '/projects', label: t('nav.projects') },

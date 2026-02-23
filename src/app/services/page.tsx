@@ -21,34 +21,29 @@ interface Service {
 
 const accentStyles = [
   {
-    background: 'from-primary/10 via-white to-white dark:from-black dark:via-green-500/20 dark:to-black',
-    badge: 'border-green-500/45 text-green-500',
-    dot: 'bg-green-500',
-    icon: 'border-primary/30 text-green-500',
+    badge: 'border-foreground/20 text-foreground/70',
+    dot: 'bg-foreground/40',
+    icon: 'text-foreground/70',
   },
   {
-    background: 'from-accent/10 via-white to-white dark:black dark:via-violet-500/20 dark:to-black',
-    badge: 'border-violet-500/45 text-violet-600 dark:text-violet-400',
-    dot: 'bg-violet-500',
-    icon: 'border-accent/30 text-violet-500',
+    badge: 'border-foreground/20 text-foreground/70',
+    dot: 'bg-foreground/40',
+    icon: 'text-foreground/70',
   },
   {
-    background: 'from-teal-100/30 via-white to-white dark:from-black dark:via-cyan-500/20 dark:to-black',
-    badge: 'border-teal-300/40 text-teal-600',
-    dot: 'bg-cyan-500',
-    icon: 'border-teal-300/50 text-teal-500',
+    badge: 'border-foreground/20 text-foreground/70',
+    dot: 'bg-foreground/40',
+    icon: 'text-foreground/70',
   },
   {
-    background: 'from-yellow-100/30 via-white to-white dark:from-yellow-500/15 dark:via-yellow-800/15 dark:to-black',
-    badge: 'border-yellow-300/40 text-yellow-600',
-    dot: 'bg-yellow-400',
-    icon: 'border-yellow-300/50 text-yellow-500',
+    badge: 'border-foreground/20 text-foreground/70',
+    dot: 'bg-foreground/40',
+    icon: 'text-foreground/70',
   },
   {
-    background: 'from-blue-100/30 via-white to-white dark:from-blue-500/5 dark:via-blue-600/15 dark:to-black',
-    badge: 'border-blue-300/40 text-blue-500',
-    dot: 'bg-blue-400',
-    icon: 'border-blue-300/50 text-blue-500',
+    badge: 'border-foreground/20 text-foreground/70',
+    dot: 'bg-foreground/40',
+    icon: 'text-foreground/70',
   },
 ];
 
@@ -170,7 +165,7 @@ export default function ServicesPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.08 + 0.2, duration: 0.25 }}
                   >
-                    <Badge variant="outline" className="border border-primary/25 text-primary">
+                    <Badge variant="outline" className="border border-foreground/20 text-foreground/70">
                       {badge}
                     </Badge>
                   </motion.div>
@@ -199,7 +194,7 @@ export default function ServicesPage() {
                 return (
                   <ScrollFadeIn key={service.id} delay={index * 0.12 + 0.3}>
                     <article
-                      className={`flex group h-full flex-col gap-6 rounded-2xl border border-foreground/12 bg-gradient-to-br ${accent.background} px-8 py-10 text-left`}
+                      className="flex group h-full flex-col gap-6 rounded-2xl border border-foreground/12 bg-white/95 px-8 py-10 text-left dark:bg-foreground/[0.06]"
                       itemScope
                       itemType="https://schema.org/Service"
                     >
@@ -258,7 +253,7 @@ export default function ServicesPage() {
               {process.map((item, index) => (
                 <ScrollFadeIn key={item.step} delay={index * 0.1 + 0.5}>
                   <div className="flex flex-col gap-3 rounded-2xl border border-foreground/12 bg-white/95 px-6 py-5 text-left dark:border-foreground/20 dark:bg-foreground/[0.08]">
-                    <span className="text-xs font-medium uppercase tracking-[0.3em] text-primary">
+                    <span className="text-xs font-medium uppercase tracking-[0.3em] text-foreground/60">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <h3 className="text-lg font-semibold text-foreground">{item.step}</h3>

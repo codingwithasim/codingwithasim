@@ -30,7 +30,6 @@ const SocialProof = () => {
 
   return (
     <section className="relative isolate overflow-hidden py-20">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/12 via-secondary/10 to-accent/12 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]" />
       <div className="container-custom">
         <ScrollFadeIn className="text-center mb-12 space-y-3">
           <p className="text-xs uppercase tracking-[0.35em] text-foreground/50">

@@ -10,32 +10,29 @@ import ScrollFadeIn from '../animations/ScrollFadeIn';
 
 const accentPalette = [
   {
-    gradient: 'from-primary/30 via-primary/12 to-transparent dark:from-primary/10 dark:via-primary/4 dark:to-transparent',
-    badge: 'text-primary',
-    chip: 'border-primary/30 bg-primary/10 text-primary dark:border-primary/15 dark:bg-primary/5 dark:text-primary/60',
-    divider: 'bg-primary/30 dark:bg-primary/15',
-    index: 'text-primary/80 dark:text-primary/60',
+    badge: 'text-foreground/70',
+    chip: 'border-foreground/15 bg-foreground/5 text-foreground/70',
+    divider: 'bg-foreground/10',
+    index: 'text-foreground/60',
   },
   {
-    gradient: 'from-secondary/30 via-secondary/12 to-transparent dark:from-secondary/10 dark:via-secondary/4 dark:to-transparent',
-    badge: 'text-primary',
-    chip: 'border-secondary/30 bg-secondary/10 text-primary dark:border-secondary/15 dark:bg-secondary/5 dark:text-primary/60',
-    divider: 'bg-primary/30 dark:bg-primary/15',
-    index: 'text-primary/80 dark:text-primary/60',
+    badge: 'text-foreground/70',
+    chip: 'border-foreground/15 bg-foreground/5 text-foreground/70',
+    divider: 'bg-foreground/10',
+    index: 'text-foreground/60',
   },
   {
-    gradient: 'from-accent/30 via-accent/12 to-transparent dark:from-accent/10 dark:via-accent/4 dark:to-transparent',
-    badge: 'text-primary',
-    chip: 'border-accent/30 bg-accent/10 text-primary dark:border-accent/15 dark:bg-accent/5 dark:text-primary/60',
-    divider: 'bg-text-primary/30 dark:bg-text-primary/15',
-    index: 'text-primary/80 dark:text-primary/60',
+    badge: 'text-foreground/70',
+    chip: 'border-foreground/15 bg-foreground/5 text-foreground/70',
+    divider: 'bg-foreground/10',
+    index: 'text-foreground/60',
   },
 ];
 
 const projectsColors: Record<string, string> = {
-  '1': "bg-[#fbf8f1]",
-  '2': "bg-[#2a0907]",
-  '3': "bg-[#fbf8f1]",
+  '1': "bg-foreground/5",
+  '2': "bg-foreground/5",
+  '3': "bg-foreground/5",
 }
 
 const FeaturedProjects = () => {
@@ -106,7 +103,6 @@ const FeaturedProjects = () => {
 
   return (
     <section className="relative isolate py-24">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-primary/8 via-secondary/10 to-accent/12 [mask-image:linear-gradient(to_top,transparent,black_15%,black_85%,transparent)]" />
       <div className="container-custom relative">
         <ScrollFadeIn className="mb-20 text-center space-y-4">
           <p className="text-xs uppercase tracking-[0.35em] text-foreground/50">
@@ -131,14 +127,12 @@ const FeaturedProjects = () => {
 
             return (
               <ScrollFadeIn key={project.id} delay={index * 0.15}>
-                <article className="relative group overflow-hidden rounded-[3rem] border border-foreground/25 form-black bg-white/92 dark:bg-gradient-to-br via-indigo-500/20 to-black  p-6 md:p-10 lg:p-14 backdrop-blur-xl dark:bg-black">
-                  <div className={`pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br ${accent.gradient} opacity-45 dark:opacity-25`} />
-                  <div className='w-96 h-96 absolute top-0 left-10 blur-3xl rounded-full bg-indigo-400/15'></div>
+                <article className="relative group overflow-hidden rounded-[3rem] border border-foreground/15 bg-white/95 p-6 md:p-10 lg:p-14 dark:bg-foreground/[0.06]">
                   <div
                     className={`grid gap-12 ${isReversed ? 'lg:grid-cols-[1.15fr_1fr]' : 'lg:grid-cols-[1fr_1.15fr]'} lg:items-center`}
                   >
                     <div
-                      className={`relative overflow-hidden rounded-3xl border border-foreground/10 bg-white/85 p-4 backdrop-blur-sm dark:bg-background/45 ${
+                      className={`relative overflow-hidden rounded-3xl border border-foreground/10 bg-white/95 p-4 dark:bg-foreground/[0.04] ${
                         isReversed ? 'lg:order-2' : 'lg:order-1'
                       }`}
                     >
@@ -150,7 +144,7 @@ const FeaturedProjects = () => {
                           className=" mx-auto object-contain"
                         />
                       </div>
-                      <div className="absolute inset-x-8 bottom-6 flex items-center justify-between rounded-full bg-white/80 px-6 py-3 text-[0.65rem] uppercase tracking-[0.3em] text-foreground/60 backdrop-blur-sm dark:bg-background/70 dark:text-foreground/70">
+                      <div className="absolute inset-x-8 bottom-6 flex items-center justify-between rounded-full border border-foreground/10 bg-white/90 px-6 py-3 text-[0.65rem] uppercase tracking-[0.3em] text-foreground/60 dark:bg-foreground/[0.06] dark:text-foreground/70">
                         <span>{project.role}</span>
                         <span className="hidden h-px flex-1 bg-foreground/10 sm:block dark:bg-foreground/30" />
                         <span>{project.development_time}</span>
@@ -221,7 +215,7 @@ const FeaturedProjects = () => {
                       ) : null}
 
                       <div className="pt-2">
-                        <Button variant="outline" asChild className="border border-foreground/20 bg-white/80 text-foreground dark:bg-background/45 dark:text-foreground">
+                        <Button variant="outline" asChild className="border border-foreground/20 bg-white/90 text-foreground dark:bg-foreground/[0.06] dark:text-foreground">
                           <Link
                             href={previewLink}
                             target={isExternal ? '_blank' : undefined}

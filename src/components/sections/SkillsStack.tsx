@@ -18,7 +18,6 @@ interface Skill {
   icon: IconType;
   description: string;
   iconColor: string;
-  accent: string;
 }
 
 interface TechCategory {
@@ -36,8 +35,7 @@ const SkillsStack = () => {
       level: 'Expert',
       icon: FaReact,
       description: "Building modern user interfaces with hooks, context and performance optimization",
-      iconColor: "text-sky-400",
-      accent: "from-sky-400/20 via-sky-400/5 to-transparent"
+      iconColor: "text-sky-400"
     },
     {
       name: 'TypeScript',
@@ -45,8 +43,7 @@ const SkillsStack = () => {
       level: 'Advanced',
       icon: SiTypescript,
       description: 'Type-safe development with interfaces, generics and utility types',
-      iconColor: "text-blue-600",
-      accent: "from-blue-500/20 via-blue-500/5 to-transparent"
+      iconColor: "text-blue-600"
     },
     {
       name: 'Node.js',
@@ -54,8 +51,7 @@ const SkillsStack = () => {
       level: 'Advanced',
       icon: FaNodeJs,
       description: 'Server-side development with Express, APIs and microservices',
-      iconColor: "text-yellow-400",
-      accent: "from-yellow-400/25 via-yellow-400/10 to-transparent"
+      iconColor: "text-yellow-400"
     },
     {
       name: 'Supabase',
@@ -63,8 +59,7 @@ const SkillsStack = () => {
       level: 'Intermediate',
       icon: RiSupabaseLine,
       description: 'Relational databases, complex queries and data modeling',
-      iconColor: "text-green-500",
-      accent: "from-emerald-400/20 via-emerald-400/5 to-transparent"
+      iconColor: "text-green-500"
     }
   ];
 
@@ -72,26 +67,25 @@ const SkillsStack = () => {
     {
       name: 'Frontend',
       icon: HiOutlineColorSwatch  ,
-      color: 'from-[#22C55E] to-[#16A34A]',
+      color: 'text-foreground',
       technologies: ['React', 'Tailwind CSS', 'Next.js']
     },
     {
       name: 'Backend',
       icon: LuSettings,
-      color: 'from-[#14B8A6] to-[#0D9488]',
+      color: 'text-foreground',
       technologies: ['Node.js', 'Supabase']
     },
     {
       name: 'DevOps',
       icon: LuSettings,
-      color: 'from-[#8B5CF6] to-[#7C3AED]',
+      color: 'text-foreground',
       technologies: ['Vercel', 'Github', 'Git']
     }
   ];
 
   return (
     <section className="relative isolate py-24">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-transparent via-foreground/[0.03] to-transparent" />
       <div className="container-custom flex flex-col gap-16">
         <ScrollFadeIn className="text-center space-y-4">
           <h4 className="text-3xl font-semibold text-foreground">
@@ -105,7 +99,7 @@ const SkillsStack = () => {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {coreSkills.map(({icon: Icon, ...skill}, index) => (
             <ScrollFadeIn key={skill.name} delay={index * 0.1}>
-              <div className={`relative h-full overflow-hidden rounded-3xl border border-foreground/10 bg-gradient-to-br ${skill.accent} p-6`}>
+              <div className="relative h-full overflow-hidden rounded-3xl border border-foreground/10 bg-white/95 p-6 dark:bg-foreground/[0.06]">
                 <div className="flex h-full flex-col gap-6">
                   <div className="flex items-center justify-between">
                     <div className={`grid h-12 w-12 place-items-center rounded-2xl bg-foreground/5 ${skill.iconColor}`}>
@@ -131,13 +125,13 @@ const SkillsStack = () => {
         <div className="space-y-12">
           {techCategories.map(({icon: Icon, ...category}, index) => (
             <ScrollFadeIn key={category.name} delay={index * 0.2}>
-              <div className="relative overflow-hidden rounded-3xl border border-foreground/10 bg-foreground/[0.035] p-8">
+              <div className="relative overflow-hidden rounded-3xl border border-foreground/10 bg-white/95 p-8 dark:bg-foreground/[0.06]">
                 <div className="flex items-center gap-4">
-                  <div className={`grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br ${category.color}`}>
-                    <Icon size={20} className="text-white" />
+                  <div className="grid h-12 w-12 place-items-center rounded-full border border-foreground/10 bg-foreground/5">
+                    <Icon size={20} className={category.color} />
                   </div>
                   <h5 className="text-2xl font-semibold text-foreground">{category.name}</h5>
-                  <div className="ml-auto h-px flex-1 bg-gradient-to-r from-foreground/20 via-foreground/10 to-transparent" />
+                  <div className="ml-auto h-px flex-1 bg-foreground/10" />
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   {category.technologies.map((tech, techIndex) => (
