@@ -27,7 +27,7 @@ const tools: Tool[] = [
   },
   {
     name: 'UUID Generator',
-    description: 'Generate UUID v4 and v7 safely.',
+    description: 'Generate UUID v4 identifiers instantly.',
     category: 'Generators',
     icon: 'UUID',
     href: '/tools/uuid-generator',
