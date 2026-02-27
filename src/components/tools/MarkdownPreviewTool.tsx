@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from 'react';
 import { Copy, FileDown, RefreshCw, Sparkles } from 'lucide-react';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown, { type Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
@@ -45,21 +45,30 @@ console.log(greet('Asim'));
 
 > Markdown previews update as you type.`;
 
-const markdownComponents = {
-  h1: ({ children }: { children: React.ReactNode }) => (
-    <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">{children}</h1>
+const markdownComponents: Components = {
+  h1: ({ children, ...props }) => (
+    <h1 {...props} className="text-2xl font-semibold text-slate-900 dark:text-white">
+      {children}
+    </h1>
   ),
-  h2: ({ children }: { children: React.ReactNode }) => (
-    <h2 className="text-xl font-semibold text-slate-900 dark:text-white">{children}</h2>
+  h2: ({ children, ...props }) => (
+    <h2 {...props} className="text-xl font-semibold text-slate-900 dark:text-white">
+      {children}
+    </h2>
   ),
-  h3: ({ children }: { children: React.ReactNode }) => (
-    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{children}</h3>
+  h3: ({ children, ...props }) => (
+    <h3 {...props} className="text-lg font-semibold text-slate-900 dark:text-white">
+      {children}
+    </h3>
   ),
-  p: ({ children }: { children: React.ReactNode }) => (
-    <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{children}</p>
+  p: ({ children, ...props }) => (
+    <p {...props} className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+      {children}
+    </p>
   ),
-  a: ({ children, href }: { children: React.ReactNode; href?: string }) => (
+  a: ({ children, href, ...props }) => (
     <a
+      {...props}
       href={href}
       target="_blank"
       rel="noreferrer"
@@ -68,52 +77,77 @@ const markdownComponents = {
       {children}
     </a>
   ),
-  ul: ({ children }: { children: React.ReactNode }) => (
-    <ul className="list-disc space-y-1 pl-5 text-sm text-slate-600 dark:text-slate-300">{children}</ul>
+  ul: ({ children, ...props }) => (
+    <ul {...props} className="list-disc space-y-1 pl-5 text-sm text-slate-600 dark:text-slate-300">
+      {children}
+    </ul>
   ),
-  ol: ({ children }: { children: React.ReactNode }) => (
-    <ol className="list-decimal space-y-1 pl-5 text-sm text-slate-600 dark:text-slate-300">{children}</ol>
+  ol: ({ children, ...props }) => (
+    <ol {...props} className="list-decimal space-y-1 pl-5 text-sm text-slate-600 dark:text-slate-300">
+      {children}
+    </ol>
   ),
-  li: ({ children }: { children: React.ReactNode }) => <li>{children}</li>,
-  blockquote: ({ children }: { children: React.ReactNode }) => (
-    <blockquote className="border-l-3 border-slate-200 pl-4 text-sm text-slate-500 dark:border-slate-700 dark:text-slate-300">
+  li: ({ children, ...props }) => <li {...props}>{children}</li>,
+  blockquote: ({ children, ...props }) => (
+    <blockquote
+      {...props}
+      className="border-l-3 border-slate-200 pl-4 text-sm text-slate-500 dark:border-slate-700 dark:text-slate-300"
+    >
       {children}
     </blockquote>
   ),
-  code: ({ children, className, inline }: { children: React.ReactNode; className?: string; inline?: boolean }) => {
+  code: (props) => {
+    const { children, className, inline, ...rest } = props as React.HTMLAttributes<HTMLElement> & {
+      inline?: boolean;
+      className?: string;
+      children?: React.ReactNode;
+    };
     if (inline) {
       return (
-        <code className="rounded bg-slate-100 px-1 py-0.5 font-mono text-[0.8rem] text-slate-700 dark:bg-slate-800 dark:text-slate-200">
+        <code
+          {...rest}
+          className="rounded bg-slate-100 px-1 py-0.5 font-mono text-[0.8rem] text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+        >
           {children}
         </code>
       );
     }
 
     return (
-      <code className={`block font-mono text-[0.8rem] text-slate-800 dark:text-slate-200 ${className ?? ''}`}>
+      <code {...rest} className={`block font-mono text-[0.8rem] text-slate-800 dark:text-slate-200 ${className ?? ''}`}>
         {children}
       </code>
     );
   },
-  pre: ({ children }: { children: React.ReactNode }) => (
-    <pre className="overflow-auto rounded-md bg-slate-100 p-4 text-xs text-slate-800 dark:bg-slate-900 dark:text-slate-100">
+  pre: ({ children, ...props }) => (
+    <pre
+      {...props}
+      className="overflow-auto rounded-md bg-slate-100 p-4 text-xs text-slate-800 dark:bg-slate-900 dark:text-slate-100"
+    >
       {children}
     </pre>
   ),
-  hr: () => <hr className="border-slate-200 dark:border-slate-700" />,
-  table: ({ children }: { children: React.ReactNode }) => (
+  hr: (props) => <hr {...props} className="border-slate-200 dark:border-slate-700" />,
+  table: ({ children, ...props }) => (
     <div className="overflow-auto">
-      <table className="w-full border-collapse text-left text-sm text-slate-600 dark:text-slate-300">{children}</table>
+      <table {...props} className="w-full border-collapse text-left text-sm text-slate-600 dark:text-slate-300">
+        {children}
+      </table>
     </div>
   ),
-  th: ({ children }: { children: React.ReactNode }) => (
-    <th className="border-b border-slate-200 px-3 py-2 font-semibold dark:border-slate-700">{children}</th>
+  th: ({ children, ...props }) => (
+    <th {...props} className="border-b border-slate-200 px-3 py-2 font-semibold dark:border-slate-700">
+      {children}
+    </th>
   ),
-  td: ({ children }: { children: React.ReactNode }) => (
-    <td className="border-b border-slate-100 px-3 py-2 dark:border-slate-800">{children}</td>
+  td: ({ children, ...props }) => (
+    <td {...props} className="border-b border-slate-100 px-3 py-2 dark:border-slate-800">
+      {children}
+    </td>
   ),
-  input: ({ checked, type }: { checked?: boolean; type?: string }) => (
+  input: ({ checked, type, ...props }) => (
     <input
+      {...props}
       type={type}
       defaultChecked={checked}
       className="mr-2 h-3.5 w-3.5 rounded border-slate-300 text-sky-600 dark:border-slate-700"
