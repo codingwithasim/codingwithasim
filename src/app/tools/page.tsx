@@ -49,6 +49,13 @@ const tools: Tool[] = [
     href: '/tools/jwt-decoder',
   },
   {
+    name: 'API Tester',
+    description: 'Send REST requests with headers and body.',
+    category: 'Developer',
+    icon: 'API',
+    href: '/tools/api-tester',
+  },
+  {
     name: 'URL Encoder',
     description: 'Encode and decode URL strings.',
     category: 'Converters',
