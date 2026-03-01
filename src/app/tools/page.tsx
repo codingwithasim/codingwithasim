@@ -55,6 +55,13 @@ const tools: Tool[] = [
     href: '/tools/api-tester',
   },
   {
+    name: 'URL Encoder / Decoder',
+    description: 'Encode or decode URL components instantly.',
+    category: 'Converters',
+    icon: '%',
+    href: '/tools/url-encoder',
+  },
+  {
     name: 'Lorem Ipsum',
     description: 'Generate placeholder text quickly.',
     category: 'Text',
