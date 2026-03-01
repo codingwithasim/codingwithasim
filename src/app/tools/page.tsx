@@ -41,6 +41,13 @@ const tools: Tool[] = [
     href: '/tools/jwt-decoder',
   },
   {
+    name: 'Hash Generator',
+    description: 'Generate MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes.',
+    category: 'Security',
+    icon: 'HASH',
+    href: '/tools/hash-generator',
+  },
+  {
     name: 'API Tester',
     description: 'Send REST requests with headers and body.',
     category: 'Developer',
