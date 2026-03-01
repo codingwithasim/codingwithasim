@@ -62,6 +62,13 @@ const tools: Tool[] = [
     href: '/tools/url-encoder',
   },
   {
+    name: 'Color Converter',
+    description: 'Convert between HEX, RGB, and HSL.',
+    category: 'Converters',
+    icon: 'HEX',
+    href: '/tools/color-converter',
+  },
+  {
     name: 'Lorem Ipsum',
     description: 'Generate placeholder text quickly.',
     category: 'Text',
