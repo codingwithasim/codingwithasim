@@ -1,24 +1,24 @@
 'use client';
 
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { Copy, RefreshCw, SendHorizonal, Sparkles, X } from 'lucide-react';
+import { Copy, RefreshCw, SendHorizonal, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
+import { Toggle } from '../ui/toggle';
 
 const METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'] as const;
 const REQUEST_TABS = ['Params', 'Headers', 'Body'] as const;
 const RESPONSE_TABS = ['Body', 'Headers'] as const;
 
-const createRow = () => ({ id: crypto.randomUUID(), key: '', value: '', enabled: true });
+const createRow = () => ({ id: crypto.randomUUID(), key: '', value: '', description: '', enabled: true });
 
 type KeyValueRow = ReturnType<typeof createRow>;
-type RequestTab = (typeof REQUEST_TABS)[number];
-type ResponseTab = (typeof RESPONSE_TABS)[number];
 
 type BodyType = 'none' | 'json' | 'text';
 
@@ -67,6 +67,40 @@ const stringifyHeaders = (headers: Record<string, string>) => {
   return lines.join('\n');
 };
 
+const countEnabled = (rows: KeyValueRow[]) => rows.filter((row) => row.enabled && row.key.trim()).length;
+
+const tokenColors = {
+  key: 'text-purple-700 dark:text-purple-300',
+  string: 'text-green-700 dark:text-green-300',
+  number: 'text-blue-700 dark:text-blue-300',
+  boolean: 'text-yellow-700 dark:text-yellow-300',
+  null: 'text-slate-500 dark:text-slate-400',
+};
+
+const escapeHtml = (input: string) =>
+  input
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+const syntaxHighlightJson = (json: string) => {
+  const escaped = escapeHtml(json);
+  return escaped.replace(
+    /("(\\u[a-fA-F0-9]{4}|\\[^u]|[^\\"])*"(?:\s*:)?|\btrue\b|\bfalse\b|\bnull\b|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)/g,
+    (match) => {
+      let cls = tokenColors.number;
+      if (match.startsWith('"')) {
+        cls = match.endsWith(':') ? tokenColors.key : tokenColors.string;
+      } else if (match === 'true' || match === 'false') {
+        cls = tokenColors.boolean;
+      } else if (match === 'null') {
+        cls = tokenColors.null;
+      }
+      return `<span class="${cls}">${match}</span>`;
+    }
+  );
+};
+
 export default function ApiTesterTool() {
   const [method, setMethod] = useState<(typeof METHODS)[number]>('GET');
   const [url, setUrl] = useState('');
@@ -74,8 +108,6 @@ export default function ApiTesterTool() {
   const [headers, setHeaders] = useState<KeyValueRow[]>([createRow()]);
   const [bodyType, setBodyType] = useState<BodyType>('none');
   const [bodyText, setBodyText] = useState('');
-  const [requestTab, setRequestTab] = useState<RequestTab>('Params');
-  const [responseTab, setResponseTab] = useState<ResponseTab>('Body');
   const [prettyJson, setPrettyJson] = useState(true);
   const [isSending, setIsSending] = useState(false);
   const [response, setResponse] = useState<ResponseState>(emptyResponse);
@@ -108,6 +140,44 @@ export default function ApiTesterTool() {
     }
   }, [prettyJson, response.body, response.headers]);
 
+  const responseBodyHighlighted = useMemo(() => {
+    if (!responseBodyView) return '';
+    const contentType = response.headers['content-type'] ?? '';
+    if (!contentType.includes('application/json')) return '';
+    return syntaxHighlightJson(responseBodyView);
+  }, [responseBodyView, response.headers]);
+
+  const paramsCount = useMemo(() => countEnabled(params), [params]);
+  const headersCount = useMemo(() => countEnabled(headers), [headers]);
+
+  const methodTone = useMemo(() => {
+    switch (method) {
+      case 'GET':
+        return 'border-emerald-200 text-emerald-700 dark:border-emerald-500/40 dark:text-emerald-200';
+      case 'POST':
+        return 'border-sky-200 text-sky-700 dark:border-sky-500/40 dark:text-sky-200';
+      case 'PUT':
+        return 'border-amber-200 text-amber-700 dark:border-amber-500/40 dark:text-amber-200';
+      case 'PATCH':
+        return 'border-violet-200 text-violet-700 dark:border-violet-500/40 dark:text-violet-200';
+      case 'DELETE':
+        return 'border-rose-200 text-rose-700 dark:border-rose-500/40 dark:text-rose-200';
+      default:
+        return 'border-slate-200 text-slate-600 dark:border-slate-700 dark:text-slate-300';
+    }
+  }, [method]);
+
+  const statusTone = useMemo(() => {
+    if (!response.status) return 'border-slate-200 text-slate-500 bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:bg-slate-900';
+    if (response.status >= 200 && response.status < 300) {
+      return 'border-emerald-200 text-emerald-700 bg-emerald-50 dark:border-emerald-500/40 dark:text-emerald-200 dark:bg-emerald-500/10';
+    }
+    if (response.status >= 300 && response.status < 400) {
+      return 'border-amber-200 text-amber-700 bg-amber-50 dark:border-amber-500/40 dark:text-amber-200 dark:bg-amber-500/10';
+    }
+    return 'border-rose-200 text-rose-700 bg-rose-50 dark:border-rose-500/40 dark:text-rose-200 dark:bg-rose-500/10';
+  }, [response.status]);
+
   const handleAddRow = useCallback((setter: React.Dispatch<React.SetStateAction<KeyValueRow[]>>) => {
     setter((prev) => [...prev, createRow()]);
   }, []);
@@ -117,7 +187,7 @@ export default function ApiTesterTool() {
   }, []);
 
   const handleRowChange = useCallback(
-    (setter: React.Dispatch<React.SetStateAction<KeyValueRow[]>>, id: string, key: 'key' | 'value') =>
+    (setter: React.Dispatch<React.SetStateAction<KeyValueRow[]>>, id: string, key: 'key' | 'value' | 'description') =>
       (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setter((prev) => prev.map((row) => (row.id === id ? { ...row, [key]: value } : row)));
@@ -246,39 +316,31 @@ export default function ApiTesterTool() {
 
   return (
     <section className="space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.35em] text-slate-500 dark:text-slate-400">
-            <Sparkles size={12} />
-            API Tool
-          </div>
-          <h1 className="text-3xl font-semibold text-slate-900 dark:text-white">API Tester</h1>
-          <p className="max-w-2xl text-sm text-slate-500 dark:text-slate-400">
-            Test REST APIs with headers, params, and JSON bodies. Requests run locally in your browser.
-          </p>
+      <header className="flex flex-wrap items-center justify-between gap-3">
+        <div className="space-y-1">
+          <h1 className="text-2xl font-semibold text-slate-900 dark:text-white">API Tester</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400">Minimal Postman-style request workspace.</p>
         </div>
-        <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-400 dark:text-slate-500">
-          <Badge variant="outline" className="border-slate-200 bg-white text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
+        <div className="flex items-center gap-2 text-xs">
+          <span className="rounded-md border border-slate-200 bg-white px-3 py-1 text-[11px] font-medium text-slate-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-400">
+            No Environment
+          </span>
+          <Badge variant="outline" className="text-[10px] uppercase tracking-[0.2em]">
             Client-side
           </Badge>
-          <Badge variant="outline" className="border-slate-200 bg-white text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
-            Postman-like
-          </Badge>
-          <Badge variant="outline" className="border-slate-200 bg-white text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
-            No tracking
-          </Badge>
         </div>
-      </div>
+      </header>
 
-      <Card className="rounded-2xl border border-slate-200/70 bg-white/90 shadow-none dark:border-slate-800 dark:bg-slate-900/70">
-        <CardContent className="space-y-6 p-5">
-          <div className="grid gap-3 rounded-xl border border-slate-200 bg-white/70 p-3 dark:border-slate-800 dark:bg-slate-950/40 lg:grid-cols-[120px_1fr_auto]">
+      <Card className="border-slate-200 shadow-none dark:border-slate-800">
+        <Tabs defaultValue="params" className="space-y-0">
+          <CardHeader className="space-y-3">
+          <div className="grid gap-3 lg:grid-cols-[120px_1fr_auto] items-center">
             <div className="space-y-1">
-              <Label className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-slate-400">Method</Label>
+              <Label className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Method</Label>
               <select
                 value={method}
                 onChange={(event) => setMethod(event.target.value as (typeof METHODS)[number])}
-                className="h-10 w-full rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-700 shadow-none dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100"
+                className={`h-9 w-full rounded-md border bg-white px-3 text-xs font-semibold uppercase tracking-[0.2em] shadow-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-300 dark:bg-slate-950 ${methodTone}`}
               >
                 {METHODS.map((item) => (
                   <option key={item} value={item}>
@@ -289,7 +351,7 @@ export default function ApiTesterTool() {
             </div>
 
             <div className="space-y-1">
-              <Label htmlFor="api-url" className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-slate-400">
+              <Label htmlFor="api-url" className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
                 Request URL
               </Label>
               <Input
@@ -297,315 +359,319 @@ export default function ApiTesterTool() {
                 value={url}
                 onChange={(event) => setUrl(event.target.value)}
                 placeholder="https://api.example.com/v1/users"
-                className="h-10 bg-white/70 text-sm text-slate-700 shadow-none dark:bg-slate-950/40 dark:text-slate-100"
+                className="h-9 rounded-md border-slate-200 bg-white text-sm text-slate-700 shadow-none focus-visible:ring-1 focus-visible:ring-slate-300 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
               />
             </div>
 
-            <div className="flex items-end gap-2">
+            <div className="flex flex-wrap h-full items-end gap-2">
               <Button
                 type="button"
                 onClick={handleSend}
                 disabled={isSending}
-                className="h-10 rounded-md bg-slate-900 px-5 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:scale-100 active:scale-100 hover:bg-slate-800"
+                className="h-9 rounded-md bg-slate-900 px-5 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-none hover:bg-slate-800"
               >
-                <SendHorizonal size={12} />
+                <SendHorizonal size={14} />
                 {isSending ? 'Sending' : 'Send'}
               </Button>
               <Button
                 type="button"
                 variant="outline"
                 onClick={isSending ? handleCancel : handleReset}
-                className="h-10 rounded-md border-slate-200 bg-white text-xs text-slate-600 hover:scale-100 active:scale-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300"
+                className="h-9 rounded-md border-slate-200 bg-white text-xs font-semibold uppercase tracking-[0.2em] text-slate-600 shadow-none hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300"
               >
                 {isSending ? <X size={12} /> : <RefreshCw size={12} />}
-                {isSending ? 'Cancel' : 'Clear'}
+                {isSending ? 'Cancel' : 'Reset'}
               </Button>
             </div>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="space-y-4">
-              <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-400">
-                {REQUEST_TABS.map((tab) => (
-                  <button
-                    key={tab}
-                    type="button"
-                    onClick={() => setRequestTab(tab)}
-                    className={`rounded-md border px-3 py-2 text-[0.65rem] transition ${
-                      requestTab === tab
-                        ? 'border-sky-200 bg-sky-50 text-sky-700 dark:border-sky-500/40 dark:bg-sky-500/10 dark:text-sky-200'
-                        : 'border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:text-slate-800 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-white'
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                ))}
+          <TabsList className="w-fit">
+              {REQUEST_TABS.map((tab) => (
+                <TabsTrigger
+                  key={tab}
+                  value={tab.toLocaleLowerCase()}
+                >
+                  {tab}
+                  {tab === 'Params' && paramsCount ? <span className="ml-2 text-[10px]">{paramsCount}</span> : null}
+                  {tab === 'Headers' && headersCount ? <span className="ml-2 text-[10px]">{headersCount}</span> : null}
+                </TabsTrigger>
+              ))}
+          </TabsList>
+          
+        </CardHeader>
+
+        
+
+        <CardContent className="space-y-4">
+          <TabsContent value="params" className="mt-0">
+            <div className="space-y-3">
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <h3 className="text-sm font-medium text-slate-900 dark:text-white">Query Params</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Key/value pairs appended to the URL.</p>
+                </div>
+                <Button type="button" variant="outline" size="sm" onClick={() => handleAddRow(setParams)}>
+                  Add Param
+                </Button>
               </div>
 
-              {requestTab === 'Params' ? (
-                <div className="space-y-3">
+              <div className="overflow-hidden rounded-md border border-slate-200 dark:border-slate-800">
+                <div className="grid gap-3 bg-slate-50 px-3 py-2 text-[11px] font-medium text-slate-400 dark:bg-slate-900/40 dark:text-slate-500 sm:grid-cols-[24px_1fr_1fr_1fr_90px]">
+                  <span />
+                  <span>Key</span>
+                  <span>Value</span>
+                  <span>Description</span>
+                  <span className="text-right">Action</span>
+                </div>
+                <div className="divide-y divide-slate-200 dark:divide-slate-800">
                   {params.map((row) => (
-                    <div key={row.id} className="grid gap-2 rounded-lg border border-slate-200 bg-white/70 p-3 dark:border-slate-800 dark:bg-slate-950/40 sm:grid-cols-[24px_1fr_1fr_auto]">
+                    <div key={row.id} className="grid gap-3 px-3 py-2 sm:grid-cols-[24px_1fr_1fr_1fr_90px]">
                       <input
                         type="checkbox"
                         checked={row.enabled}
                         onChange={handleToggleRow(setParams, row.id)}
-                        className="mt-2 h-4 w-4 rounded border-slate-300 text-sky-600 dark:border-slate-700"
+                        className="mt-2 h-4 w-4 rounded border-slate-300 text-slate-900 dark:border-slate-700"
                       />
                       <Input
                         value={row.key}
                         onChange={handleRowChange(setParams, row.id, 'key')}
                         placeholder="key"
-                        className="h-9 bg-white/70 text-sm text-slate-700 shadow-none dark:bg-slate-950/40 dark:text-slate-100"
+                        className="h-8 rounded-md border-slate-200 bg-white text-sm text-slate-700 shadow-none dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
                       />
                       <Input
                         value={row.value}
                         onChange={handleRowChange(setParams, row.id, 'value')}
                         placeholder="value"
-                        className="h-9 bg-white/70 text-sm text-slate-700 shadow-none dark:bg-slate-950/40 dark:text-slate-100"
+                        className="h-8 rounded-md border-slate-200 bg-white text-sm text-slate-700 shadow-none dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+                      />
+                      <Input
+                        value={row.description}
+                        onChange={handleRowChange(setParams, row.id, 'description')}
+                        placeholder="description"
+                        className="h-8 rounded-md border-slate-200 bg-white text-sm text-slate-700 shadow-none dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
                       />
                       <Button
                         type="button"
-                        variant="outline"
+                        variant="ghost"
+                        size="sm"
                         onClick={() => handleRemoveRow(setParams, row.id)}
-                        className="h-9 rounded-md border-slate-200 bg-white text-xs text-slate-600 hover:scale-100 active:scale-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300"
+                        className="text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                       >
                         Remove
                       </Button>
                     </div>
                   ))}
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => handleAddRow(setParams)}
-                    className="h-9 rounded-md border-slate-200 bg-white text-xs text-slate-600 hover:scale-100 active:scale-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300"
-                  >
-                    Add Param
-                  </Button>
                 </div>
-              ) : null}
+              </div>
+            </div>
+          </TabsContent>
 
-              {requestTab === 'Headers' ? (
-                <div className="space-y-3">
+          <TabsContent value="headers" className="mt-0">
+            <div className="space-y-3">
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <h3 className="text-sm font-medium text-slate-900 dark:text-white">Request Headers</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Custom headers sent with the request.</p>
+                </div>
+                <Button type="button" variant="outline" size="sm" onClick={() => handleAddRow(setHeaders)}>
+                  Add Header
+                </Button>
+              </div>
+
+              <div className="overflow-hidden rounded-md border border-slate-200 dark:border-slate-800">
+                <div className="grid gap-3 bg-slate-50 px-3 py-2 text-[11px] font-medium text-slate-400 dark:bg-slate-900/40 dark:text-slate-500 sm:grid-cols-[24px_1fr_1fr_1fr_90px]">
+                  <span />
+                  <span>Header</span>
+                  <span>Value</span>
+                  <span>Description</span>
+                  <span className="text-right">Action</span>
+                </div>
+                <div className="divide-y divide-slate-200 dark:divide-slate-800">
                   {headers.map((row) => (
-                    <div key={row.id} className="grid gap-2 rounded-lg border border-slate-200 bg-white/70 p-3 dark:border-slate-800 dark:bg-slate-950/40 sm:grid-cols-[24px_1fr_1fr_auto]">
+                    <div key={row.id} className="grid gap-3 px-3 py-2 sm:grid-cols-[24px_1fr_1fr_1fr_90px]">
                       <input
                         type="checkbox"
                         checked={row.enabled}
                         onChange={handleToggleRow(setHeaders, row.id)}
-                        className="mt-2 h-4 w-4 rounded border-slate-300 text-sky-600 dark:border-slate-700"
+                        className="mt-2 h-4 w-4 rounded border-slate-300 text-slate-900 dark:border-slate-700"
                       />
                       <Input
                         value={row.key}
                         onChange={handleRowChange(setHeaders, row.id, 'key')}
                         placeholder="Header"
-                        className="h-9 bg-white/70 text-sm text-slate-700 shadow-none dark:bg-slate-950/40 dark:text-slate-100"
+                        className="h-8 rounded-md border-slate-200 bg-white text-sm text-slate-700 shadow-none dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
                       />
                       <Input
                         value={row.value}
                         onChange={handleRowChange(setHeaders, row.id, 'value')}
                         placeholder="Value"
-                        className="h-9 bg-white/70 text-sm text-slate-700 shadow-none dark:bg-slate-950/40 dark:text-slate-100"
+                        className="h-8 rounded-md border-slate-200 bg-white text-sm text-slate-700 shadow-none dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+                      />
+                      <Input
+                        value={row.description}
+                        onChange={handleRowChange(setHeaders, row.id, 'description')}
+                        placeholder="description"
+                        className="h-8 rounded-md border-slate-200 bg-white text-sm text-slate-700 shadow-none dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
                       />
                       <Button
                         type="button"
-                        variant="outline"
+                        variant="ghost"
+                        size="sm"
                         onClick={() => handleRemoveRow(setHeaders, row.id)}
-                        className="h-9 rounded-md border-slate-200 bg-white text-xs text-slate-600 hover:scale-100 active:scale-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300"
+                        className="text-[11px] font-semibold uppercase tracking-[0.15em] text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                       >
                         Remove
                       </Button>
                     </div>
                   ))}
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => handleAddRow(setHeaders)}
-                    className="h-9 rounded-md border-slate-200 bg-white text-xs text-slate-600 hover:scale-100 active:scale-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300"
-                  >
-                    Add Header
-                  </Button>
-                </div>
-              ) : null}
-
-              {requestTab === 'Body' ? (
-                <div className="space-y-3">
-                  <div className="flex flex-wrap gap-2">
-                    {(['none', 'json', 'text'] as BodyType[]).map((type) => (
-                      <button
-                        key={type}
-                        type="button"
-                        onClick={() => setBodyType(type)}
-                        className={`rounded-md border px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.25em] transition ${
-                          bodyType === type
-                            ? 'border-sky-200 bg-sky-50 text-sky-700 dark:border-sky-500/40 dark:bg-sky-500/10 dark:text-sky-200'
-                            : 'border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:text-slate-800 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-white'
-                        }`}
-                      >
-                        {type}
-                      </button>
-                    ))}
-                  </div>
-                  {bodyType === 'none' ? (
-                    <p className="text-sm text-slate-400">No request body for this method.</p>
-                  ) : (
-                    <Textarea
-                      value={bodyText}
-                      onChange={(event) => setBodyText(event.target.value)}
-                      placeholder={bodyType === 'json' ? '{"name": "Ada"}' : 'Raw text body'}
-                      className="min-h-[180px] bg-white/70 font-mono text-sm text-slate-800 shadow-none focus-visible:ring-1 focus-visible:ring-sky-200 dark:bg-slate-950/40 dark:text-slate-100"
-                      spellCheck={false}
-                    />
-                  )}
-                </div>
-              ) : null}
-
-              <div className="rounded-lg border border-slate-200 bg-white/70 p-4 text-xs text-slate-500 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-300">
-                <div className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-slate-400">Request Preview</div>
-                <div className="mt-3 space-y-2 text-sm">
-                  <div className="flex items-center justify-between">
-                    <span>Resolved URL</span>
-                    <span className="font-mono text-slate-700 dark:text-slate-100 truncate">{requestUrl || '-'}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Body Type</span>
-                    <span className="font-mono text-slate-700 dark:text-slate-100">{bodyType}</span>
-                  </div>
                 </div>
               </div>
             </div>
+          </TabsContent>
 
-            <div className="space-y-4">
-              <div className="rounded-xl border border-slate-200 bg-white/80 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-950/50">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <div>
-                    <div className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-slate-400">Response</div>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                      Status {response.status ?? '-'} {response.statusText}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3 text-xs text-slate-400">
-                    <span>{response.timeMs ? `${response.timeMs} ms` : '-'}</span>
-                    <span>{response.size ? `${response.size} bytes` : '-'}</span>
-                  </div>
+          <TabsContent value="body" className="mt-0">
+            <div className="space-y-3">
+              <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <h3 className="text-sm font-medium text-slate-900 dark:text-white">Request Body</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Payload for POST, PUT, or PATCH requests.</p>
                 </div>
-
-                {response.error ? <p className="mt-3 text-sm text-rose-500">{response.error}</p> : null}
-
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {RESPONSE_TABS.map((tab) => (
-                    <button
-                      key={tab}
+                <div className="inline-flex rounded-md border border-slate-200 bg-white p-1 dark:border-slate-700 dark:bg-slate-950">
+                  {(['none', 'json', 'text'] as BodyType[]).map((type) => (
+                    <Button
+                      key={type}
                       type="button"
-                      onClick={() => setResponseTab(tab)}
-                      className={`rounded-md border px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.25em] transition ${
-                        responseTab === tab
-                          ? 'border-sky-200 bg-sky-50 text-sky-700 dark:border-sky-500/40 dark:bg-sky-500/10 dark:text-sky-200'
-                          : 'border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:text-slate-800 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:text-white'
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setBodyType(type)}
+                      className={`rounded-md px-3 text-[10px] font-semibold uppercase tracking-[0.2em] ${
+                        bodyType === type
+                          ? 'bg-slate-900 text-white hover:bg-slate-900 dark:bg-white dark:text-slate-900'
+                          : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
                       }`}
                     >
-                      {tab}
-                    </button>
+                      {type}
+                    </Button>
                   ))}
-                  <label className="ml-auto flex items-center gap-2 text-[0.65rem] uppercase tracking-[0.25em] text-slate-400">
-                    <input
-                      type="checkbox"
-                      checked={prettyJson}
-                      onChange={(event) => setPrettyJson(event.target.checked)}
-                      className="h-3.5 w-3.5 rounded border-slate-300 text-sky-600 dark:border-slate-700"
-                    />
-                    Pretty JSON
-                  </label>
-                </div>
-
-                {responseTab === 'Body' ? (
-                  <div className="mt-4 rounded-md border border-slate-200 bg-white/70 p-3 font-mono text-xs text-slate-700 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-200">
-                    <pre className="whitespace-pre-wrap break-words">{responseBodyView || 'Response body will appear here.'}</pre>
-                  </div>
-                ) : null}
-
-                {responseTab === 'Headers' ? (
-                  <div className="mt-4 rounded-md border border-slate-200 bg-white/70 p-3 font-mono text-xs text-slate-700 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-200">
-                    <pre className="whitespace-pre-wrap break-words">{stringifyHeaders(response.headers) || 'Response headers will appear here.'}</pre>
-                  </div>
-                ) : null}
-
-                <div className="mt-4 flex flex-wrap gap-2">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => handleCopy('response body', response.body)}
-                    className="h-8 rounded-md border-slate-200 bg-white text-[0.65rem] text-slate-600 hover:scale-100 active:scale-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300"
-                  >
-                    <Copy size={12} />
-                    Copy Body
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => handleCopy('response headers', stringifyHeaders(response.headers))}
-                    className="h-8 rounded-md border-slate-200 bg-white text-[0.65rem] text-slate-600 hover:scale-100 active:scale-100 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300"
-                  >
-                    <Copy size={12} />
-                    Copy Headers
-                  </Button>
                 </div>
               </div>
+              {bodyType === 'none' ? (
+                <div className="rounded-md border border-dashed border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900/40 dark:text-slate-400">
+                  This request does not include a body.
+                </div>
+              ) : (
+                <Textarea
+                  value={bodyText}
+                  onChange={(event) => setBodyText(event.target.value)}
+                  placeholder={bodyType === 'json' ? '{"name": "Ada"}' : 'Raw text body'}
+                  className="min-h-[220px] rounded-md border-slate-200 bg-white font-mono text-xs text-slate-800 shadow-none focus-visible:ring-1 focus-visible:ring-slate-300 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+                  spellCheck={false}
+                />
+              )}
+            </div>
+          </TabsContent>
 
-              <div className="rounded-lg border border-slate-200 bg-white/70 p-4 text-xs text-slate-500 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-300">
-                <div className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-slate-400">Note</div>
-                <p className="mt-2 text-sm">
-                  Some APIs block browser requests due to CORS. If a request fails, try the same endpoint in a server or proxy.
-                </p>
-              </div>
+          <div className="rounded-md border border-dashed border-slate-200 bg-slate-50/70 p-3 text-xs text-slate-500 dark:border-slate-800 dark:bg-slate-900/40 dark:text-slate-400">
+            <div className="flex items-center justify-between gap-3">
+              <span>Resolved URL</span>
+              <span className="max-w-[60%] truncate font-mono text-slate-700 dark:text-slate-100">{requestUrl || '-'}</span>
+            </div>
+            <div className="mt-2 flex items-center justify-between">
+              <span>Body Type</span>
+              <span className="font-mono text-slate-700 dark:text-slate-100">{bodyType}</span>
             </div>
           </div>
         </CardContent>
+        </Tabs>
       </Card>
 
-      <section className="grid gap-6 md:grid-cols-2">
-        <Card className="rounded-lg border border-slate-200 bg-white/90 shadow-none dark:border-slate-800 dark:bg-slate-900/60">
-          <CardContent className="space-y-2 p-5">
-            <h2 className="text-base font-semibold text-slate-900 dark:text-white">What is an API tester?</h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              An API tester lets you send HTTP requests to endpoints and inspect the response. It is useful for debugging REST APIs,
-              checking payloads, and validating headers.
-            </p>
-          </CardContent>
-        </Card>
+      <Card className="border-slate-200 shadow-none dark:border-slate-800">
+        <Tabs defaultValue="body" className="space-y-0">
+          <CardHeader className="space-y-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <CardTitle className="text-base text-slate-900 dark:text-white">Response</CardTitle>
+                <CardDescription className="text-xs text-slate-500 dark:text-slate-400">
+                  Status, headers, and response body preview.
+                </CardDescription>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                <span className={`rounded-md border px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] ${statusTone}`}>
+                  {response.status ? `${response.status}` : 'No status'}
+                </span>
+                <span>{response.timeMs ? `${response.timeMs} ms` : '-'}</span>
+                <span>{response.size ? `${response.size} bytes` : '-'}</span>
+              </div>
+            </div>
 
-        <Card className="rounded-lg border border-slate-200 bg-white/90 shadow-none dark:border-slate-800 dark:bg-slate-900/60">
-          <CardContent className="space-y-2 p-5">
-            <h2 className="text-base font-semibold text-slate-900 dark:text-white">How to use this API tester</h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              Choose a method, enter a URL, add headers or params, and send the request. The response panel shows status, headers, and
-              body output.
-            </p>
-          </CardContent>
-        </Card>
+            {response.error ? (
+              <div className="rounded-md border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-600 dark:border-rose-500/40 dark:bg-rose-500/10 dark:text-rose-200">
+                {response.error}
+              </div>
+            ) : null}
 
-        <Card className="rounded-lg border border-slate-200 bg-white/90 shadow-none dark:border-slate-800 dark:bg-slate-900/60">
-          <CardContent className="space-y-3 p-5">
-            <h2 className="text-base font-semibold text-slate-900 dark:text-white">Common REST requests</h2>
-            <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-              <li><span className="font-mono">GET</span> - fetch data</li>
-              <li><span className="font-mono">POST</span> - create a resource</li>
-              <li><span className="font-mono">PATCH</span> - update fields</li>
-              <li><span className="font-mono">DELETE</span> - remove a resource</li>
-            </ul>
-          </CardContent>
-        </Card>
+            <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-2 text-xs dark:border-slate-800">
+              <TabsList className="w-fit">
+                {RESPONSE_TABS.map((tab) => (
+                  <TabsTrigger key={tab} value={tab.toLocaleLowerCase()}>
+                    {tab}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
 
-        <Card className="rounded-lg border border-slate-200 bg-white/90 shadow-none dark:border-slate-800 dark:bg-slate-900/60">
-          <CardContent className="space-y-2 p-5">
-            <h2 className="text-base font-semibold text-slate-900 dark:text-white">Why test APIs locally</h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              Running requests in the browser is fast and private. You can validate responses quickly before integrating them into your
-              app.
-            </p>
+              <Toggle
+                variant={"outline"} 
+                size={"sm"}
+                onClick={() => setPrettyJson((prev) => !prev)}
+                className='ml-auto cursor-pointer'>
+                  Pretty JSON
+              </Toggle>
+
+            </div>
+          </CardHeader>
+
+        <CardContent>
+          <TabsContent value="body" className="mt-0">
+            <div className="rounded-md border border-slate-200 bg-white px-3 py-2 font-mono text-xs text-slate-700 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200">
+              <pre className="max-h-[360px] overflow-auto whitespace-pre-wrap break-words">
+                {responseBodyHighlighted ? (
+                    <code dangerouslySetInnerHTML={{ __html: responseBodyHighlighted }} />
+                  ) : (
+                    responseBodyView || 'Response body will appear here.'
+                  )}
+                </pre>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="headers" className="mt-0">
+            <div className="rounded-md border border-slate-200 bg-white px-3 py-2 font-mono text-xs text-slate-700 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200">
+              <pre className="max-h-[360px] overflow-auto whitespace-pre-wrap break-words">
+                {stringifyHeaders(response.headers) || 'Response headers will appear here.'}
+                </pre>
+              </div>
+            </TabsContent>
           </CardContent>
-        </Card>
-      </section>
+
+          <CardFooter className="flex flex-wrap gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => handleCopy('response body', response.body)}
+            >
+              <Copy size={12} />
+              Copy Body
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => handleCopy('response headers', stringifyHeaders(response.headers))}
+            >
+              <Copy size={12} />
+              Copy Headers
+            </Button>
+          </CardFooter>
+        </Tabs>
+      </Card>
     </section>
   );
 }

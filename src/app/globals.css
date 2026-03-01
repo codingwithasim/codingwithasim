@@ -536,3 +536,7 @@ pre {
   --tw-scale-x: 1 !important;
   --tw-scale-y: 1 !important;
 }
+
+.tools-scope .container-custom {
+  max-width: 1400px;
+}

@@ -34,14 +34,6 @@ const tools: Tool[] = [
     isPopular: true,
   },
   {
-    name: 'Base64 Encoder',
-    description: 'Encode and decode Base64 strings.',
-    category: 'Converters',
-    icon: '64',
-    href: '/tools/base64',
-    isPopular: true,
-  },
-  {
     name: 'JWT Decoder',
     description: 'Inspect JWT headers and payloads.',
     category: 'Security',
@@ -56,13 +48,6 @@ const tools: Tool[] = [
     href: '/tools/api-tester',
   },
   {
-    name: 'URL Encoder',
-    description: 'Encode and decode URL strings.',
-    category: 'Converters',
-    icon: '%',
-    href: '/tools/url-encoder',
-  },
-  {
     name: 'Lorem Ipsum',
     description: 'Generate placeholder text quickly.',
     category: 'Text',
@@ -75,27 +60,6 @@ const tools: Tool[] = [
     category: 'Developer',
     icon: '.*',
     href: '/tools/regex-tester',
-  },
-  {
-    name: 'SHA-256 Hash',
-    description: 'Hash text using SHA-256.',
-    category: 'Security',
-    icon: 'SHA',
-    href: '/tools/sha256',
-  },
-  {
-    name: 'Color Converter',
-    description: 'Convert HEX, RGB, and HSL.',
-    category: 'Utilities',
-    icon: 'HEX',
-    href: '/tools/color-converter',
-  },
-  {
-    name: 'Case Converter',
-    description: 'Switch between camel, snake, and more.',
-    category: 'Text',
-    icon: 'Aa',
-    href: '/tools/case-converter',
   },
   {
     name: 'Markdown Preview',
@@ -220,7 +184,7 @@ export default function ToolsPage() {
               <input
                 type="text"
                 aria-label="Search tools"
-                placeholder="Search tools... (PDF, Base64, UUID, QR code)"
+                placeholder="Search tools... (JSON, UUID, JWT, Markdown)"
                 className="h-14 w-full rounded-xl border border-slate-200 bg-white pl-12 pr-10 text-sm text-slate-800 shadow-[0_10px_24px_rgba(15,23,42,0.06)] outline-none transition focus:border-sky-300 focus:ring-2 focus:ring-sky-200 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-sky-500 dark:focus:ring-sky-500/30"
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
