@@ -55,6 +55,13 @@ const tools: Tool[] = [
     href: '/tools/api-tester',
   },
   {
+    name: 'Curl → Fetch',
+    description: 'Paste curl → get JS fetch code.',
+    category: 'Developer',
+    icon: 'CURL',
+    href: '/tools/curl-to-fetch',
+  },
+  {
     name: 'URL Encoder / Decoder',
     description: 'Encode or decode URL components instantly.',
     category: 'Converters',
