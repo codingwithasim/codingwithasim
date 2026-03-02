@@ -110,6 +110,13 @@ const tools: Tool[] = [
     icon: 'SQL',
     href: '/tools/sql-formatter',
   },
+  {
+    name: 'JSON → TypeScript',
+    description: 'Convert JSON into TypeScript interfaces.',
+    category: 'Developer',
+    icon: 'TS',
+    href: '/tools/json-to-ts',
+  },
 ];
 
 const ToolCard = ({ tool, variant = 'default' }: { tool: Tool; variant?: 'default' | 'popular' }) => {
