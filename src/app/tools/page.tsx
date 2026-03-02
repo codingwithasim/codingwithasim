@@ -117,6 +117,13 @@ const tools: Tool[] = [
     icon: 'TS',
     href: '/tools/json-to-ts',
   },
+  {
+    name: 'Diff Checker',
+    description: 'Compare two texts and highlight differences.',
+    category: 'Developer',
+    icon: 'DIFF',
+    href: '/tools/diff-checker',
+  },
 ];
 
 const ToolCard = ({ tool, variant = 'default' }: { tool: Tool; variant?: 'default' | 'popular' }) => {
