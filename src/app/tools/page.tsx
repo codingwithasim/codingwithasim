@@ -96,6 +96,13 @@ const tools: Tool[] = [
     icon: 'TIME',
     href: '/tools/timestamp',
   },
+  {
+    name: 'SQL Formatter',
+    description: 'Format SQL with clean structure and keyword highlighting.',
+    category: 'Developer',
+    icon: 'SQL',
+    href: '/tools/sql-formatter',
+  },
 ];
 
 const ToolCard = ({ tool, variant = 'default' }: { tool: Tool; variant?: 'default' | 'popular' }) => {
@@ -206,7 +213,7 @@ export default function ToolsPage() {
                 type="text"
                 aria-label="Search tools"
                 placeholder="Search tools... (JSON, UUID, JWT, Markdown)"
-                className="h-14 w-full rounded-xl border border-slate-200 bg-white pl-12 pr-10 text-sm text-slate-800 shadow-[0_10px_24px_rgba(15,23,42,0.06)] outline-none transition focus:border-sky-300 focus:ring-2 focus:ring-sky-200 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-sky-500 dark:focus:ring-sky-500/30"
+                className="h-14 w-full rounded-xl border border-slate-300 bg-white pl-12 pr-10 text-sm text-slate-800 outline-none transition focus:border-sky-300 focus:ring-2 focus:ring-sky-200 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-sky-500 dark:focus:ring-sky-500/30"
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
                 onKeyDown={(event) => {
