@@ -21,14 +21,14 @@ export const metadata: Metadata = {
       'Convert JSON into TypeScript interfaces instantly. Fast, client-side JSON to TS generator with syntax highlighting.',
     type: 'website',
     url: '/tools/json-to-ts',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'JSON → TypeScript Interface Generator | Toolbox',
     description:
       'Convert JSON into TypeScript interfaces instantly. Fast, client-side JSON to TS generator with syntax highlighting.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

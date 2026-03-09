@@ -35,14 +35,14 @@ export const metadata: Metadata = {
       'Simple, fast, and privacy-friendly online tools for everyday tasks. Convert, generate, format, and calculate in one place.',
     type: 'website',
     url: '/tools',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Free Online Tools | Toolbox',
     description:
       'Simple, fast, and privacy-friendly online tools for everyday tasks. Convert, generate, format, and calculate in one place.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

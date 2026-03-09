@@ -21,14 +21,14 @@ export const metadata: Metadata = {
       'Compare two texts line-by-line and word-by-word with clear highlights. Fast, client-side diff checker.',
     type: 'website',
     url: '/tools/diff-checker',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Diff Checker (Text Compare) | Toolbox',
     description:
       'Compare two texts line-by-line and word-by-word with clear highlights. Fast, client-side diff checker.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

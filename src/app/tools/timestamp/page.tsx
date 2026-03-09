@@ -15,14 +15,14 @@ export const metadata: Metadata = {
       'Convert Unix timestamps to readable dates and back. Switch between seconds and milliseconds instantly in your browser.',
     type: 'website',
     url: '/tools/timestamp',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Timestamp Converter | Toolbox',
     description:
       'Convert Unix timestamps to readable dates and back. Switch between seconds and milliseconds instantly in your browser.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

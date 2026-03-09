@@ -15,14 +15,14 @@ export const metadata: Metadata = {
       'Test REST APIs in your browser with headers, params, and JSON bodies. Inspect status, headers, and response data instantly.',
     type: 'website',
     url: '/tools/api-tester',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'API Tester | Toolbox',
     description:
       'Test REST APIs in your browser with headers, params, and JSON bodies. Inspect status, headers, and response data instantly.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

@@ -15,14 +15,14 @@ export const metadata: Metadata = {
       'Test regular expressions against text instantly. Highlight matches, inspect groups, and copy results in your browser.',
     type: 'website',
     url: '/tools/regex-tester',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Regex Tester | Toolbox',
     description:
       'Test regular expressions against text instantly. Highlight matches, inspect groups, and copy results in your browser.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

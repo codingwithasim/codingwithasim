@@ -15,14 +15,14 @@ export const metadata: Metadata = {
       'Preview Markdown live in your browser. Write, edit, and instantly see formatted output with zero backend calls.',
     type: 'website',
     url: '/tools/markdown-preview',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Markdown Preview | Toolbox',
     description:
       'Preview Markdown live in your browser. Write, edit, and instantly see formatted output with zero backend calls.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

@@ -15,14 +15,14 @@ export const metadata: Metadata = {
       'Generate clean lorem ipsum placeholder text in seconds. Create paragraphs, sentences, or words right in your browser.',
     type: 'website',
     url: '/tools/lorem-ipsum',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Lorem Ipsum Generator | Toolbox',
     description:
       'Generate clean lorem ipsum placeholder text in seconds. Create paragraphs, sentences, or words right in your browser.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

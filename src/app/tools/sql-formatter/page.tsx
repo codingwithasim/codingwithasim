@@ -22,14 +22,14 @@ export const metadata: Metadata = {
       'Format SQL queries with readable structure and keyword highlighting. Fast, client-side SQL formatter.',
     type: 'website',
     url: '/tools/sql-formatter',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'SQL Formatter | Toolbox',
     description:
       'Format SQL queries with readable structure and keyword highlighting. Fast, client-side SQL formatter.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

@@ -21,14 +21,14 @@ export const metadata: Metadata = {
       'Convert curl commands into browser-ready fetch snippets instantly. Fast, client-side curl to fetch converter.',
     type: 'website',
     url: '/tools/curl-to-fetch',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Curl → Fetch Converter | Toolbox',
     description:
       'Convert curl commands into browser-ready fetch snippets instantly. Fast, client-side curl to fetch converter.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

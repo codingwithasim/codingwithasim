@@ -23,14 +23,14 @@ export const metadata: Metadata = {
       'Format, validate, and minify JSON in your browser. Free JSON formatter with copy, download, and example data.',
     type: 'website',
     url: '/tools/json-formatter',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'JSON Formatter | Toolbox',
     description:
       'Format, validate, and minify JSON in your browser. Free JSON formatter with copy, download, and example data.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

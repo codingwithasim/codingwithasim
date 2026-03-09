@@ -15,14 +15,14 @@ export const metadata: Metadata = {
       'Generate UUID v4 identifiers instantly in your browser. Copy, download, and format UUIDs with zero backend calls.',
     type: 'website',
     url: '/tools/uuid-generator',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'UUID Generator | Toolbox',
     description:
       'Generate UUID v4 identifiers instantly in your browser. Copy, download, and format UUIDs with zero backend calls.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

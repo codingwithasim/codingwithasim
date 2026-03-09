@@ -23,14 +23,14 @@ export const metadata: Metadata = {
       'Convert between HEX, RGB, and HSL instantly in your browser. Fast, client-side color converter.',
     type: 'website',
     url: '/tools/color-converter',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Color Converter (HEX, RGB, HSL) | Toolbox',
     description:
       'Convert between HEX, RGB, and HSL instantly in your browser. Fast, client-side color converter.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

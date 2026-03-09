@@ -23,14 +23,14 @@ export const metadata: Metadata = {
       'Encode or decode URL components instantly in your browser. Fast, client-side URL encoder/decoder for text.',
     type: 'website',
     url: '/tools/url-encoder',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'URL Encoder / Decoder | Toolbox',
     description:
       'Encode or decode URL components instantly in your browser. Fast, client-side URL encoder/decoder for text.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 

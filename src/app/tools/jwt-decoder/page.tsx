@@ -15,14 +15,14 @@ export const metadata: Metadata = {
       'Decode JSON Web Tokens in your browser. Inspect headers, payloads, and claims instantly with no backend calls.',
     type: 'website',
     url: '/tools/jwt-decoder',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'JWT Decoder | Toolbox',
     description:
       'Decode JSON Web Tokens in your browser. Inspect headers, payloads, and claims instantly with no backend calls.',
-    images: ['/assets/og_image.png'],
+    images: ['/assets/og_tools.png'],
   },
 };
 
