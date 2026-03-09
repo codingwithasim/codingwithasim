@@ -1,8 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
+import { Poppins } from 'next/font/google';
 import { Button } from '@/components/ui/button';
 import ThemeToggle from '@/components/ui/ThemeToggle';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Free Online Tools | Toolbox',
@@ -41,7 +48,7 @@ export const metadata: Metadata = {
 
 export default function ToolsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="tools-scope -mt-16 min-h-screen bg-white text-slate-900 dark:bg-[#0b0f1a] dark:text-slate-100">
+    <div className={`${poppins.className} tools-scope -mt-16 min-h-screen text-slate-900 dark:text-slate-100`}>
       <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/85 backdrop-blur dark:border-slate-800/80 dark:bg-slate-950/80">
         <div className="container-custom flex items-center justify-between py-4">
           <Link href="/tools" className="flex items-center gap-3">

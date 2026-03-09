@@ -1,128 +1,162 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowUpRight, Search, Sparkles, X } from 'lucide-react';
+import { ArrowUpRight, LucideIcon, Search, Sparkles, X } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import {
+  Braces,
+  Fingerprint,
+  KeyRound,
+  Hash,
+  Cloud,
+  ArrowLeftRight,
+  Link2,
+  Palette,
+  FileText,
+  Regex,
+  FileCode,
+  Clock,
+  Database,
+  FileJson,
+  GitCompare,
+} from "lucide-react";
+import { Badge } from '@/components/ui/badge';
 
 type Tool = {
   name: string;
   description: string;
   category: string;
-  icon: string;
+  icon: LucideIcon;
   href: string;
   isPopular?: boolean;
+  styles: string
 };
 
 type SortMode = 'popular' | 'name';
 
 const tools: Tool[] = [
   {
-    name: 'JSON Formatter',
-    description: 'Format and validate JSON instantly.',
-    category: 'Developer',
-    icon: '{ }',
-    href: '/tools/json-formatter',
+    name: "JSON Formatter",
+    description: "Format and validate JSON instantly.",
+    category: "Developer",
+    icon: Braces,
+    href: "/tools/json-formatter",
     isPopular: true,
+    styles: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-500/10 dark:text-blue-200 dark:border-blue-500/40",
   },
   {
-    name: 'UUID Generator',
-    description: 'Generate UUID v4 identifiers instantly.',
-    category: 'Generators',
-    icon: 'UUID',
-    href: '/tools/uuid-generator',
+    name: "UUID Generator",
+    description: "Generate UUID v4 identifiers instantly.",
+    category: "Generators",
+    icon: Fingerprint,
+    href: "/tools/uuid-generator",
     isPopular: true,
+    styles: "bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-500/10 dark:text-purple-200 dark:border-purple-500/40",
   },
   {
-    name: 'JWT Decoder',
-    description: 'Inspect JWT headers and payloads.',
-    category: 'Security',
-    icon: 'JWT',
-    href: '/tools/jwt-decoder',
+    name: "JWT Decoder",
+    description: "Inspect JWT headers and payloads.",
+    category: "Security",
+    icon: KeyRound,
+    href: "/tools/jwt-decoder",
+    styles: "bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-500/10 dark:text-orange-200 dark:border-orange-500/40",
   },
   {
-    name: 'Hash Generator',
-    description: 'Generate MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes.',
-    category: 'Security',
-    icon: 'HASH',
-    href: '/tools/hash-generator',
+    name: "Hash Generator",
+    description: "Generate MD5, SHA-1, SHA-256, SHA-384, and SHA-512 hashes.",
+    category: "Security",
+    icon: Hash,
+    href: "/tools/hash-generator",
+    styles: "bg-red-50 w-13 text-red-700 border-red-200 dark:bg-red-500/10 dark:text-red-200 dark:border-red-500/40",
   },
   {
-    name: 'API Tester',
-    description: 'Send REST requests with headers and body.',
-    category: 'Developer',
-    icon: 'API',
-    href: '/tools/api-tester',
+    name: "API Tester",
+    description: "Send REST requests with headers and body.",
+    category: "Developer",
+    icon: Cloud,
+    href: "/tools/api-tester",
+    styles: "bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-500/10 dark:text-indigo-200 dark:border-indigo-500/40",
   },
   {
-    name: 'Curl → Fetch',
-    description: 'Paste curl → get JS fetch code.',
-    category: 'Developer',
-    icon: 'CURL',
-    href: '/tools/curl-to-fetch',
+    name: "Curl → Fetch",
+    description: "Paste curl → get JS fetch code.",
+    category: "Developer",
+    icon: ArrowLeftRight,
+    href: "/tools/curl-to-fetch",
+    styles: "bg-sky-50 text-sky-700 border-sky-200 dark:bg-sky-500/10 dark:text-sky-200 dark:border-sky-500/40",
   },
   {
-    name: 'URL Encoder / Decoder',
-    description: 'Encode or decode URL components instantly.',
-    category: 'Converters',
-    icon: '%',
-    href: '/tools/url-encoder',
+    name: "URL Encoder / Decoder",
+    description: "Encode or decode URL components instantly.",
+    category: "Converters",
+    icon: Link2,
+    href: "/tools/url-encoder",
+    styles: "bg-teal-50 text-teal-700 border-teal-200 dark:bg-teal-500/10 dark:text-teal-200 dark:border-teal-500/40",
   },
   {
-    name: 'Color Converter',
-    description: 'Convert between HEX, RGB, and HSL.',
-    category: 'Converters',
-    icon: 'HEX',
-    href: '/tools/color-converter',
+    name: "Color Converter",
+    description: "Convert between HEX, RGB, and HSL.",
+    category: "Converters",
+    icon: Palette,
+    href: "/tools/color-converter",
+    styles: "bg-pink-50 text-pink-700 border-pink-200 dark:bg-pink-500/10 dark:text-pink-200 dark:border-pink-500/40",
   },
   {
-    name: 'Lorem Ipsum',
-    description: 'Generate placeholder text quickly.',
-    category: 'Text',
-    icon: 'Aa',
-    href: '/tools/lorem-ipsum',
+    name: "Lorem Ipsum",
+    description: "Generate placeholder text quickly.",
+    category: "Text",
+    icon: FileText,
+    href: "/tools/lorem-ipsum",
+    styles: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-500/10 dark:text-amber-200 dark:border-amber-500/40",
   },
   {
-    name: 'Regex Tester',
-    description: 'Test patterns against sample text.',
-    category: 'Developer',
-    icon: '.*',
-    href: '/tools/regex-tester',
+    name: "Regex Tester",
+    description: "Test patterns against sample text.",
+    category: "Developer",
+    icon: Regex,
+    href: "/tools/regex-tester",
+    styles: "bg-green-50 text-green-700 border-green-200 dark:bg-green-500/10 dark:text-green-200 dark:border-green-500/40",
   },
   {
-    name: 'Markdown Preview',
-    description: 'Live preview Markdown output.',
-    category: 'Developer',
-    icon: '</>',
-    href: '/tools/markdown-preview',
+    name: "Markdown Preview",
+    description: "Live preview Markdown output.",
+    category: "Developer",
+    icon: FileCode,
+    href: "/tools/markdown-preview",
+    styles: "bg-cyan-50 text-cyan-700 border-cyan-200 dark:bg-cyan-500/10 dark:text-cyan-200 dark:border-cyan-500/40",
   },
   {
-    name: 'Timestamp Tool',
-    description: 'Convert Unix timestamps.',
-    category: 'Utilities',
-    icon: 'TIME',
-    href: '/tools/timestamp',
+    name: "Timestamp Tool",
+    description: "Convert Unix timestamps.",
+    category: "Utilities",
+    icon: Clock,
+    href: "/tools/timestamp",
+    styles: "bg-lime-50 text-lime-700 border-lime-200 dark:bg-lime-500/10 dark:text-lime-200 dark:border-lime-500/40",
   },
   {
-    name: 'SQL Formatter',
-    description: 'Format SQL with clean structure and keyword highlighting.',
-    category: 'Developer',
-    icon: 'SQL',
-    href: '/tools/sql-formatter',
+    name: "SQL Formatter",
+    description: "Format SQL with clean structure and keyword highlighting.",
+    category: "Developer",
+    icon: Database,
+    href: "/tools/sql-formatter",
+    styles: "bg-violet-50 text-violet-700 border-violet-200 dark:bg-violet-500/10 dark:text-violet-200 dark:border-violet-500/40",
   },
   {
-    name: 'JSON → TypeScript',
-    description: 'Convert JSON into TypeScript interfaces.',
-    category: 'Developer',
-    icon: 'TS',
-    href: '/tools/json-to-ts',
+    name: "JSON → TypeScript",
+    description: "Convert JSON into TypeScript interfaces.",
+    category: "Developer",
+    icon: FileJson,
+    href: "/tools/json-to-ts",
+    styles: "bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-500/10 dark:text-rose-200 dark:border-rose-500/40",
   },
   {
-    name: 'Diff Checker',
-    description: 'Compare two texts and highlight differences.',
-    category: 'Developer',
-    icon: 'DIFF',
-    href: '/tools/diff-checker',
+    name: "Diff Checker",
+    description: "Compare two texts and highlight differences.",
+    category: "Developer",
+    icon: GitCompare,
+    href: "/tools/diff-checker",
+    styles: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-200 dark:border-emerald-500/40",
   },
 ];
 
@@ -133,29 +167,26 @@ const ToolCard = ({ tool, variant = 'default' }: { tool: Tool; variant?: 'defaul
   return (
     <Link
       href={tool.href}
-      className={`group relative flex h-full flex-col gap-4 rounded-lg border border-slate-200/80 bg-white/90 ${sizeClasses} transition-colors duration-200 hover:border-sky-200 dark:border-slate-800 dark:bg-slate-900/60 dark:hover:border-sky-500/40`}
+      className={`group relative flex h-full flex-col gap-4 rounded-lg shadow-[2px_2px_6px_0_#ebebec,0_2px_4px_-2px_#ebebec] hover:shadow-[2px_5px_10px_0px_#ebebec,0_4px_6px_-4px_#ebebec] dark:shadow-none  bg-white/90 ${sizeClasses} transition-shadow duration-200 dark:bg-slate-900/60 dark:hover:border-sky-500/40`}
     >
       <span className="absolute left-0 top-4 h-10 w-1 rounded-full bg-sky-100 dark:bg-sky-500/20" />
       <div className="flex items-center justify-between text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-slate-400 dark:text-slate-500">
-        <span className="rounded-md border border-slate-200 bg-slate-50 px-3 py-1 text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
-          {tool.category}
-        </span>
+        <Badge variant={'outline'} className='text-[0.65rem] opacity-50'>{tool.category}</Badge>
         {tool.isPopular ? <span className="text-sky-600 dark:text-sky-300">Popular</span> : <span>Tool</span>}
       </div>
       <div className="flex items-start gap-3">
         <span
-          className={`inline-flex ${iconClasses} items-center justify-center rounded-md border border-sky-100 bg-sky-50 font-semibold uppercase tracking-wide text-sky-700 dark:border-slate-700 dark:bg-slate-800 dark:text-sky-200`}
+          className={`inline-flex h-10 w-10 items-center justify-center rounded-full text-sm border font-semibold uppercase tracking-wide ${tool.styles}`}
         >
-          {tool.icon}
+          {<tool.icon size={18}/>}
         </span>
         <div className="space-y-1">
           <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">{tool.name}</h3>
           <p className="text-sm text-slate-500 dark:text-slate-400">{tool.description}</p>
         </div>
       </div>
-      <div className="mt-auto flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400">
-        <span className="uppercase tracking-[0.25em]">Open tool</span>
-        <ArrowUpRight size={14} className="text-sky-600 dark:text-sky-300" />
+      <div className="mt-auto flex items-center justify-end text-xs font-medium text-slate-500 dark:text-slate-400">
+        <Button variant={"default"} className='rounded-full group-hover:bg-indigo-700 hover:bg-indigo-800 group-hover:text-white transition-all! bg-surface text-foreground '>Open Tool</Button>
       </div>
     </Link>
   );
@@ -331,7 +362,7 @@ export default function ToolsPage() {
       </section>
 
       {showPopular ? (
-        <section className="py-14">
+        <section className="py-14 bg-zinc-50 dark:bg-[#0b0f1a]">
           <div className="container-custom">
             <div className="mb-8 flex items-center justify-between">
               <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">Popular Tools</h2>
@@ -346,7 +377,7 @@ export default function ToolsPage() {
         </section>
       ) : null}
 
-      <section className="py-10">
+      <section className="py-10 bg-zinc-50 dark:bg-[#0b0f1a]">
         <div className="container-custom">
           <div className="mb-8 flex items-center justify-between">
             <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">All Tools</h2>
