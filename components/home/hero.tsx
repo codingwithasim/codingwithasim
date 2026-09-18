@@ -6,7 +6,7 @@ import { BackgroundPattern } from "./background-pattern";
 
 export default function Hero() {
     return (
-        <div className="flex min-h-screen items-center justify-center px-6">
+        <div id="home" className="flex min-h-screen items-center justify-center px-6">
             <BackgroundPattern />
 
             <div className="relative z-10 max-w-3xl text-center">
@@ -27,7 +27,7 @@ export default function Hero() {
                     <span className="text-muted-foreground">actually work.</span>
                 </h1>
 
-                <p className="mx-auto mt-6 max-w-2xl text-muted-foreground text-xl md:text-2xl/normal">
+                <p className="mx-auto mt-6 max-w-2xl text-muted-foreground text-xl md:text-xl/normal">
                     Full-stack developer crafting fast, thoughtful web experiences.
                     Clean code, questionable amounts of coffee, and absolutely no
                     unnecessary carousels.

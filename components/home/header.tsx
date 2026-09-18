@@ -14,46 +14,58 @@ import {
 } from "../ui/navigation-menu"
 import { Button } from "../ui/button"
 
+type MenuItem = {
+  title: string
+  link: string
+}
+
+const menuItems : Array<MenuItem> = [
+  {
+    title: "Home",
+    link: "#home"
+  },
+  {
+    title: "Projects",
+    link: "#projects"
+  },
+  {
+    title: "Services",
+    link: "#services",
+  },
+  {
+    title: "About me",
+    link: "#about"
+  }
+]
+
 export default function Header() {
   const { setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
+    setMounted(true) 
   }, [])
 
   return (
-    <header className="relative z-10 flex min-h-16 items-center border-b bg-background px-3 py-3 sm:px-6">
+    <header className="fixed top-0 left-0 w-full z-100 flex min-h-16 items-center border-b bg-background px-3 py-3 sm:px-6">
       {/* Navigation */}
       <div className="absolute left-1/2 top-1/2 max-w-[calc(100%-5rem)] -translate-x-1/2 -translate-y-1/2">
         <NavigationMenu>
           <NavigationMenuList className="gap-0 sm:gap-1">
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                href="/projects"
-                className={`${navigationMenuTriggerStyle()} px-2.5 text-xs sm:px-4 sm:text-sm`}
-              >
-                Projects
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                href="/services"
-                className={`${navigationMenuTriggerStyle()} px-2.5 text-xs sm:px-4 sm:text-sm`}
-              >
-                Services
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                href="/about"
-                className={`${navigationMenuTriggerStyle()} px-2.5 text-xs sm:px-4 sm:text-sm`}
-              >
-                About me
-              </NavigationMenuLink>
-            </NavigationMenuItem>
+            {
+              menuItems.map((item, idx) => {
+                return (
+                  <NavigationMenuItem key={idx}>
+                    <NavigationMenuLink
+                      href={item.link}
+                      className={`${navigationMenuTriggerStyle()} px-2.5 text-xs sm:px-4 sm:text-sm`}
+                    >
+                      {item.title}
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                )
+              })
+            }
           </NavigationMenuList>
         </NavigationMenu>
       </div>
