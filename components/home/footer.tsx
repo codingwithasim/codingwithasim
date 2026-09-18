@@ -45,7 +45,7 @@ const socialMediaLinks: SocialMedia[] = [
 export default function Footer() {
   return (
     <footer className="border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
-      <div className="mx-auto max-w-6xl px-6 py-12 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
         <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
           {/* Brand */}
           <div className="max-w-sm">
@@ -70,7 +70,7 @@ export default function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-zinc-500 transition-colors hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-50"
+                  className="text-zinc-500 duration-500 transition-colors hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-50"
                 >
                   {link.label}
                 </Link>
@@ -88,7 +88,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.name}
-                    className="text-zinc-400 transition-colors hover:text-zinc-950 dark:text-zinc-500 dark:hover:text-zinc-50"
+                    className="text-zinc-400 duration-500 transition-colors hover:text-zinc-950 dark:text-zinc-500 dark:hover:text-zinc-50"
                   >
                     <Icon size={19} />
                   </a>
