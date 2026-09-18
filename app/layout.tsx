@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
+import SmoothScroll from "@/components/smoth-scroll";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -34,7 +35,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange>
-          {children}
+          <SmoothScroll>
+            {children}
+          </SmoothScroll>
         </ThemeProvider>
       </body>
     </html>
