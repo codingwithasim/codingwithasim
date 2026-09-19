@@ -102,7 +102,7 @@ export default function About() {
                 >
                   <div className="mb-4 flex size-9 items-center justify-center rounded-full bg-muted/50 transition-all duration-500 ease-out group-hover:scale-105 group-hover:bg-foreground/5">
                     <Icon
-                      className="size-[17px] text-muted-foreground transition-all duration-500 ease-out group-hover:-rotate-6 group-hover:text-foreground"
+                      className="size-4.25 text-muted-foreground transition-all duration-500 ease-out group-hover:-rotate-6 group-hover:text-foreground"
                       strokeWidth={1.7}
                     />
                   </div>
@@ -128,7 +128,7 @@ export default function About() {
           </p>
 
           <Link
-            href="#contact"
+            href="/contact"
             className={cn(
               "group inline-flex shrink-0 items-center gap-2",
               "text-sm font-medium",

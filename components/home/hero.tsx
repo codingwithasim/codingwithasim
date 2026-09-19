@@ -36,7 +36,7 @@ export default function Hero() {
 
                 <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
                     <Link
-                        href="/projects"
+                        href="#projects"
                         className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-medium text-primary-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
                     >
                         See what I&apos;ve built
@@ -44,7 +44,7 @@ export default function Hero() {
                     </Link>
 
                     <Link
-                        href="#contact"
+                        href="/contact"
                         className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-border bg-background px-6 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-muted"
                     >
                         Let&apos;s talk
