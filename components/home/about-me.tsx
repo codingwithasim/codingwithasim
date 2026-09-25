@@ -1,6 +1,11 @@
-import { ArrowUpRight, Code2, MapPin, GraduationCap, Coffee } from "lucide-react";
+import { ArrowUpRight, Code2, MapPin, GraduationCap, Coffee, SquareLibrary } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { FaReact } from "react-icons/fa";
+import { RiNextjsFill, RiSupabaseLine } from "react-icons/ri";
+import { BsTypescript } from "react-icons/bs";
+import { BiLogoTypescript } from "react-icons/bi";
+import { SiMysql } from "react-icons/si";
 
 const facts = [
   {
@@ -63,12 +68,12 @@ export default function About() {
             <div className="max-w-2xl space-y-5 text-base leading-7 text-muted-foreground sm:text-lg">
               <p>
                 I&apos;m a Computer Science Master&apos;s student and
-                full-stack web developer based in France.
+                full-stack web developer based in <span className="group"><span className="group-hover:text-blue-500 transition-colors duration-400">Fr</span><span className="group-hover:dark:text-white transition-colors duration-400">an</span><span className="group-hover:text-red-500 transition-colors duration-400">ce</span></span>.
               </p>
 
               <p>
-                Most of my time is spent building with React, Next.js,
-                TypeScript, Supabase, and PostgreSQL. I enjoy taking something
+                Most of my time is spent building with React <FaReact className="inline"/>, Next.js <RiNextjsFill className="inline"/>,
+                TypeScript <BiLogoTypescript className="inline"/> ,  Supabase <RiSupabaseLine className="inline"/>, and SQL. I enjoy taking something
                 from a rough idea to a working product, figuring things out
                 along the way is usually half the fun.
               </p>

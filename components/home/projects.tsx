@@ -23,36 +23,42 @@ type ProjectItemProps = {
 const projects: Array<Project> = [
   {
     id: 1,
-    title: "Advanced E-Commerce Platform",
-    category: "Full Stack Development",
+    title: "Roast & Co. - Specialty Coffee Store",
+    category: "Full Stack E-Commerce",
     description:
-      "A high-performance commerce platform with real-time inventory, intelligent search, and seamless payments—built to stay fast when traffic gets heavy.",
-    image:
-      "https://images.unsplash.com/photo-1661956602944-249bcd04b63f?q=80&w=2070&auto=format&fit=crop",
-    technologies: ["Next.js", "TypeScript", "Prisma", "Stripe", "TailwindCSS"],
-    link: "#",
+    "A full-stack e-commerce application featuring product discovery, cart management, authentication, and Stripe checkout.",    image:
+      "/project-1.png",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "React",
+      "TailwindCSS",
+      "Supabase",
+      "Stripe",
+    ],
+    link: "https://roast-co-store.vercel.app/",
   },
-  {
+   {
     id: 2,
-    title: "Enterprise Dashboard System",
-    category: "Data Visualization",
+    title: "Chrona - Productivity Toolkit",
+    category: "Productivity",
     description:
-      "An analytics platform that turns complex datasets into clear, interactive insights with real-time updates and automated reporting.",
+      "A productivity web app featuring Pomodoro, timers, stopwatch, alarms, and world clocks, with persistent user preferences and a responsive interface.",
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
-    technologies: ["React", "D3.js", "GraphQL", "Node.js", "AWS"],
-    link: "#",
+      "/project-4.png",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Zustand"],
+    link: "https://chrona-time.vercel.app/",
   },
   {
     id: 3,
-    title: "Multi-platform Mobile Application",
-    category: "Mobile Development",
+    title: "Savora - Luxury Restaurant Landing Page",
+    category: "Landing Page",
     description:
-      "A productivity-focused mobile experience with offline support, push notifications, and reliable cloud synchronization across devices.",
+      "A responsive restaurant landing page focused on premium visual design, smooth animations, and conversion-oriented sections.",
     image:
-      "https://images.unsplash.com/photo-1596558450268-9c27524ba856?q=80&w=2050&auto=format&fit=crop",
-    technologies: ["React Native", "Firebase", "Redux", "Jest", "TypeScript"],
-    link: "#",
+      "/project-5.png",
+    technologies: ["Next.js", "Framer Motion", "Tailwind CSS", "TypeScript"],
+    link: "https://savora-eight.vercel.app/",
   },
 ]
 
@@ -106,6 +112,7 @@ function ProjectItem({index, project}: ProjectItemProps){
       {/* Image */}
       <Link
         href={project.link}
+        target="_blank"
         className="group/image relative block overflow-hidden rounded-2xl border bg-muted"
       >
         <div className="relative aspect-16/10 overflow-hidden">
@@ -168,6 +175,7 @@ function ProjectItem({index, project}: ProjectItemProps){
         {/* CTA */}
         <Link
           href={project.link}
+          target="_blank"
           className="group/link mt-8 inline-flex items-center gap-2 text-sm font-medium"
         >
           View project
