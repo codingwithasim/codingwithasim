@@ -6,6 +6,8 @@ import { FiGithub } from "react-icons/fi";
 import { LuLinkedin } from "react-icons/lu";
 import { VscTwitter } from "react-icons/vsc";
 
+import { siteConfig } from "@/lib/site";
+
 type SocialMedia = {
   name: string;
   url: string;
@@ -13,31 +15,31 @@ type SocialMedia = {
 };
 
 const footerLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Projects", href: "#projects" },
-  { label: "Services", href: "#services" },
-  { label: "About me", href: "#about" },
+  { label: "Home", href: "/#home" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Services", href: "/#services" },
+  { label: "About me", href: "/#about" },
 ];
 
 const socialMediaLinks: SocialMedia[] = [
   {
     name: "Github",
-    url: "https://github.com/codingwithasim",
+    url: siteConfig.socials.github,
     icon: FiGithub,
   },
   {
     name: "Instagram",
-    url: "https://instagram.com/codingwithasim",
+    url: siteConfig.socials.instagram,
     icon: FaInstagram,
   },
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/in/codingwithasim",
+    url: siteConfig.socials.linkedin,
     icon: LuLinkedin,
   },
   {
     name: "X",
-    url: "https://x.com/codingwithasim",
+    url: siteConfig.socials.x,
     icon: VscTwitter,
   },
 ];
@@ -58,8 +60,8 @@ export default function Footer() {
             </Link>
 
             <p className="mt-3 text-sm leading-6 text-zinc-500 dark:text-zinc-400">
-              Full-stack web developer building modern web applications with
-              React, Next.js, TypeScript and Supabase.
+              Full-stack developer in Rouen, France, building websites and web
+              apps for small businesses, founders and agencies.
             </p>
           </div>
 

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useSyncExternalStore } from "react"
 import { useTheme } from "next-themes"
 import { ArrowUpRight, LoaderCircle, Moon, Sun } from "lucide-react"
 
@@ -38,13 +38,13 @@ const menuItems : Array<MenuItem> = [
   }
 ]
 
+// False during server render and hydration, true once running in the browser,
+// so the theme icon never mismatches the server HTML.
+const subscribe = () => () => {}
+
 export default function Header() {
   const { setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true) 
-  }, [])
+  const mounted = useSyncExternalStore(subscribe, () => true, () => false)
 
   return (
     <header className="fixed top-0 left-0 w-full z-100 flex min-h-16 items-center border-b bg-background px-3 py-3 sm:px-6">
@@ -98,7 +98,7 @@ export default function Header() {
           href="/contact"
           className="hidden items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-muted sm:inline-flex"
         >
-          Contact me
+          Start a project
           <ArrowUpRight className="size-4" />
         </Link>
       </div>

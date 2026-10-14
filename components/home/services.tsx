@@ -1,8 +1,8 @@
 import {
-  Code2,
-  Database,
-  Layers3,
-  Zap,
+  Globe,
+  Rocket,
+  ShoppingBag,
+  Wrench,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -19,44 +19,44 @@ type Service = {
 const services: Service[] = [
   {
     number: "01",
-    category: "Full Stack",
-    title: "Web Applications",
+    category: "Websites",
+    title: "Business Websites & Landing Pages",
     description:
-      "Full-stack web applications built from the ground up, combining thoughtful interfaces with reliable backend functionality.",
-    icon: Code2,
+      "A fast, mobile-friendly website that explains what you do and turns visitors into calls, bookings and sales. Set up to be found on Google from day one.",
+    icon: Globe,
     iconColor: "text-cyan-500 dark:text-cyan-400",
     iconBackground:
       "group-hover:bg-cyan-500/10 dark:group-hover:bg-cyan-400/10",
   },
   {
     number: "02",
-    category: "Frontend",
-    title: "Frontend Development",
+    category: "E-commerce",
+    title: "Online Stores",
     description:
-      "Responsive and polished interfaces that feel fast, intuitive, and consistent across every screen size.",
-    icon: Layers3,
+      "Sell online with a clean store, secure Stripe payments, customer accounts and a simple way to manage your products and orders.",
+    icon: ShoppingBag,
     iconColor: "text-sky-500 dark:text-sky-400",
     iconBackground:
       "group-hover:bg-sky-500/10 dark:group-hover:bg-sky-400/10",
   },
   {
     number: "03",
-    category: "Backend",
-    title: "Backend & Data",
+    category: "Startups",
+    title: "Web Apps & MVPs",
     description:
-      "The infrastructure behind your application, including authentication, databases, APIs, and server-side functionality.",
-    icon: Database,
+      "Turn your idea into a working product: user accounts, dashboards, databases and payments, built to launch quickly and grow with you.",
+    icon: Rocket,
     iconColor: "text-emerald-500 dark:text-emerald-400",
     iconBackground:
       "group-hover:bg-emerald-500/10 dark:group-hover:bg-emerald-400/10",
   },
   {
     number: "04",
-    category: "Integrations",
-    title: "API & Integrations",
+    category: "Support & Agencies",
+    title: "Fixes, Features & Extra Hands",
     description:
-      "Connecting your application with the services it depends on, from payment providers to third-party APIs.",
-    icon: Zap,
+      "Already have a site or app? I fix bugs, add features and make it faster. Agencies: I can join your team on React and Next.js projects, white-label welcome.",
+    icon: Wrench,
     iconColor: "text-violet-500 dark:text-violet-400",
     iconBackground:
       "group-hover:bg-violet-500/10 dark:group-hover:bg-violet-400/10",
@@ -79,8 +79,9 @@ export default function Services() {
           </h2>
 
           <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-            From focused frontend work to complete web applications, I build
-            practical digital products with modern technologies.
+            Whether you need your first website, an online store, or an extra
+            developer on an existing project, I take care of the build so you
+            can focus on running your business.
           </p>
         </div>
 

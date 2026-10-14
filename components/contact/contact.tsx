@@ -8,32 +8,34 @@ import {
 } from "lucide-react";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
+import { siteConfig } from "@/lib/site";
+
 const contactLinks = [
   {
     label: "Email",
-    value: "asim.dev.pro@gmail.com",
-    href: "mailto:asim.dev.pro@gmail.com",
+    value: siteConfig.email,
+    href: `mailto:${siteConfig.email}?subject=New%20project%20inquiry`,
     icon: Mail,
     primary: true,
   },
   {
     label: "LinkedIn",
     value: "Connect with me",
-    href: "https://www.linkedin.com/in/codingwithasim/",
+    href: siteConfig.socials.linkedin,
     icon: FaLinkedin,
     primary: false,
   },
   {
     label: "GitHub",
     value: "See what I'm building",
-    href: "https://github.com/codingwithasim",
+    href: siteConfig.socials.github,
     icon: FaGithub,
     primary: false,
   },
   {
     label: "Instagram",
     value: "Follow me on Instagram",
-    href: "https://www.instagram.com/codingwithasim/",
+    href: siteConfig.socials.instagram,
     icon: FaInstagram,
     primary: false,
   },
@@ -58,9 +60,10 @@ export default function Contact() {
           </h1>
 
           <p className="mt-8 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-            Have a project in mind, need help with an existing application,
-            or just want to talk about an idea? Send me a message and let&apos;s
-            see what we can build.
+            Tell me a bit about your project: what you need, when you need it,
+            and a budget range if you have one. I&apos;ll get back to you
+            within 24 hours with questions or next steps. And if I&apos;m not
+            the right fit, I&apos;ll tell you honestly.
           </p>
         </div>
 
@@ -107,7 +110,7 @@ export default function Contact() {
         </div>
 
         {/* Bottom information */}
-        <div className="mt-16 grid gap-10 sm:grid-cols-2">
+        <div className="mt-16 grid gap-10 sm:grid-cols-3">
           <div>
             <div className="mb-3 flex items-center gap-2 text-sm font-medium">
               <MapPin className="size-4 text-muted-foreground" />
@@ -115,7 +118,7 @@ export default function Contact() {
             </div>
 
             <p className="text-muted-foreground">
-              Rouen, France 🇫🇷
+              Rouen, France 🇫🇷 · working with clients everywhere
             </p>
           </div>
 
@@ -125,7 +128,17 @@ export default function Contact() {
             </p>
 
             <p className="text-muted-foreground">
-              Open to interesting projects 🚀
+              Taking on new projects 🚀
+            </p>
+          </div>
+
+          <div>
+            <p className="mb-3 text-sm font-medium">
+              Languages
+            </p>
+
+            <p className="text-muted-foreground">
+              English & Français
             </p>
           </div>
         </div>

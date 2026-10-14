@@ -1,17 +1,15 @@
-import { ArrowUpRight, Code2, MapPin, GraduationCap, Coffee, SquareLibrary } from "lucide-react";
+import { ArrowUpRight, CalendarCheck, Code2, Languages, MapPin } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { FaReact } from "react-icons/fa";
 import { RiNextjsFill, RiSupabaseLine } from "react-icons/ri";
-import { BsTypescript } from "react-icons/bs";
 import { BiLogoTypescript } from "react-icons/bi";
-import { SiMysql } from "react-icons/si";
 
 const facts = [
   {
-    icon: GraduationCap,
+    icon: CalendarCheck,
     label: "Currently",
-    value: "CS Master's student",
+    value: "Taking on new projects",
   },
   {
     icon: Code2,
@@ -21,12 +19,12 @@ const facts = [
   {
     icon: MapPin,
     label: "Based in",
-    value: "France 🇫🇷",
+    value: "Rouen, France 🇫🇷",
   },
   {
-    icon: Coffee,
-    label: "Powered by",
-    value: "Coffee & curiosity ☕",
+    icon: Languages,
+    label: "I speak",
+    value: "English & Français",
   },
 ];
 
@@ -80,7 +78,10 @@ export default function About() {
 
               <p>
                 I care about interfaces that feel simple, code that makes
-                sense, and products that solve an actual problem.
+                sense, and products that solve an actual problem. When you
+                work with me, you talk directly to the person building your
+                project. No account managers, no outsourcing, just clear
+                updates and a website that does its job.
               </p>
 
               <p className="text-foreground">
@@ -128,8 +129,9 @@ export default function About() {
         {/* Closing CTA */}
         <div className="mt-16 flex flex-col gap-5 sm:mt-20 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-xl text-sm leading-6 text-muted-foreground sm:text-base">
-            Have an idea, a problem to solve, or just a web project that needs
-            some attention? I&apos;m always interested in hearing about it. 👋
+            Have an idea, a problem to solve, or a website that needs some
+            attention? Tell me about it. The first call is free, and so is my
+            honest opinion. 👋
           </p>
 
           <Link

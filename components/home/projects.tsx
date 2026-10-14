@@ -20,14 +20,15 @@ type ProjectItemProps = {
   project: Project
 }
 
-const projects: Array<Project> = [
+export const projects: Array<Project> = [
   {
     id: 1,
     title: "Roast & Co. - Specialty Coffee Store",
-    category: "Full Stack E-Commerce",
+    category: "Online Store",
     description:
-    "A full-stack e-commerce application featuring product discovery, cart management, authentication, and Stripe checkout.",    image:
-      "/project-1.png",
+      "A complete online store for a specialty coffee brand: product pages, cart, customer accounts and secure Stripe checkout. Everything a small business needs to start selling online.",
+    image:
+      "/project-1.webp",
     technologies: [
       "Next.js",
       "TypeScript",
@@ -41,22 +42,22 @@ const projects: Array<Project> = [
    {
     id: 2,
     title: "Chrona - Productivity Toolkit",
-    category: "Productivity",
+    category: "Web App",
     description:
-      "A productivity web app featuring Pomodoro, timers, stopwatch, alarms, and world clocks, with persistent user preferences and a responsive interface.",
+      "A productivity app with Pomodoro, timers, alarms and world clocks that remembers each user's settings. The same fast, app-like experience I build for dashboards and internal tools.",
     image:
-      "/project-4.png",
+      "/project-4.webp",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Zustand"],
     link: "https://chrona-time.vercel.app/",
   },
   {
     id: 3,
     title: "Savora - Luxury Restaurant Landing Page",
-    category: "Landing Page",
+    category: "Restaurant Website",
     description:
-      "A responsive restaurant landing page focused on premium visual design, smooth animations, and conversion-oriented sections.",
+      "A premium landing page for a restaurant, designed to turn visitors into reservations: rich visuals, smooth animations and a clear call to action on every screen size.",
     image:
-      "/project-5.png",
+      "/project-5.webp",
     technologies: ["Next.js", "Framer Motion", "Tailwind CSS", "TypeScript"],
     link: "https://savora-eight.vercel.app/",
   },
@@ -78,8 +79,9 @@ export default function Projects() {
           </h2>
 
           <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-            A collection of projects where design, engineering, and a
-            questionable amount of coffee came together 😎
+            Projects I designed and built from start to finish. They&apos;re
+            all live, so click around. They actually work (that&apos;s kind
+            of my thing 😎).
           </p>
         </div>
 
@@ -113,6 +115,7 @@ function ProjectItem({index, project}: ProjectItemProps){
       <Link
         href={project.link}
         target="_blank"
+        rel="noopener noreferrer"
         className="group/image relative block overflow-hidden rounded-2xl border bg-muted"
       >
         <div className="relative aspect-16/10 overflow-hidden">
@@ -176,6 +179,7 @@ function ProjectItem({index, project}: ProjectItemProps){
         <Link
           href={project.link}
           target="_blank"
+          rel="noopener noreferrer"
           className="group/link mt-8 inline-flex items-center gap-2 text-sm font-medium"
         >
           View project
